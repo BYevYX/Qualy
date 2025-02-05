@@ -29,6 +29,7 @@
     "**/*.jsx",
     "../../../apps/frontend/host/.next/types/**/*.ts",
     "../../../dist/apps/frontend/host/.next/types/**/*.ts",
+    "../../../eslint.config.js",
     "next-env.d.ts"
   ],
   "exclude": ["node_modules", "jest.config.ts", "**/*.spec.ts", "**/*.test.ts"]

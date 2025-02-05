@@ -1,3 +1,5 @@
+import React from 'react';
+
 export default function Index() {
   /*
    * Replace the elements below with your own.

@@ -6,7 +6,6 @@ const jsx = require('eslint-plugin-jsx-a11y');
 const playwright = require('eslint-plugin-playwright');
 const react = require('eslint-plugin-react');
 const prettierPlugin = require('eslint-plugin-prettier/recommended');
-const next = require('"eslint-config-next"');
 
 module.exports = [
     ...tseslint.config(
@@ -85,9 +84,9 @@ module.exports = [
             'dist/**',
             '.github/**',
             '.vscode/**',
+            'node_modules/**'
         ],
     },
 
-    next,
     prettierPlugin,
 ];
