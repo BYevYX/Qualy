@@ -88,3 +88,31 @@ And join the Nx community:
 - [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
 - [Our Youtube channel](https://www.youtube.com/@nxdevtools)
 - [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+
+
+
+
+
+
+Frontend:
+Next.js для хост-приложения (SSR/ISR).
+React для микрофронтендов.
+Webpack Module Federation для динамической загрузки микрофронтендов.
+TailwindCSS для стилей.
+Storybook для документирования UI-компонентов.
+Backend:
+NestJS для структурированных микросервисов.
+Prisma для работы с базами данных.
+PostgreSQL для реляционных данных.
+Redis для кэширования.
+Kafka для очередей сообщений.
+Elasticsearch для полнотекстового поиска.
+Инфраструктура:
+Docker и Kubernetes для оркестрации.
+GitHub Actions для CI/CD.
+AWS/GCP/Azure для хостинга и облачных сервисов.
+Коммуникация:
+GraphQL для API.
+Событийная архитектура через Kafka.
+также хочу использовать
+API Gateway NGINX для маршрутизации запросов.
