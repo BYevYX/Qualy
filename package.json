@@ -8,8 +8,6 @@
         "@eslint/compat": "^1.2.6",
         "@eslint/js": "^9.19.0",
         "@module-federation/nextjs-mf": "^8.8.12",
-        "@nrwl/workspace": "^19.8.4",
-        "@nx/devkit": "20.4.0",
         "@nx/eslint": "20.4.0",
         "@nx/eslint-plugin": "20.4.0",
         "@nx/jest": "20.4.0",
