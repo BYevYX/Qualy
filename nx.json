@@ -52,9 +52,7 @@
     },
     {
       "plugin": "@nx/jest/plugin",
-      "exclude": [
-        "**/*e2e/**/*"
-      ],
+      "exclude": ["**/*e2e/**/*"],
       "options": {
         "targetName": "test"
       }
