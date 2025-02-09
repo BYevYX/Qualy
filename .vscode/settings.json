@@ -1,0 +1,18 @@
+{
+  "tailwindCSS.experimental.configFile": {
+    "apps/frontend/Auth/src/app/global.css": "apps/frontend/Auth/src/**",
+    "apps/frontend/host/src/app/global.css": "apps/frontend/host/src/**",
+    "libs/frontend/share/src/global.css": "libs/frontend/share/src/**"
+  },
+
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "tailwindCSS.includeLanguages": {
+    "javascript": "javascriptreact",
+    "typescript": "typescriptreact"
+  }
+}
