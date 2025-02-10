@@ -29,9 +29,9 @@
     "strict": true,
     "target": "ES2022",
     "jsx": "react-jsx",
-    "paths": {
-      "@qualy/share": ["libs/frontend/share/src/index.ts"],
-      "@qualy/share/server": ["libs/frontend/share/src/server.ts"]
-    }
+    // "paths": {
+    //   "@qualy/share": ["libs/frontend/share/src/index.ts"],
+    //   "@qualy/share/server": ["libs/frontend/share/src/server.ts"]
+    // }
   }
 }

@@ -56,8 +56,8 @@
     "typescript-eslint": "^8.23.0"
   },
   "workspaces": [
-    "apps/*",
-    "libs/*"
+    "apps/**",
+    "libs/**"
   ],
   "dependencies": {
     "@apollo/server": "^4.11.3",
