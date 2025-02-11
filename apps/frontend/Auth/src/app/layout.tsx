@@ -1,6 +1,8 @@
-import { useCallback, useState } from 'react';
+// 'use client';
+import { useCallback } from 'react';
 
-import { Toggle } from '../../../../../libs/frontend/share/src/';
+import { Toggle } from '@qualy/front_share';
+
 import './global.css';
 
 export const metadata = {
@@ -17,22 +19,23 @@ export default function RootLayout({
   login: React.ReactNode;
   signup: React.ReactNode;
 }) {
-  const [isLoging, setIsLoging] = useState(true);
+  // const [isLoging, setIsLoging] = useState(true);
 
-  const handleToggle = useCallback(() => {
-    setIsLoging((prev) => !prev);
-  }, []);
+  // const handleToggle = useCallback(() => {
+  //   // setIsLoging((prev) => !prev);
+
+  // }, []);
 
   return (
     <html lang="en">
       <body>
         <main className="b flex h-full flex-col items-center justify-center bg-blue-400">
           {children}
-          <div className="space-y-6">{isLoging ? login : signup}</div>
+          <div className="space-y-6">{true ? login : signup}</div>
           <Toggle
             firstButonText="Login"
             secondButonText="Signup"
-            handleToggle={handleToggle}
+            handleToggle={true}
           />
         </main>
       </body>

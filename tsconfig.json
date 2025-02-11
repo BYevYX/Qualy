@@ -10,5 +10,21 @@
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"],
   "files": [],
-  "references": []
+  "references": [
+    {
+      "path": "./apps/frontend/Auth-e2e"
+    },
+    {
+      "path": "./apps/frontend/host-e2e"
+    },
+    {
+      "path": "./libs/frontend/share"
+    },
+    {
+      "path": "./apps/frontend/Auth"
+    },
+    {
+      "path": "./apps/frontend/host"
+    }
+  ]
 }

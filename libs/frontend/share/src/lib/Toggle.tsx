@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import type { FC } from 'react';
 
+import styles from './share.module.css';
+
 interface BaseProps {
   firstButonText: string;
   secondButonText: string;
@@ -30,14 +32,14 @@ export const Toggle: FC<ToggleProps> = ({
   const [isFirst, setIsFirst] = useState(true);
 
   return (
-    <div className="relative flex h-12 w-64 items-center rounded-full bg-gray-200 p-1">
+    <div className={styles.btn}>
       {/* Скользящий фон */}
+      ghcfjgvb.njkhgjfcjk
       <div
         className={`absolute h-full w-1/2 rounded-full bg-white shadow-md transition-transform duration-300 ${
           isFirst ? 'translate-x-0' : 'translate-x-full'
         }`}
       />
-
       <button
         className={`relative z-10 w-1/2 text-center transition-colors duration-300 ${
           isFirst ? 'text-black' : 'text-gray-500'
@@ -50,7 +52,6 @@ export const Toggle: FC<ToggleProps> = ({
       >
         {firstButonText}
       </button>
-
       <button
         className={`relative z-10 w-1/2 text-center transition-colors duration-300 ${
           !isFirst ? 'text-black' : 'text-gray-500'
