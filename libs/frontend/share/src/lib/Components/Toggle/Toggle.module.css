@@ -1,0 +1,49 @@
+.root {
+    display: flex;
+}
+
+.root:before {
+    position: absolute;
+    height: 100%;
+    width: 50%;
+
+    background-color: white;
+
+    transform: translateX(0);
+    transition: transform 300ms;
+}
+
+.root_active:before {
+    transform: translateX(0);
+    transition: transform 300ms;
+}
+
+.first, .second {
+    background-color: grey;
+    padding: 4px 16px;
+    position: relative;
+    text-align: center;
+    width: 50%;
+
+    z-index: 1;
+
+    color: white;
+    transition: color 300ms;
+}
+
+.first {
+    border-radius: 16px 0 0 16px;
+    border-right: 1px solid black;
+}
+
+.second {
+    border-radius: 0 16px 16px 0;
+    border-left: 1px solid black;
+
+}
+
+.first_active, .second_active {
+    color: black;
+    transition: color 300ms;
+}
+

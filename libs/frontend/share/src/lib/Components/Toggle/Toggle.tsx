@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import type { FC } from 'react';
 
-import styles from './share.module.css';
+import styles from './Toggle.module.css';
 
 interface BaseProps {
   firstButonText: string;
@@ -32,18 +32,9 @@ export const Toggle: FC<ToggleProps> = ({
   const [isFirst, setIsFirst] = useState(true);
 
   return (
-    <div className={styles.btn}>
-      {/* Скользящий фон */}
-      ghcfjgvb.njkhgjfcjk
-      <div
-        className={`absolute h-full w-1/2 rounded-full bg-white shadow-md transition-transform duration-300 ${
-          isFirst ? 'translate-x-0' : 'translate-x-full'
-        }`}
-      />
+    <div className={`${styles.root} ${isFirst && styles.root_active}`}>
       <button
-        className={`relative z-10 w-1/2 text-center transition-colors duration-300 ${
-          isFirst ? 'text-black' : 'text-gray-500'
-        }`}
+        className={`${styles.first} ${isFirst && styles.first_active}`}
         onClick={(e) => {
           setIsFirst(true);
           handleToggle?.(e);
@@ -53,9 +44,7 @@ export const Toggle: FC<ToggleProps> = ({
         {firstButonText}
       </button>
       <button
-        className={`relative z-10 w-1/2 text-center transition-colors duration-300 ${
-          !isFirst ? 'text-black' : 'text-gray-500'
-        }`}
+        className={`${styles.second} ${!isFirst && styles.second_active}`}
         onClick={(e) => {
           setIsFirst(false);
           handleToggle?.(e);

@@ -1,8 +1,4 @@
-// 'use client';
-import { useCallback } from 'react';
-
-import { Toggle } from '@qualy/front_share';
-
+import AuthToggle from 'src/features/AuthToggle';
 import './global.css';
 
 export const metadata = {
@@ -19,24 +15,12 @@ export default function RootLayout({
   login: React.ReactNode;
   signup: React.ReactNode;
 }) {
-  // const [isLoging, setIsLoging] = useState(true);
-
-  // const handleToggle = useCallback(() => {
-  //   // setIsLoging((prev) => !prev);
-
-  // }, []);
-
   return (
     <html lang="en">
       <body>
-        <main className="b flex h-full flex-col items-center justify-center bg-blue-400">
+        <main className="flex h-full flex-col items-center justify-center bg-blue-400">
           {children}
-          <div className="space-y-6">{true ? login : signup}</div>
-          <Toggle
-            firstButonText="Login"
-            secondButonText="Signup"
-            handleToggle={true}
-          />
+          <AuthToggle login={login} signup={signup} />
         </main>
       </body>
     </html>
