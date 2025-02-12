@@ -1,0 +1,23 @@
+.button {
+    text-align: center;
+    background-color: white;
+    border-radius: 8px;
+    
+    padding: 4px 8px;
+
+    cursor: pointer;
+
+    transition: all 300ms ease;
+}
+
+.button:hover {
+    background-color: beige;
+
+    transition: all 300ms;
+}
+
+.button:active {
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+    transform: translateY(3px);
+
+}

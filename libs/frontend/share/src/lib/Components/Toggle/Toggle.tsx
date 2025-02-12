@@ -36,6 +36,8 @@ export const Toggle: FC<ToggleProps> = ({
       <button
         className={`${styles.first} ${isFirst && styles.first_active}`}
         onClick={(e) => {
+          if (isFirst) return;
+
           setIsFirst(true);
           handleToggle?.(e);
           handleFirst?.(e);
@@ -46,6 +48,8 @@ export const Toggle: FC<ToggleProps> = ({
       <button
         className={`${styles.second} ${!isFirst && styles.second_active}`}
         onClick={(e) => {
+          if (!isFirst) return;
+
           setIsFirst(false);
           handleToggle?.(e);
           handleSecond?.(e);

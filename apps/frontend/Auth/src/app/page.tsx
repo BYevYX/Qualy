@@ -1,7 +1,9 @@
 import { FC } from 'react';
 
+import { Button, Input } from '@qualy/front_share';
+
 const MainPage: FC = () => {
-  return <p>9909900090</p>;
+  return <>Hello World</>;
 };
 
 export default MainPage;
