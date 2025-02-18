@@ -1,0 +1,59 @@
+.multiButtons {
+    display: flex;
+    gap: 10%;
+}
+
+.button {
+    position: relative;
+    color: white;
+    padding: 6px 16px;
+    border-radius: 16px;
+
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.active {
+    color: black;
+    background-color: white;
+}
+
+
+.button::before,
+.button::after {
+  content: '';
+  position: absolute;
+  background-color: white;
+  transition: all 0.5s ease;
+}
+
+/* Верхняя и нижняя линии */
+.button::before {
+  top: 100%;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  transform: translateX(-50%);
+}
+
+/* Левая и правая линии */
+.button::after {
+  top: 50%;
+  left: 100%;
+  width: 2px;
+  height: 0;
+  transform: translateY(-50%);
+}
+
+/* Анимация при наведении */
+.button:hover:not(.active)::before {
+  width: 100%; /* Растягиваем верхнюю и нижнюю линии */
+  left: 0;
+  transform: translateX(0);
+}
+
+.button:hover:not(.active)::after {
+  height: 100%; /* Растягиваем левую и правую линии */
+  top: 0;
+  transform: translateY(0);
+}

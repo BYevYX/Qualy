@@ -1,7 +1,7 @@
 'use client';
 import { FC, useCallback, useState } from 'react';
 
-import { Toggle } from '@qualy/front_share';
+import { Toggle } from '@qualy/front_share/client';
 
 interface Props {
   login: React.ReactNode;

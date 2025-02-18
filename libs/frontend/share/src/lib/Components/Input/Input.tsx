@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import { InputHTMLAttributes, FC } from 'react';
 
 import styles from './Input.module.css';
@@ -12,7 +13,7 @@ export const Input: FC<InputProps> = ({
   ...atributes
 }) => {
   const styleVariant = styles[inputStyle];
-  const combinedClassName = `${className || ''} ${styles.input} ${styleVariant}`;
+  const combinedClassName = cn(className, styles.input, styleVariant);
 
   return <input className={combinedClassName} {...atributes} />;
 };

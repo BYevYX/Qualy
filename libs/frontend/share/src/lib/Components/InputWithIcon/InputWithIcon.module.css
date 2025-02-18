@@ -1,0 +1,15 @@
+.container {
+    position: relative;
+    display: inline-block;
+}
+
+.image {
+    position: absolute;
+    right: 5px;
+    top: 15%;
+    cursor: pointer;
+}
+
+.input {
+    padding-right: 40px;
+}

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
-import camera from '../../../public/images/shely.jpeg';
+import shely from 'public/images/shely.jpeg';
+import AuthMultiChoose from 'src/features/between/ui/AuthMultiChoose';
 
 export default function AuthLayout({
   children,
@@ -8,17 +9,17 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex justify-around">
+    <div className="relative flex justify-around">
       <div className="flex">
         <Image
-          src={camera}
+          src={shely}
           alt="camera image"
-          className="h-auto max-h-screen w-full max-w-full"
+          className="box-border h-auto max-h-screen w-full max-w-full"
         />
       </div>
-      <div className="flex h-full flex-col items-center justify-center">
-        {children}
-      </div>
+      <AuthMultiChoose />
+
+      <div className="self-center justify-self-center">{children}</div>
     </div>
   );
 }
