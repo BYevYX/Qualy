@@ -8,7 +8,7 @@ export const Button: FC<ButtonHTMLAttributes<HTMLButtonElement>> = ({
   children,
   ...atributes
 }) => {
-  const buttonClassName = cn(className, styles.button);
+  const buttonClassName = cn(styles.button, className);
 
   return (
     <button className={buttonClassName} {...atributes}>

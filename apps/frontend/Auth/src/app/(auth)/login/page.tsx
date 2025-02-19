@@ -1,21 +1,30 @@
 import Form from 'next/form';
-import Link from 'next/link';
 import { FC } from 'react';
 
-import { Button, Input } from '@qualy/front_share/server';
-import PasswordInput from 'src/features/between/ui/PasswordInput';
+import AuthErrorProvider from 'src/features/AuthErrors/ui/AuthErrorProvider';
+import { loginSchema } from 'src/utils/validate';
+import LoginFormContent from 'src/widjets/login/ui/LoginFormContent';
 
 const Login: FC = () => {
-  return (
-    <Form action={'p'} className="flex flex-col gap-5">
-      <Input placeholder="Email" name="email" />
-      <PasswordInput name="password" placeholder="Password" />
-      <Button type="submit">Login</Button>
+  const action = async (formData: FormData) => {
+    'use server';
+    try {
+      await loginSchema.validate({
+        email: formData.get('email'),
+        password: formData.get('password'),
+      });
+      console.log('success', formData.get('email'));
+    } catch (error) {
+      console.log('error', (error as Error).message);
+    }
+  };
 
-      <Link className="text-white" href="/signup">
-        Signup
-      </Link>
-    </Form>
+  return (
+    <AuthErrorProvider>
+      <Form action={action} className="flex flex-col gap-5">
+        <LoginFormContent />
+      </Form>
+    </AuthErrorProvider>
   );
 };
 

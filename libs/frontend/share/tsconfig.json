@@ -10,7 +10,8 @@
     "composite": true,
     "declaration": true,
     "declarationMap": true,
-    "emitDeclarationOnly": false
+    "emitDeclarationOnly": false,
+    "lib": ["dom", "esnext"]
   },
   "files": [],
   "include": [],

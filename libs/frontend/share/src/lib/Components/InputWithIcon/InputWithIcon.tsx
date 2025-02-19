@@ -1,30 +1,31 @@
 import cn from 'classnames';
 import Image, { StaticImageData, type ImageProps } from 'next/image';
 import type { FC, InputHTMLAttributes } from 'react';
+import { Schema, StringSchema } from 'yup';
 
 import styles from './InputWithIcon.module.css';
 import { Input } from '../Input/Input';
 
-interface InputWithIconProps {
+interface InputWithIconBaseProps {
   className?: string;
-  imageClassname?: string;
+  schema?: StringSchema | Schema;
   icon: StaticImageData;
   alt: string;
-  inputAtributes: InputHTMLAttributes<HTMLInputElement>;
-  imageAtributes: Partial<ImageProps>;
+  inputAtributes?: InputHTMLAttributes<HTMLInputElement>;
+  imageAtributes?: Partial<ImageProps>;
 }
 
-export const InputWithIcon: FC<InputWithIconProps> = ({
+export const InputWithIcon: FC<InputWithIconBaseProps> = ({
   className,
-  imageClassname,
+  schema,
   icon,
   alt,
   inputAtributes,
   imageAtributes,
 }) => {
   const containerStyles = cn(styles.container, className);
-  const imageStyles = cn(styles.image, imageClassname);
-  const inputStyles = cn(styles.input, inputAtributes.className);
+  const imageStyles = cn(styles.image, imageAtributes?.className);
+  const inputStyles = cn(styles.input, inputAtributes?.className);
 
   return (
     <div className={containerStyles}>
@@ -36,7 +37,7 @@ export const InputWithIcon: FC<InputWithIconProps> = ({
         width={30}
         {...imageAtributes}
       />
-      <Input {...inputAtributes} className={inputStyles} />
+      <Input {...inputAtributes} className={inputStyles} schema={schema} />
     </div>
   );
 };
