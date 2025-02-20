@@ -1,4 +1,4 @@
-import { object, string, ref } from 'yup';
+import { string, StringSchema } from 'yup';
 
 const maxLength = 100;
 const passwordMinLength = 8;
@@ -9,30 +9,29 @@ const baseString = (fieldName: string) =>
     .required(`${fieldName} is required`)
     .max(maxLength, `${fieldName} must be no longer than 100 characters`);
 
-export const emailSchema = baseString('Email').email('Not valid Email');
-export const passwordSchema = baseString('Password').min(
+const emailSchema = baseString('Email').email('Not valid Email');
+const passwordSchema = baseString('Password').min(
   passwordMinLength,
   `Password must be at least ${passwordMinLength} characters`,
 );
 
-const baseSchema = object({
-  email: emailSchema,
-  password: passwordSchema,
-});
+const verifyPasswordSchema = baseString('Verify Password').test(
+  'passwords-match',
+  'Password need to match',
+  function (value) {
+    const password = this.options.context?.password;
+    return value === password;
+  },
+);
 
-export const loginSchema = baseSchema;
-
-export const usernameSchema = baseString('Username').min(
+const usernameSchema = baseString('Username').min(
   usernameMinLength,
   `Username must be at least ${usernameMinLength} characters`,
 );
 
-export const verifyPasswordSchema = baseString('Verify Password').equals(
-  [ref('password'), null],
-  'Passwords must match',
-);
-
-export const signupSchema = baseSchema.shape({
-  username: usernameSchema,
+export default {
+  email: emailSchema,
+  password: passwordSchema,
   verifyPassword: verifyPasswordSchema,
-});
+  username: usernameSchema,
+} as Record<string, StringSchema>;

@@ -1,23 +1,21 @@
 import cn from 'classnames';
 import Image, { StaticImageData, type ImageProps } from 'next/image';
-import type { FC, InputHTMLAttributes } from 'react';
-import { Schema, StringSchema } from 'yup';
+import type { FC } from 'react';
 
 import styles from './InputWithIcon.module.css';
 import { Input } from '../Input/Input';
+import { InputProps } from 'src/types';
 
 interface InputWithIconBaseProps {
   className?: string;
-  schema?: StringSchema | Schema;
   icon: StaticImageData;
   alt: string;
-  inputAtributes?: InputHTMLAttributes<HTMLInputElement>;
+  inputAtributes?: InputProps;
   imageAtributes?: Partial<ImageProps>;
 }
 
 export const InputWithIcon: FC<InputWithIconBaseProps> = ({
   className,
-  schema,
   icon,
   alt,
   inputAtributes,
@@ -37,7 +35,7 @@ export const InputWithIcon: FC<InputWithIconBaseProps> = ({
         width={30}
         {...imageAtributes}
       />
-      <Input {...inputAtributes} className={inputStyles} schema={schema} />
+      <Input {...inputAtributes} className={inputStyles} />
     </div>
   );
 };

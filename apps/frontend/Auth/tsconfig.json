@@ -23,12 +23,9 @@
     ],
     "types": ["jest", "node"],
     "paths": {
-      "@qualy/front_share/client": [
-        "../../../libs/frontend/share/src/index.ts"
+      "@qualy/front_share/*": [
+        "../../../libs/frontend/share/src/*"
       ],
-      "@qualy/front_share/server": [
-        "../../../libs/frontend/share/src/server.ts"
-      ]
     }
   },
   "files": [],

@@ -1,25 +1,40 @@
 'use client';
 import Link from 'next/link';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 
+import { Input } from '@qualy/front_share/client';
 import { Button } from '@qualy/front_share/server';
 import { useAuthErrors } from 'src/features/AuthErrors/model/AuthErrorsContext';
-import AuthInput from 'src/features/common/ui/AuthInput';
 import PasswordInput from 'src/features/common/ui/PasswordInput';
-import { emailSchema } from 'src/utils/validate';
+import schems from 'src/utils/validate';
 
 const LoginFormContent: FC = () => {
-  const [errors] = useAuthErrors();
+  const [errors, setErrors] = useAuthErrors();
+  const [formData, setFormData] = useState<Record<string, string>>({
+    email: '',
+    password: '',
+  });
 
   const disabled = Object.values(errors).some((error) => error);
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newFormData = { ...formData, [e.target.name]: e.target.value };
+
+    schems[e.target.name]
+      .validate(newFormData[e.target.name])
+      .then(() => setErrors({ ...errors, [e.target.name]: null }))
+      .catch((err) => setErrors({ ...errors, [e.target.name]: err.message }));
+
+    setFormData(newFormData);
+  };
+
   return (
-    <>
-      <AuthInput
-        schema={emailSchema}
+    <div onChange={handleChange} className="flex flex-col gap-5">
+      <Input
         type="text"
         placeholder="Email"
         name="email"
+        error={errors.email}
       />
       <PasswordInput name="password" placeholder="Password" />
       <Button type="submit" disabled={disabled}>
@@ -32,7 +47,7 @@ const LoginFormContent: FC = () => {
           Signup
         </Link>
       </span>
-    </>
+    </div>
   );
 };
 
