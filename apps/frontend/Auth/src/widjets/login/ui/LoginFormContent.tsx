@@ -35,6 +35,8 @@ const LoginFormContent: FC = () => {
         placeholder="Email"
         name="email"
         error={errors.email}
+        className="text-blue-600"
+        inputStyle="underline"
       />
       <PasswordInput name="password" placeholder="Password" />
       <Button type="submit" disabled={disabled}>

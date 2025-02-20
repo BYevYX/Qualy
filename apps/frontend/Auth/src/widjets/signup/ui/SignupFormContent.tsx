@@ -37,14 +37,14 @@ const SignupFormContent: FC = () => {
         <Input
           name="username"
           placeholder="Username"
-          className="border-amber-300 text-amber-600"
+          className="text-blue-600"
           inputStyle="underline"
           error={errors.username}
         />
         <Input
           placeholder="Email"
           name="email"
-          className="border-amber-300 text-amber-600"
+          className="text-blue-600"
           inputStyle="underline"
           error={errors.email}
         />

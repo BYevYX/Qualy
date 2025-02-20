@@ -24,6 +24,8 @@ const PasswordInput: FC<PasswordInputProps> = ({ name, placeholder }) => {
         placeholder,
         name,
         error: errors[name],
+        className: 'text-blue-600',
+        inputStyle: 'underline',
       }}
       imageAtributes={{
         onClick: () => setShowPassword(!showPassword),

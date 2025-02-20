@@ -1,17 +1,15 @@
 .button {
     text-align: center;
-    background-color: white;
+    background-color: #FFC312;
     border-radius: 8px;
     
     padding: 4px 8px;
-
     cursor: pointer;
-
     transition: all 300ms ease;
 }
 
 .button:hover {
-    background-color: beige;
+    background-color: #FFA500;
 
     transition: all 300ms;
 }
@@ -22,6 +20,6 @@
 }
 
 .button:disabled {
-    background-color: #ccc;
+    background-color: #FFE082;
     cursor: not-allowed;
 }

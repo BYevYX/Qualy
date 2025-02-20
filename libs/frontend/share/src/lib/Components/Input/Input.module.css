@@ -2,23 +2,6 @@
   position: relative;
 }
 
-.error.input {
-  background-color: #e74c3c;
-}
-
-.errorMessage {
-  color: #e74c3c;
-  opacity: 1;
-  transition: all 0.3s ease;
-  position: absolute;
-}
-
-@starting-style {
-  .errorMessage {
-    opacity: 0;
-  }
-}
-
 .errorMessageContainer {
   font-size: small;
 }
@@ -60,6 +43,7 @@
 .underline, .withGlow {
     border-bottom: 2px solid rgb(204, 204, 204);
     transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(140, 197, 236, 0.295);
 }
 
 .underline:focus {
@@ -78,5 +62,24 @@
   }
   50% {
     border-bottom-color: #8e44ad;
+  }
+}
+
+.error.underline {
+  box-shadow: 0 0 10px rgba(192, 57, 43, 0.7);
+  border-bottom-color: #e74c3c;
+  color: #e74c3c;
+}
+
+.errorMessage {
+  color: #e74c3c;
+  opacity: 1;
+  transition: all 0.3s ease;
+  position: absolute;
+}
+
+@starting-style {
+  .errorMessage {
+    opacity: 0;
   }
 }
