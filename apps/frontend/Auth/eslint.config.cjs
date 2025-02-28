@@ -4,6 +4,6 @@ module.exports = [
   ...baseConfig,
 
   {
-    ignores: ['.next/**/*'],
+    ignores: ['.next/**/*', '!**/auth.config.ts'],
   },
 ];

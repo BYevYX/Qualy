@@ -2,7 +2,7 @@
 import { usePathname } from 'next/navigation';
 import { FC } from 'react';
 
-import { MultiButtons } from '@qualy/front_share/client';
+import { MultiButtons } from '@qualy/front-share/client';
 
 const AuthMultiChoose: FC = () => {
   const path = usePathname();

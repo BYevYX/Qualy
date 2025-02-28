@@ -25,6 +25,9 @@
     },
     {
       "path": "./apps/frontend/host"
+    },
+    {
+      "path": "./libs/frontend/server"
     }
   ]
 }

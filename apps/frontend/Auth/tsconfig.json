@@ -23,9 +23,8 @@
     ],
     "types": ["jest", "node"],
     "paths": {
-      "@qualy/front_share/*": [
-        "../../../libs/frontend/share/src/*"
-      ],
+      "@qualy/front-share/*": ["../../../libs/frontend/share/src/*"],
+      "@qualy/front-server": ["../../../libs/frontend/server/src"]
     }
   },
   "files": [],
@@ -37,12 +36,9 @@
     "../../../apps/frontend/Auth/.next/types/**/*.ts",
     "../../../dist/apps/frontend/Auth/.next/types/**/*.ts",
     "next-env.d.ts",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "../../../libs/**/*.ts"
   ],
   "exclude": ["node_modules", "jest.config.ts", "**/*.spec.ts", "**/*.test.ts"],
-  "references": [
-    {
-      "path": "../../../libs/frontend/share"
-    }
-  ]
+  "references": []
 }

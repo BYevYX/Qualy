@@ -15,7 +15,6 @@
     ],
     "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"]
   },
-
   "plugins": [
     {
       "plugin": "@nx/js/typescript",

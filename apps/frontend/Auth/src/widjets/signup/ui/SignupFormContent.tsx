@@ -2,11 +2,12 @@
 import Link from 'next/link';
 import { FC, useState } from 'react';
 
-import { Input } from '@qualy/front_share/client';
-import { Button } from '@qualy/front_share/server';
+import { Input } from '@qualy/front-share/client';
+import { Button } from '@qualy/front-share/server';
 import { useAuthErrors } from 'src/features/AuthErrors/model/AuthErrorsContext';
 import PasswordInput from 'src/features/common/ui/PasswordInput';
-import schems from 'src/utils/validate';
+import schems from 'src/utils/validateInputs';
+import { SignupFields } from 'src/widjets/login/model/types';
 
 const SignupFormContent: FC = () => {
   const [errors, setErrors] = useAuthErrors();
@@ -23,7 +24,7 @@ const SignupFormContent: FC = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newFormData = { ...formData, [e.target.name]: e.target.value };
 
-    schems[e.target.name]
+    schems[e.target.name as SignupFields]
       .validate(newFormData[e.target.name], { context: newFormData })
       .then(() => setErrors({ ...errors, [e.target.name]: null }))
       .catch((err) => setErrors({ ...errors, [e.target.name]: err.message }));

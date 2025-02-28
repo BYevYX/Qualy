@@ -1,7 +1,7 @@
 'use client';
 import { FC, useState } from 'react';
 
-import { InputWithIcon } from '@qualy/front_share/server';
+import { InputWithIcon } from '@qualy/front-share/server';
 import closeEye from 'public/images/close_eye.png';
 import openEye from 'public/images/open_eye.png';
 import { useAuthErrors } from 'src/features/AuthErrors/model/AuthErrorsContext';
