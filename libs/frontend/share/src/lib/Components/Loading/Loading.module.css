@@ -1,0 +1,130 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  min-height: 200px;
+  color: white;
+}
+
+.message {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4b5563;
+}
+
+/* Варианты анимаций */
+.spinner {
+  animation: spin 1s linear infinite;
+  border: 3px solid;
+  border-radius: 9999px;
+  border-bottom-color: transparent;
+}
+
+.dotsContainer {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.dot {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 9999px;
+  animation: bounce 1.4s infinite ease-in-out;
+  background-color: white;
+}
+
+.pulse {
+  border-radius: 9999px;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  background-color: white;
+}
+
+/* Размеры */
+.sizeSm {
+  width: 1rem;
+  height: 1rem;
+}
+
+.sizeMd {
+  width: 2rem;
+  height: 2rem;
+}
+
+.sizeLg {
+  width: 3rem;
+  height: 3rem;
+}
+
+/* Темная тема */
+@media (prefers-color-scheme: dark) {
+  .message {
+    color: #d1d5db;
+  }
+}
+
+/* Анимации */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-0.5rem);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.gradient {
+  position: relative;
+  animation: spin 1.5s linear infinite;
+  border-radius: 9999px;
+  background: linear-gradient(
+    45deg,
+    var(--gradient-start),
+    var(--gradient-mid),
+    var(--gradient-end)
+  );
+  padding: 2px;
+}
+
+.gradientInner {
+  background: #fff;
+  border-radius: inherit;
+  width: 100%;
+  height: 100%;
+}
+
+/* Для темной темы */
+@media (prefers-color-scheme: dark) {
+  .gradientInner {
+    background: #1a1a1a;
+  }
+}
+
+/* Анимация градиента */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

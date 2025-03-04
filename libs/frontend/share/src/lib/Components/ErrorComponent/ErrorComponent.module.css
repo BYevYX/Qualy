@@ -1,0 +1,25 @@
+.errorContainer {
+  border: 1px solid #ff4444;
+  border-radius: 4px;
+  padding: 4px 12px;
+  opacity: 1;
+  transition: all 0.3s linear;
+}
+
+.closing {
+  opacity: 0;
+  margin: 0;
+}
+
+.text {
+  color: #e74c3c;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+@starting-style {
+  .errorContainer {
+    opacity: 0;
+    margin: 0;
+  }
+}

@@ -1,6 +1,6 @@
 import { string, StringSchema } from 'yup';
 
-import { SignupFields } from 'src/widjets/signup/model/types';
+import { SignupFieldsType } from 'src/widjets/signup/model/types';
 
 const maxLength = 100;
 const passwordMinLength = 8;
@@ -36,4 +36,4 @@ export default {
   password: passwordSchema,
   verifyPassword: verifyPasswordSchema,
   username: usernameSchema,
-} as Record<SignupFields, StringSchema<string>>;
+} as Record<SignupFieldsType, StringSchema<string>>;

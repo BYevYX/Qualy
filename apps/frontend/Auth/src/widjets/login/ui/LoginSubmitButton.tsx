@@ -1,0 +1,27 @@
+import Link from 'next/link';
+import { FC } from 'react';
+
+import { Button } from '@qualy/front-share/server';
+
+interface LoginFormContentProps {
+  disabled: boolean;
+}
+
+const LoginSubmitButton: FC<LoginFormContentProps> = ({ disabled }) => {
+  return (
+    <div>
+      <Button type="submit" disabled={disabled}>
+        Login
+      </Button>
+
+      <span className="text-cyan-700">
+        Don&apos;t have an account?{' '}
+        <Link className="text-amber-400 hover:text-amber-200" href="/signup">
+          Signup
+        </Link>
+      </span>
+    </div>
+  );
+};
+
+export default LoginSubmitButton;

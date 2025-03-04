@@ -1,10 +1,10 @@
 'use client';
 import { FC, useState } from 'react';
 
+import { useMegaForm } from '@qualy/front-share/client';
 import { InputWithIcon } from '@qualy/front-share/server';
 import closeEye from 'public/images/close_eye.png';
 import openEye from 'public/images/open_eye.png';
-import { useAuthErrors } from 'src/features/AuthErrors/model/AuthErrorsContext';
 
 interface PasswordInputProps {
   name: 'password' | 'verifyPassword';
@@ -13,7 +13,7 @@ interface PasswordInputProps {
 
 const PasswordInput: FC<PasswordInputProps> = ({ name, placeholder }) => {
   const [showPassword, setShowPassword] = useState(false);
-  const [errors] = useAuthErrors();
+  const { fieldsErrors } = useMegaForm();
 
   return (
     <InputWithIcon
@@ -23,7 +23,7 @@ const PasswordInput: FC<PasswordInputProps> = ({ name, placeholder }) => {
         type: showPassword ? 'text' : 'password',
         placeholder,
         name,
-        error: errors[name],
+        error: fieldsErrors[name],
         className: 'text-blue-600',
         inputStyle: 'underline',
       }}

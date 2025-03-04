@@ -1,13 +1,28 @@
-import Form from 'next/form';
-import { FC } from 'react';
+'use client';
+import { FC, useActionState } from 'react';
 
-import SignupFormContent from 'src/widjets/signup/ui/SignupFormContent';
+import { MegaForm } from '@qualy/front-share/client';
+import schemas from 'src/utils/validateInputs';
+import { AuthActionObject } from 'src/widjets/share/model/types';
+import { registerAction } from 'src/widjets/signup/api/signupActions';
+import SignupFields from 'src/widjets/signup/ui/SignupFileds';
+import SignupSubmitButton from 'src/widjets/signup/ui/SignupSubmitButton';
 
 const Signup: FC = () => {
+  const [state, action] = useActionState(
+    async (_: AuthActionObject, formData: FormData) =>
+      await registerAction(formData),
+    { succes: false },
+  );
+
   return (
-    <Form action={'action'} className="flex flex-col gap-15">
-      <SignupFormContent />
-    </Form>
+    <MegaForm
+      action={action}
+      inputRender={<SignupFields />}
+      submitButtonRender={(props) => <SignupSubmitButton {...props} />}
+      validationSchemas={schemas}
+      formError={state.error}
+    />
   );
 };
 
