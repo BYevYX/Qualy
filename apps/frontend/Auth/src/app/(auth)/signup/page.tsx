@@ -21,7 +21,7 @@ const Signup: FC = () => {
       inputRender={<SignupFields />}
       submitButtonRender={(props) => <SignupSubmitButton {...props} />}
       validationSchemas={schemas}
-      formError={state.error}
+      formError={state}
     />
   );
 };

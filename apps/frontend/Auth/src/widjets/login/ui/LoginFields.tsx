@@ -8,7 +8,7 @@ const LoginFields: FC = () => {
   const { fieldsErrors } = useMegaForm();
 
   return (
-    <div>
+    <div className="flex flex-col gap-5">
       <Input
         name="email"
         type="text"

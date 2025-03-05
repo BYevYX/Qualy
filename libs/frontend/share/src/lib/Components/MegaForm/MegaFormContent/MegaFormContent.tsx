@@ -1,5 +1,5 @@
 'use client';
-import { useMemo, useRef, memo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { FC } from 'react';
 
 import styles from './MegaFormContent.module.css';
@@ -16,18 +16,24 @@ const MegaFormContent: FC<MegaFormContentProps> = ({
   const { pending, fieldsErrors, setFieldsErrors, fields, setFields } =
     useMegaForm();
 
-  const isFormErrorDisplay = useRef(!!formError);
+  const [isFormErrorDisplay, setIsFormErrorDisplay] = useState(
+    !!formError?.error,
+  );
+
+  useEffect(() => {
+    setIsFormErrorDisplay(!!formError?.error);
+  }, [formError]);
 
   const disabled = useMemo(
     () =>
       Object.values(fieldsErrors).some((error) => error) ||
-      isFormErrorDisplay.current ||
+      isFormErrorDisplay ||
       pending,
     [fieldsErrors, isFormErrorDisplay, pending],
   );
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    isFormErrorDisplay.current = false;
+    setIsFormErrorDisplay(false);
     const { name, value } = e.target;
     const newFormData = { ...fields, [name]: value };
 
@@ -46,24 +52,24 @@ const MegaFormContent: FC<MegaFormContentProps> = ({
 
     setFields(newFormData);
   };
-
+  console.log(isFormErrorDisplay, formError?.error);
   return (
     <div onChange={handleChange} className={styles.container}>
       {typeof inputRender === 'function' ? inputRender() : inputRender}
 
       <ErrorComponent
-        display={isFormErrorDisplay.current}
+        display={isFormErrorDisplay}
         className={styles.errorComponent}
       >
-        {formError}
+        {formError?.error}
       </ErrorComponent>
 
       {submitButtonRender({
         disabled,
-        isFormErrorDisplay: isFormErrorDisplay.current,
+        isFormErrorDisplay: isFormErrorDisplay,
       })}
     </div>
   );
 };
 
-export default memo(MegaFormContent);
+export default MegaFormContent;

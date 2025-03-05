@@ -15,13 +15,15 @@ const Login: FC = () => {
     { succes: false },
   );
 
+  console.log(state);
+
   return (
     <MegaForm
       action={action}
       inputRender={<LoginFields />}
       submitButtonRender={(props) => <LoginSubmitButton {...props} />}
       validationSchemas={schemas}
-      formError={state.error}
+      formError={state}
     />
   );
 };

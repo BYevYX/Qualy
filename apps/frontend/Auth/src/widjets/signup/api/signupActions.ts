@@ -1,9 +1,9 @@
 'use server';
-
 import bcrypt from 'bcryptjs';
 import { ValidationError } from 'yup';
 
 import { createUser } from './signupDB';
+import { SignupError } from '../model/SignupError';
 import { getUserByEmail } from '@qualy/front-server';
 import { db } from 'src/db';
 import { signupSchema } from 'src/utils/validateAuth';
@@ -22,7 +22,7 @@ export async function registerAction(
 
     const existingUser = await getUserByEmail(db, email);
     if (existingUser) {
-      throw new Error('User already exists');
+      throw new SignupError('User already exists');
     }
 
     const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -33,7 +33,10 @@ export async function registerAction(
     if (e instanceof ValidationError) {
       return { succes: false, error: e.message };
     }
-    console.error(e);
+
+    if (e instanceof SignupError) {
+      return { succes: false, error: e.message };
+    }
     return { succes: false, error: 'Something went wrong!' };
   }
 }

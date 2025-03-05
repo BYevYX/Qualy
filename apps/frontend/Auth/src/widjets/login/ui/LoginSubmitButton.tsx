@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import Link from 'next/link';
 import { FC } from 'react';
 
@@ -5,11 +6,19 @@ import { Button } from '@qualy/front-share/server';
 
 interface LoginFormContentProps {
   disabled: boolean;
+  isFormErrorDisplay: boolean;
 }
 
-const LoginSubmitButton: FC<LoginFormContentProps> = ({ disabled }) => {
+const LoginSubmitButton: FC<LoginFormContentProps> = ({
+  disabled,
+  isFormErrorDisplay,
+}) => {
   return (
-    <div>
+    <div
+      className={cn('flex flex-col gap-1', {
+        'mt-7': !isFormErrorDisplay,
+      })}
+    >
       <Button type="submit" disabled={disabled}>
         Login
       </Button>

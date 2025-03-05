@@ -1,6 +1,6 @@
 'use client';
 import Form, { FormProps } from 'next/form';
-import { FC, ReactNode, Suspense, useState } from 'react';
+import { FC, memo, ReactNode, Suspense, useState } from 'react';
 import { StringSchema } from 'yup';
 
 import MegaFormContent from './MegaFormContent/MegaFormContent';
@@ -9,7 +9,7 @@ import { Loading } from '../Loading/Loading';
 import { FieldsAndErrorsRecord } from 'src/types';
 
 interface MegaFormProps extends Omit<FormProps, 'children'> {
-  formError: string | null | undefined;
+  formError: { error?: string } | null | undefined;
   validationSchemas: Record<string, StringSchema<string>>;
   inputRender: ReactNode | (() => ReactNode);
   submitButtonRender: (props: {
@@ -18,7 +18,7 @@ interface MegaFormProps extends Omit<FormProps, 'children'> {
   }) => ReactNode;
 }
 
-export const MegaForm: FC<MegaFormProps> = ({
+const MegaFormComponent: FC<MegaFormProps> = ({
   inputRender,
   submitButtonRender,
   formError,
@@ -50,3 +50,5 @@ export const MegaForm: FC<MegaFormProps> = ({
     </MegaFormContext>
   );
 };
+
+export const MegaForm = memo(MegaFormComponent);

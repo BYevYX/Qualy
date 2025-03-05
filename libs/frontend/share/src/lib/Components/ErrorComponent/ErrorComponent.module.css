@@ -6,11 +6,6 @@
   transition: all 0.3s linear;
 }
 
-.closing {
-  opacity: 0;
-  margin: 0;
-}
-
 .text {
   color: #e74c3c;
   font-size: 14px;
