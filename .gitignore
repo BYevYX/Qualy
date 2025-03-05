@@ -47,3 +47,4 @@ out
 
 .env
 .env*.local
+package-lock.json
