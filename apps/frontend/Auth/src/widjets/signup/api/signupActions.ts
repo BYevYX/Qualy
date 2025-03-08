@@ -4,9 +4,8 @@ import { ValidationError } from 'yup';
 
 import { createUser } from './signupDB';
 import { SignupError } from '../model/SignupError';
-import { getUserByEmail } from '@qualy/front-server';
-import { db } from 'src/db';
 import { signupSchema } from 'src/utils/validateAuth';
+import { authGetUserByEmail } from 'src/widjets/share/api/shareDB';
 import { AuthActionObject } from 'src/widjets/share/model/types';
 
 const saltRounds = 10;
@@ -20,7 +19,7 @@ export async function registerAction(
     );
     const { email, username, password } = validatedData;
 
-    const existingUser = await getUserByEmail(db, email);
+    const existingUser = await authGetUserByEmail(email);
     if (existingUser) {
       throw new SignupError('User already exists');
     }

@@ -6,11 +6,19 @@
 .button {
     position: relative;
     color: white;
-    padding: 6px 16px;
-    border-radius: 16px;
 
     cursor: pointer;
     transition: all 0.3s ease-in-out;
+}
+
+.common {
+  padding: 6px 16px;
+  border-radius: 16px;
+}
+
+.withLines {
+  padding: 6px 16px;
+  border-radius: 16px;
 }
 
 .active {
@@ -19,8 +27,8 @@
 }
 
 
-.button::before,
-.button::after {
+.withLines::before,
+.withLines::after {
   content: '';
   position: absolute;
   background-color: white;
@@ -28,7 +36,7 @@
 }
 
 /* Верхняя и нижняя линии */
-.button::before {
+.withLines::before {
   top: 100%;
   left: 50%;
   width: 0;
@@ -37,7 +45,7 @@
 }
 
 /* Левая и правая линии */
-.button::after {
+.withLines::after {
   top: 50%;
   left: 100%;
   width: 2px;
@@ -46,13 +54,13 @@
 }
 
 /* Анимация при наведении */
-.button:hover:not(.active)::before {
+.withLines:hover:not(.active)::before {
   width: 100%; /* Растягиваем верхнюю и нижнюю линии */
   left: 0;
   transform: translateX(0);
 }
 
-.button:hover:not(.active)::after {
+.withLines:hover:not(.active)::after {
   height: 100%; /* Растягиваем левую и правую линии */
   top: 0;
   transform: translateY(0);

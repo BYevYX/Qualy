@@ -1,6 +1,5 @@
 .button {
     text-align: center;
-    background-color: #FFC312;
     border-radius: 8px;
     
     padding: 4px 8px;
@@ -8,9 +7,12 @@
     transition: all 300ms ease;
 }
 
-.button:hover {
-    background-color: #FFA500;
+.common {
+    background-color: #FFC312;
+}
 
+.common:hover {
+    background-color: #FFA500;
     transition: all 300ms;
 }
 

@@ -4,7 +4,10 @@ import type { Provider } from 'next-auth/providers';
 
 import authConfig from './auth.config';
 import { db } from './db';
-import { authGetUserById } from './widjets/share/api/shareDB';
+import {
+  authGetUserById,
+  verifyUserEmailBD,
+} from './widjets/share/api/shareDB';
 
 export const providerMap = (authConfig.providers as Provider[])
   .map((provider) => {
@@ -22,7 +25,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(db),
   session: { strategy: 'jwt' },
   pages: {
-    signIn: '/login',
+    signIn: '/auth/login',
+    error: '/auth/login',
   },
   callbacks: {
     async jwt({ token }) {
@@ -47,5 +51,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return session;
     },
   },
-  events: {},
+  events: {
+    async linkAccount({ user }) {
+      if (!user.id) throw new Error('User ID not found');
+      await verifyUserEmailBD(user.id);
+    },
+  },
 });

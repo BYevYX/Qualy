@@ -1,11 +1,11 @@
 'use client';
 import { useEffect, useMemo, useState } from 'react';
 import type { FC } from 'react';
+import type { MegaFormContentProps } from 'src/lib/Types/props';
 
 import styles from './MegaFormContent.module.css';
 import { ErrorComponent } from '../../ErrorComponent/ErrorComponent';
 import { useMegaForm } from '../useMegaForm';
-import type { MegaFormContentProps } from 'src/lib/Types/props';
 
 const MegaFormContent: FC<MegaFormContentProps> = ({
   formError,
@@ -38,7 +38,7 @@ const MegaFormContent: FC<MegaFormContentProps> = ({
     const newFormData = { ...fields, [name]: value };
 
     try {
-      await validationSchemas[name].validate(value);
+      await validationSchemas[name].validate(value, { context: newFormData });
       setFieldsErrors((prev) => ({
         ...prev,
         [name]: undefined,
@@ -52,7 +52,7 @@ const MegaFormContent: FC<MegaFormContentProps> = ({
 
     setFields(newFormData);
   };
-  console.log(isFormErrorDisplay, formError?.error);
+
   return (
     <div onChange={handleChange} className={styles.container}>
       {typeof inputRender === 'function' ? inputRender() : inputRender}

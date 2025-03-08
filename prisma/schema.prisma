@@ -13,7 +13,7 @@ enum userRole {
   ADMIN
 }
 
-model users {
+model User {
   id            String    @id @default(cuid())
   name          String?   @db.VarChar(100)
   email         String    @unique @db.VarChar(100)
@@ -23,11 +23,13 @@ model users {
   updatedAt     DateTime  @updatedAt
   password      String?   @db.VarChar(100)
   role          userRole  @default(USER)
-  accounts      account[]
-  sessions      session[]
+  accounts      Account[]
+  sessions      Session[]
+
+  @@map("users")
 }
 
-model account {
+model Account {
   userId            String
   type              String
   provider          String
@@ -41,18 +43,21 @@ model account {
   session_state     String?
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
-  user              users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([provider, providerAccountId])
+  @@map("accounts")
 }
 
-model session {
+model Session {
   sessionToken String   @unique
   userId       String
   expires      DateTime
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
-  user         users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
 }
 
 model verificationToken {

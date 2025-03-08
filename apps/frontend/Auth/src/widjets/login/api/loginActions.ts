@@ -19,7 +19,6 @@ export async function loginAction(data: FormData): Promise<AuthActionObject> {
     return { succes: true };
   } catch (e) {
     const errorObj = { succes: false };
-    console.log('===>', e);
 
     if (e instanceof AuthError) {
       switch (e.type) {

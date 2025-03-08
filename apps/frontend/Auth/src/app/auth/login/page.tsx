@@ -8,14 +8,13 @@ import LoginFields from 'src/widjets/login/ui/LoginFields';
 import LoginSubmitButton from 'src/widjets/login/ui/LoginSubmitButton';
 import { AuthActionObject } from 'src/widjets/share/model/types';
 
+// TODO read from url error (https://authjs.dev/reference/core/types#signinpageerrorparam)
 const Login: FC = () => {
   const [state, action] = useActionState(
     async (_: AuthActionObject, formData: FormData) =>
       await loginAction(formData),
     { succes: false },
   );
-
-  console.log(state);
 
   return (
     <MegaForm

@@ -27,7 +27,10 @@ const SignupSubmitButton: FC<SignupSubmitButtonProps> = ({
       </Button>
       <span className="text-cyan-700">
         Already have an account?{' '}
-        <Link className="text-amber-400 hover:text-amber-200" href="/login">
+        <Link
+          className="text-amber-400 hover:text-amber-200"
+          href="/auth/login"
+        >
           Login
         </Link>
       </span>

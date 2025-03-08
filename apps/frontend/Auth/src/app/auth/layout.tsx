@@ -2,11 +2,15 @@ import Image from 'next/image';
 
 import shely from 'public/images/shely.jpeg';
 import AuthMultiChoose from 'src/features/common/ui/AuthMultiChoose';
+import { LayoutParams } from 'src/widjets/share/model/types';
+import OAuth from 'src/widjets/share/ui/OAuth';
 
-export default function AuthLayout({
+export default async function AuthLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: LayoutParams;
 }) {
   return (
     <div className="relative flex justify-around">
@@ -25,6 +29,7 @@ export default function AuthLayout({
         </h1>
 
         {children}
+        <OAuth params={params} />
       </div>
     </div>
   );

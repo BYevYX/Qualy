@@ -6,20 +6,20 @@ import { MultiButtons } from '@qualy/front-share/client';
 
 const AuthMultiChoose: FC = () => {
   const path = usePathname();
-
   return (
     <MultiButtons
       className="absolute top-10 right-20"
+      variant="withLines"
       buttonsData={[
         {
           text: 'Login',
-          href: '/login',
-          active: path === '/login',
+          href: '/auth/login',
+          active: path === '/auth/login',
         },
         {
           text: 'Signup',
-          href: '/signup',
-          active: path === '/signup',
+          href: '/auth/signup',
+          active: path === '/auth/signup',
         },
       ]}
     />
