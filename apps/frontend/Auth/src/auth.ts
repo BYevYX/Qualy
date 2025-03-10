@@ -4,10 +4,12 @@ import type { Provider } from 'next-auth/providers';
 
 import authConfig from './auth.config';
 import { db } from './db';
+import { refreshTokenRotation } from './utils/RefreshTokens';
 import {
   authGetUserById,
   verifyUserEmailBD,
 } from './widjets/share/api/shareDB';
+import { OAuthProvidersType } from '@qualy/front-server/types';
 
 export const providerMap = (authConfig.providers as Provider[])
   .map((provider) => {
@@ -29,25 +31,32 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     error: '/auth/login',
   },
   callbacks: {
-    async jwt({ token }) {
+    async jwt({ token, account }) {
       if (!token.sub) return token;
 
       const existingUser = await authGetUserById(token.sub);
       if (!existingUser) return token;
 
-      token.role = existingUser.role;
-      return token;
+      return {
+        ...token,
+        role: existingUser.role,
+        provider: account?.provider as OAuthProvidersType,
+      };
     },
+
     async session({ session, token }) {
       if (!session.user) return session;
 
       if (token.sub) {
         session.user.id = token.sub;
       }
-
       if (token.role) {
         session.user.role = token.role;
       }
+      session.user.provider = token.provider;
+
+      await refreshTokenRotation(session);
+
       return session;
     },
   },

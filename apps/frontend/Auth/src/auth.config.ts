@@ -16,6 +16,8 @@ export default {
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      // Google requires "offline" access_type to provide a `refresh_token`
+      authorization: { params: { access_type: 'offline', prompt: 'consent' } },
     }),
     GitHub({
       clientId: process.env.GITHUB_CLIENT_ID,
