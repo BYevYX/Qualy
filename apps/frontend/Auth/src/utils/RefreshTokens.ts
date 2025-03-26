@@ -7,6 +7,7 @@ import { db } from 'src/db';
 import { authGetAccountByUserId } from 'src/widjets/share/api/shareDB';
 
 // TODO: test it and explore VKID SDK
+// TODO: handle RefreshTokenError (принудительно вызвать авторизовать)
 export async function refreshTokenRotation(session: Session) {
   const {
     user: { id, provider },

@@ -5,8 +5,8 @@ import { StringSchema } from 'yup';
 
 import MegaFormContent from './MegaFormContent/MegaFormContent';
 import { MegaFormContext } from './MegaFormContext';
+import { FieldsAndErrorsRecord } from '../../Types/contexts';
 import { Loading } from '../Loading/Loading';
-import { FieldsAndErrorsRecord } from 'src/types';
 
 interface MegaFormProps extends Omit<FormProps, 'children'> {
   formError: { error?: string } | null | undefined;

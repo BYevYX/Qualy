@@ -8,12 +8,14 @@ import { registerAction } from 'src/widjets/signup/api/signupActions';
 import SignupFields from 'src/widjets/signup/ui/SignupFileds';
 import SignupSubmitButton from 'src/widjets/signup/ui/SignupSubmitButton';
 
-// TODO read from url error (https://authjs.dev/reference/core/types#signinpageerrorparam)
+// TODO: read from url error (https://authjs.dev/reference/core/types#signinpageerrorparam)
+// TODO: add handle messages from succes
+
 const Signup: FC = () => {
   const [state, action] = useActionState(
     async (_: AuthActionObject, formData: FormData) =>
       await registerAction(formData),
-    { succes: false },
+    { succes: 'ok' },
   );
 
   return (

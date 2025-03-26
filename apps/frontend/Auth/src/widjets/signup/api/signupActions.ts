@@ -5,7 +5,9 @@ import { ValidationError } from 'yup';
 import { createUser } from './signupDB';
 import { SignupError } from '../model/SignupError';
 import { signupSchema } from 'src/utils/validateAuth';
+import { sendEmail } from 'src/widjets/mail/api/send';
 import { authGetUserByEmail } from 'src/widjets/share/api/shareDB';
+import { generateVerificationToken } from 'src/widjets/share/api/tokens';
 import { AuthActionObject } from 'src/widjets/share/model/types';
 
 const saltRounds = 10;
@@ -14,10 +16,9 @@ export async function registerAction(
   formData: FormData,
 ): Promise<AuthActionObject> {
   try {
-    const validatedData = await signupSchema.validate(
+    const { email, username, password } = await signupSchema.validate(
       Object.fromEntries(formData.entries()),
     );
-    const { email, username, password } = validatedData;
 
     const existingUser = await authGetUserByEmail(email);
     if (existingUser) {
@@ -27,15 +28,22 @@ export async function registerAction(
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     await createUser(email, hashedPassword, username);
 
-    return { succes: true };
+    const verificationToken = await generateVerificationToken(email);
+    const { error } = await sendEmail(email, verificationToken.token);
+
+    if (error) {
+      return { error: error.message };
+    }
+
+    return { succes: 'Confirmation email sent!' };
   } catch (e) {
     if (e instanceof ValidationError) {
-      return { succes: false, error: e.message };
+      return { error: e.message };
     }
 
     if (e instanceof SignupError) {
-      return { succes: false, error: e.message };
+      return { error: e.message };
     }
-    return { succes: false, error: 'Something went wrong!' };
+    return { error: 'Something went wrong!' };
   }
 }

@@ -8,3 +8,6 @@ export const AFTER_LOGIN_REDIRECT = '/';
 export const NEED_LOGIN_REDIRECT = '/auth/login';
 
 export const SIGNIN_ERROR_URL = '/auth/login';
+
+export const EMAIL_VERIFICATION_URL = '/auth/verify-email';
+export const DOMAIN = 'http://localhost:3000';

@@ -9,6 +9,8 @@ import Yandex from 'next-auth/providers/yandex';
 
 import { loginSchema } from './utils/validateAuth';
 import { authGetUserByEmail } from './widjets/share/api/shareDB';
+import { generateVerificationToken } from './widjets/share/api/tokens';
+import { NotVerifyEmailYetError } from './widjets/share/model/errors';
 
 // TODO: configure VK (now it isnt working)
 export default {
@@ -37,7 +39,7 @@ export default {
         password: {},
         email: {},
       },
-      async authorize(credentials, request) {
+      async authorize(credentials) {
         const validatedCredentials = await loginSchema.validate(credentials);
         const { email, password } = validatedCredentials;
 
@@ -47,6 +49,10 @@ export default {
         }
 
         const isPasswordMatch = await bcrypt.compare(password, user.password);
+
+        if (!user.emailVerified && isPasswordMatch) {
+          throw new NotVerifyEmailYetError(email);
+        }
         if (isPasswordMatch) return user;
 
         return null;

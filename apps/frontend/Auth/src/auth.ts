@@ -22,6 +22,7 @@ export const providerMap = (authConfig.providers as Provider[])
   })
   .filter((provider) => provider.id !== 'credentials');
 
+// TODO: maybe add signin callback to redirect if email not verified (а не кидать ошибку) or smt else
 export const { handlers, signIn, signOut, auth } = NextAuth({
   ...authConfig,
   adapter: PrismaAdapter(db),

@@ -1,5 +1,5 @@
 export interface AuthActionObject {
-  succes: boolean;
+  succes?: string;
   error?: string;
 }
 

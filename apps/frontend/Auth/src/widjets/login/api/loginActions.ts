@@ -3,6 +3,9 @@ import { AuthError } from 'next-auth';
 
 import { signIn } from 'src/auth';
 import { AFTER_LOGIN_REDIRECT } from 'src/routes';
+import { sendEmail } from 'src/widjets/mail/api/send';
+import { generateVerificationToken } from 'src/widjets/share/api/tokens';
+import { NotVerifyEmailYetError } from 'src/widjets/share/model/errors';
 import { AuthActionObject } from 'src/widjets/share/model/types';
 
 export async function loginAction(data: FormData): Promise<AuthActionObject> {
@@ -16,16 +19,24 @@ export async function loginAction(data: FormData): Promise<AuthActionObject> {
       redirectTo: AFTER_LOGIN_REDIRECT,
     });
 
-    return { succes: true };
+    return { succes: 'ok' };
   } catch (e) {
-    const errorObj = { succes: false };
+    if (e instanceof NotVerifyEmailYetError) {
+      const verificationToken = await generateVerificationToken(e.email);
+      const { error } = await sendEmail(e.email, verificationToken.token);
+
+      if (error) {
+        return { error: error.message };
+      }
+      return { succes: 'Confirmation email sent!' };
+    }
 
     if (e instanceof AuthError) {
       switch (e.type) {
         case 'CredentialsSignin':
-          return { ...errorObj, error: 'Invalid credentials!' };
+          return { error: 'Invalid credentials!' };
         default:
-          return { ...errorObj, error: 'Something went wrong!' };
+          return { error: 'Something went wrong!' };
       }
     }
     throw e;

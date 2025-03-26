@@ -20,3 +20,12 @@ export const verifyUserEmailBD = async (id: string) => {
     },
   });
 };
+
+export const getVerificationTokenByEmail = async (email: string) => {
+  const verificationToken = await db.verificationToken.findUnique({
+    where: {
+      email,
+    },
+  });
+  return verificationToken;
+};
