@@ -5,3 +5,5 @@ export { Input } from './lib/Components/Input/Input';
 
 export { MegaForm } from './lib/Components/MegaForm/MegaForm';
 export { useMegaForm } from './lib/Components/MegaForm/useMegaForm';
+
+export { E404 } from './lib/Components/404/404';

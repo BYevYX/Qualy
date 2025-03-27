@@ -1,8 +1,22 @@
+import Image from 'next/image';
 import { FC } from 'react';
 
-// TODO: add normal not found page
+import { E404 } from '@qualy/front-share/client';
+import reels from 'public/images/reels.webp';
+
 const NotFound: FC = () => {
-  return <div className="text-amber-50">heelo</div>;
+  return (
+    <div className="relative flex h-screen w-screen items-center justify-center">
+      <Image
+        src={reels}
+        alt="Reels"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+      <div className="relative">
+        <E404 size="lg" />
+      </div>
+    </div>
+  );
 };
 
 export default NotFound;

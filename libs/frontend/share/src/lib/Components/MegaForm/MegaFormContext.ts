@@ -1,6 +1,6 @@
 import { createContext, Dispatch, SetStateAction } from 'react';
 
-import { FieldsAndErrorsRecord } from 'src/types';
+import { FieldsAndErrorsRecord } from '../../Types/contexts';
 
 interface MegaFormContextType {
   fieldsErrors: FieldsAndErrorsRecord;

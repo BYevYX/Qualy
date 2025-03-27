@@ -9,6 +9,10 @@
 
 ## later
 
+## assets
+
+1. change all images
+
 ### deploy
 
 1. not forget to verify domain in Resend for production
