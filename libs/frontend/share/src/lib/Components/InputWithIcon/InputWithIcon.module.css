@@ -1,12 +1,15 @@
 .container {
     position: relative;
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
-.image {
+.icon {
     position: absolute;
+    align-self: flex-end;
     right: 5px;
-    top: 10%;
+    padding-bottom: 5px;
     cursor: pointer;
     z-index: 3;
 }

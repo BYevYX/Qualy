@@ -16,7 +16,7 @@ const templates = {
   //   },
 };
 
-// TODO: when domain in resend will be ready: change from on custom email
+// TODO: when domain in resend will be ready: change 'from' on custom email
 export async function sendEmail(
   to: string | string[],
   token: string,

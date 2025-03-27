@@ -1,41 +1,27 @@
 import cn from 'classnames';
-import Image, { StaticImageData, type ImageProps } from 'next/image';
-import type { FC } from 'react';
+import type { FC, PropsWithChildren } from 'react';
 
 import styles from './InputWithIcon.module.css';
+import { InputProps } from '../../Types/props';
 import { Input } from '../Input/Input';
-import { InputProps } from 'src/types';
 
-interface InputWithIconBaseProps {
-  className?: string;
-  icon: StaticImageData;
-  alt: string;
-  inputAtributes?: InputProps;
-  imageAtributes?: Partial<ImageProps>;
+interface InputWithIconProps extends PropsWithChildren, InputProps {
+  containerClassname?: string;
 }
 
-export const InputWithIcon: FC<InputWithIconBaseProps> = ({
+export const InputWithIcon: FC<InputWithIconProps> = ({
   className,
-  icon,
-  alt,
-  inputAtributes,
-  imageAtributes,
+  containerClassname,
+  children,
+  ...inputProps
 }) => {
-  const containerStyles = cn(styles.container, className);
-  const imageStyles = cn(styles.image, imageAtributes?.className);
-  const inputStyles = cn(styles.input, inputAtributes?.className);
+  const containerStyles = cn(styles.container, containerClassname);
+  const inputStyles = cn(styles.input, className);
 
   return (
     <div className={containerStyles}>
-      <Image
-        className={imageStyles}
-        src={icon}
-        alt={alt}
-        height={30}
-        width={30}
-        {...imageAtributes}
-      />
-      <Input {...inputAtributes} className={inputStyles} />
+      <div className={styles.icon}>{children}</div>
+      <Input {...inputProps} className={inputStyles} />
     </div>
   );
 };
