@@ -3,3 +3,10 @@ export { Button } from './lib/Components/Button/Button';
 export { InputWithIcon } from './lib/Components/InputWithIcon/InputWithIcon';
 export { Loading } from './lib/Components/Loading/Loading';
 export { ErrorComponent } from './lib/Components/ErrorComponent/ErrorComponent';
+
+export {
+  Card,
+  CardHeader,
+  CardContent,
+  CardFooter,
+} from './lib/Components/Card/Card';

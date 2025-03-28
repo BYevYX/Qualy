@@ -1,4 +1,5 @@
 'use client';
+import { useSearchParams } from 'next/navigation';
 import { FC, useActionState } from 'react';
 
 import { MegaForm } from '@qualy/front-share/client';
@@ -8,7 +9,6 @@ import LoginFields from 'src/widjets/login/ui/LoginFields';
 import LoginSubmitButton from 'src/widjets/login/ui/LoginSubmitButton';
 import { AuthActionObject } from 'src/widjets/share/model/types';
 
-// TODO: read from url error (https://authjs.dev/reference/core/types#signinpageerrorparam)
 // TODO: add handle messages from succes
 const Login: FC = () => {
   const [state, action] = useActionState(

@@ -5,7 +5,7 @@ import AuthMultiChoose from 'src/features/common/ui/AuthMultiChoose';
 import { LayoutParams } from 'src/widjets/share/model/types';
 import OAuth from 'src/widjets/share/ui/OAuth';
 
-export default async function AuthLayout({
+export default function AuthLayout({
   children,
   params,
 }: {

@@ -1,8 +1,37 @@
 'use client';
-// TODO normal page with Error
 
-const ErrorPage = () => {
-  return <div>Error</div>;
+import { useRouter } from 'next/navigation';
+import { useState, type FC } from 'react';
+
+import { Modal } from '@qualy/front-share/client';
+import ErrorMessage from 'src/features/common/ui/ErrorMessaage';
+
+interface ErrorFallbackProps {
+  error: Error & { digest?: string };
+  reset: () => void;
+}
+
+const ErrorFallback: FC<ErrorFallbackProps> = ({ error, reset }) => {
+  const router = useRouter();
+  const [isOpen, setIsOpen] = useState(true);
+
+  const handleClose = () => {
+    setIsOpen(false);
+
+    setTimeout(() => {
+      reset();
+      router.back();
+    }, 300);
+  };
+
+  console.error('Error ', error);
+
+  return (
+    <Modal isOpen={isOpen} onClose={handleClose}>
+      <h3>Error!</h3>
+      <ErrorMessage message={error.message} />
+    </Modal>
+  );
 };
 
-export default ErrorPage;
+export default ErrorFallback;

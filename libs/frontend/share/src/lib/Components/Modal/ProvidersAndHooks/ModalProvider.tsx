@@ -2,7 +2,7 @@
 import type { FC, PropsWithChildren } from 'react';
 import { useCallback, useState } from 'react';
 
-import { Modal } from './Modal';
+import { Modal } from '../Modal';
 import ModalContext from './ModalContext';
 
 export const ModalProvider: FC<PropsWithChildren> = ({ children }) => {
