@@ -19,7 +19,7 @@ export async function loginAction(data: FormData): Promise<AuthActionObject> {
       redirectTo: AFTER_LOGIN_REDIRECT,
     });
 
-    return { succes: 'ok' };
+    return { succes: 'You entering!' };
   } catch (e) {
     if (e instanceof NotVerifyEmailYetError) {
       const verificationToken = await generateVerificationToken(e.email);

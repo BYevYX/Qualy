@@ -23,7 +23,7 @@ export default function AuthLayout({
       </div>
       <AuthMultiChoose />
 
-      <div className="self-center justify-self-center">
+      <div className="flex flex-col self-center justify-self-center">
         <h1 className="p-10 text-center text-2xl text-white">
           Hello, Welcome!
         </h1>

@@ -1,19 +1,33 @@
-.errorContainer {
-  border: 1px solid #ff4444;
+.container {
   border-radius: 4px;
   padding: 4px 12px 8px 12px;
   opacity: 1;
   transition: all 0.3s linear;
 }
 
+.container.error {
+  border: 1px solid #ff4444;
+}
+
+.container.success {
+  border: 1px solid #2ecc71;
+}
+
 .text {
-  color: #e74c3c;
   font-size: 14px;
   font-weight: 700;
 }
 
+.text.error {
+  color: #ff4444;
+}
+
+.text.success {
+  color: #2ecc71;
+}
+
 @starting-style {
-  .errorContainer {
+  .container {
     opacity: 0;
     margin: 0;
   }

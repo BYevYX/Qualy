@@ -11,7 +11,7 @@ const ErrorPage: FC = () => {
   const error = search.get('error');
 
   return (
-    <Card className="max-w-3xs items-center">
+    <Card className="max-w-3xs self-center">
       <CardHeader className="text-white">
         <h3>Error!</h3>
       </CardHeader>

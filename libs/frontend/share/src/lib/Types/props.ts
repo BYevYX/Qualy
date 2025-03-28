@@ -7,7 +7,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export interface MegaFormContentProps {
-  formError: { error?: string } | null | undefined;
+  state?: { error?: string; success?: string } | null;
   validationSchemas: Record<string, StringSchema<string>>;
   inputRender: ReactNode | (() => ReactNode);
   submitButtonRender: (props: {

@@ -4,11 +4,11 @@ import type { FC } from 'react';
 import type { MegaFormContentProps } from 'src/lib/Types/props';
 
 import styles from './MegaFormContent.module.css';
-import { ErrorComponent } from '../../ErrorComponent/ErrorComponent';
+import { StateComponent } from '../../StateComponent/StateComponent';
 import { useMegaForm } from '../useMegaForm';
 
 const MegaFormContent: FC<MegaFormContentProps> = ({
-  formError,
+  state,
   validationSchemas,
   inputRender,
   submitButtonRender,
@@ -16,13 +16,11 @@ const MegaFormContent: FC<MegaFormContentProps> = ({
   const { pending, fieldsErrors, setFieldsErrors, fields, setFields } =
     useMegaForm();
 
-  const [isFormErrorDisplay, setIsFormErrorDisplay] = useState(
-    !!formError?.error,
-  );
+  const [isFormErrorDisplay, setIsFormErrorDisplay] = useState(!!state?.error);
 
   useEffect(() => {
-    setIsFormErrorDisplay(!!formError?.error);
-  }, [formError]);
+    setIsFormErrorDisplay(!!state?.error);
+  }, [state]);
 
   const disabled = useMemo(
     () =>
@@ -57,12 +55,13 @@ const MegaFormContent: FC<MegaFormContentProps> = ({
     <div onChange={handleChange} className={styles.container}>
       {typeof inputRender === 'function' ? inputRender() : inputRender}
 
-      <ErrorComponent
-        display={isFormErrorDisplay}
-        className={styles.errorComponent}
+      <StateComponent
+        display={isFormErrorDisplay || !!state?.success}
+        className={styles.stateComponent}
+        stateType={isFormErrorDisplay ? 'error' : 'success'}
       >
-        {formError?.error}
-      </ErrorComponent>
+        {isFormErrorDisplay ? state?.error : state?.success}
+      </StateComponent>
 
       {submitButtonRender({
         disabled,

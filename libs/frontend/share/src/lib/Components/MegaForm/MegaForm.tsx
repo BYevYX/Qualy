@@ -8,8 +8,10 @@ import { MegaFormContext } from './MegaFormContext';
 import { FieldsAndErrorsRecord } from '../../Types/contexts';
 import { Loading } from '../Loading/Loading';
 
+// Always should be extension of MegaFormContentProps
+// Need this because ts dont understand types outside lib if used MegaFormContentProps (need to understand why)
 interface MegaFormProps extends Omit<FormProps, 'children'> {
-  formError: { error?: string } | null | undefined;
+  state?: { error?: string; success?: string } | null;
   validationSchemas: Record<string, StringSchema<string>>;
   inputRender: ReactNode | (() => ReactNode);
   submitButtonRender: (props: {
@@ -21,8 +23,8 @@ interface MegaFormProps extends Omit<FormProps, 'children'> {
 const MegaFormComponent: FC<MegaFormProps> = ({
   inputRender,
   submitButtonRender,
-  formError,
   validationSchemas,
+  state,
   ...formProps
 }) => {
   const [fields, setFields] = useState<FieldsAndErrorsRecord>({});
@@ -40,7 +42,7 @@ const MegaFormComponent: FC<MegaFormProps> = ({
       <Suspense fallback={<Loading />}>
         <Form {...formProps}>
           <MegaFormContent
-            formError={formError}
+            state={state}
             inputRender={inputRender}
             submitButtonRender={submitButtonRender}
             validationSchemas={validationSchemas}

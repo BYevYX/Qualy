@@ -1,5 +1,4 @@
 'use client';
-import { useSearchParams } from 'next/navigation';
 import { FC, useActionState } from 'react';
 
 import { MegaForm } from '@qualy/front-share/client';
@@ -14,7 +13,7 @@ const Login: FC = () => {
   const [state, action] = useActionState(
     async (_: AuthActionObject, formData: FormData) =>
       await loginAction(formData),
-    { succes: 'ok' },
+    {},
   );
 
   return (
@@ -23,7 +22,7 @@ const Login: FC = () => {
       inputRender={<LoginFields />}
       submitButtonRender={(props) => <LoginSubmitButton {...props} />}
       validationSchemas={schemas}
-      formError={state}
+      state={state}
     />
   );
 };

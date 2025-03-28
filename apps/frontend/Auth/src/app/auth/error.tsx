@@ -28,7 +28,7 @@ const ErrorFallback: FC<ErrorFallbackProps> = ({ error, reset }) => {
 
   return (
     <Modal isOpen={isOpen} onClose={handleClose}>
-      <h3>Error!</h3>
+      <h3>Unexpected Error!</h3>
       <ErrorMessage message={error.message} />
     </Modal>
   );

@@ -14,7 +14,7 @@ const Signup: FC = () => {
   const [state, action] = useActionState(
     async (_: AuthActionObject, formData: FormData) =>
       await registerAction(formData),
-    { succes: 'ok' },
+    {},
   );
 
   return (
@@ -23,7 +23,7 @@ const Signup: FC = () => {
       inputRender={<SignupFields />}
       submitButtonRender={(props) => <SignupSubmitButton {...props} />}
       validationSchemas={schemas}
-      formError={state}
+      state={state}
     />
   );
 };
