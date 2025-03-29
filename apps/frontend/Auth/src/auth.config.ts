@@ -7,6 +7,7 @@ import Google from 'next-auth/providers/google';
 import VK from 'next-auth/providers/vk';
 import Yandex from 'next-auth/providers/yandex';
 
+import { AFTER_LOGIN_REDIRECT } from './routes';
 import { loginSchema } from './utils/validateAuth';
 import { sendEmail } from './widjets/mail/api/send';
 import { authGetUserByEmail } from './widjets/share/api/shareDB';
@@ -53,11 +54,11 @@ export default {
 
         if (!user.emailVerified && isPasswordMatch) {
           const verificationToken = await generateVerificationToken(email);
-          const { error } = await sendEmail(
-            email,
-            user.name as string,
-            verificationToken.token,
-          );
+          const { error } = await sendEmail(email, 'verifyEmail', {
+            username: user.name as string,
+            token: verificationToken.token,
+            redirectUrl: AFTER_LOGIN_REDIRECT,
+          });
 
           throw new NotVerifyEmailYetError({ email, error });
         }

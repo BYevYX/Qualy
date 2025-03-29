@@ -29,7 +29,10 @@ export async function registerAction(
     await createUser(email, hashedPassword, username);
 
     const verificationToken = await generateVerificationToken(email);
-    const { error } = await sendEmail(email, username, verificationToken.token);
+    const { error } = await sendEmail(email, 'verifyEmail', {
+      username,
+      token: verificationToken.token,
+    });
 
     if (error) {
       return { error: error.message };

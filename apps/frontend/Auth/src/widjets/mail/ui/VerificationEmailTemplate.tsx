@@ -6,13 +6,17 @@ import { getFullUrl } from 'src/utils/helpers';
 
 const VerificationEmailTemplate: FC<{
   token: string;
-  name: string;
-}> = ({ token, name }) => {
-  const confirmLink = getFullUrl(EMAIL_VERIFICATION_URL, { token });
+  username: string;
+  redirectUrl?: string;
+}> = ({ token, username, redirectUrl }) => {
+  const confirmLink = getFullUrl(EMAIL_VERIFICATION_URL, {
+    token,
+    redirectUrl: redirectUrl ?? '',
+  });
 
   const text = {
     header: 'Verification Email',
-    greeting: `Hey ${name},`,
+    greeting: `Hey ${username},`,
     content:
       'Thank you for signing up with Qualy!\nTo complete your registration and ensure the security of your account, please confirm your email address by clicking the button below:',
     additional: (

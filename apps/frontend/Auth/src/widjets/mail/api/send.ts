@@ -16,12 +16,14 @@ const templates = {
   },
 };
 
-// TODO: when domain in resend will be ready: change 'from' on custom email
 export async function sendEmail(
-  to: string | string[],
-  userName: string,
-  token: string,
-  variant: keyof typeof templates = 'verifyEmail',
+  to: string,
+  variant: keyof typeof templates,
+  templateParameters: {
+    username: string;
+    token: string;
+    redirectUrl?: string;
+  },
 ) {
   const { subject, template } = templates[variant];
 
@@ -29,6 +31,6 @@ export async function sendEmail(
     from: 'Acme <onboarding@resend.dev>',
     to,
     subject,
-    react: template({ token, name: userName }),
+    react: template(templateParameters),
   });
 }

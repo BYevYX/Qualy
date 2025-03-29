@@ -37,7 +37,7 @@ export const generateVerificationToken = async (email: string) => {
   });
 };
 
-export const checkVerificationToken = async (
+export const processVerificationToken = async (
   token: string,
 ): Promise<{ status: StatusType; code: VerificationCode }> => {
   const verificationToken = await getVerificationTokenByToken(token);
@@ -62,7 +62,10 @@ export const checkVerificationToken = async (
       };
     }
 
-    await sendEmail(user.email, user?.name, newVerificationToken.token);
+    await sendEmail(user.email, 'verifyEmail', {
+      username: user.name as string,
+      token: newVerificationToken.token,
+    });
     return {
       status: 'info',
       code: 'expired',

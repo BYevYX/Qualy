@@ -1,5 +1,5 @@
 'use client';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { FC, useEffect, useState, useTransition } from 'react';
 
 import {
@@ -9,7 +9,7 @@ import {
   Loading,
   StatusComponent,
 } from '@qualy/front-share/server';
-import { checkVerificationToken } from 'src/widjets/share/api/tokens';
+import { processVerificationToken } from 'src/widjets/share/api/tokens';
 import { VerificationCode } from 'src/widjets/share/model/types';
 
 interface VerifyState {
@@ -28,9 +28,11 @@ const VerifyPage: FC = () => {
   const [state, setState] = useState<VerifyState>({});
 
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
   const search = useSearchParams();
   const token = search.get('token');
+  const redirect = search.get('redirectUrl');
 
   useEffect(() => {
     async function action() {
@@ -42,13 +44,17 @@ const VerifyPage: FC = () => {
         return;
       }
 
-      const result = await checkVerificationToken(token);
+      const result = await processVerificationToken(token);
       startTransition(() =>
         setState({
           status: result.status,
           message: textMap[result.code],
         }),
       );
+
+      if (result.status === 'success' && redirect === '/') {
+        router.push('/');
+      }
     }
 
     startTransition(action);
