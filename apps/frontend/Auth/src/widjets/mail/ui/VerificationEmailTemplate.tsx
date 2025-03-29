@@ -1,19 +1,33 @@
 import { FC } from 'react';
 
-import { DOMAIN, EMAIL_VERIFICATION_URL } from 'src/routes';
+import { EmailTemplate } from '@qualy/front-share/templates';
+import { EMAIL_VERIFICATION_URL } from 'src/routes';
+import { getFullUrl } from 'src/utils/helpers';
 
 const VerificationEmailTemplate: FC<{
   token: string;
-}> = ({ token }) => {
-  const confirmPath = new URL(EMAIL_VERIFICATION_URL, DOMAIN).toString();
-  const query = new URLSearchParams({ token }).toString();
-  const confirmLink = confirmPath + '?' + query;
+  name: string;
+}> = ({ token, name }) => {
+  const confirmLink = getFullUrl(EMAIL_VERIFICATION_URL, { token });
+
+  const text = {
+    header: 'Verification Email',
+    greeting: `Hey ${name},`,
+    content:
+      'Thank you for signing up with Qualy!\nTo complete your registration and ensure the security of your account, please confirm your email address by clicking the button below:',
+    additional: (
+      <span>
+        If the button doesn&apos;t work, you can copy and paste this link into
+        your browser: <a href={confirmLink}>{confirmLink}</a>
+      </span>
+    ),
+    linkExpire: 'This link will expire in 1 day.',
+  };
 
   return (
-    <div>
-      <h1>Verification Email</h1>
-      <a href={confirmLink}>Verify email</a>
-    </div>
+    <EmailTemplate text={text}>
+      <a href={confirmLink}>Confirm email</a>
+    </EmailTemplate>
   );
 };
 

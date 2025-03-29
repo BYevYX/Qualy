@@ -8,7 +8,6 @@ import LoginFields from 'src/widjets/login/ui/LoginFields';
 import LoginSubmitButton from 'src/widjets/login/ui/LoginSubmitButton';
 import { AuthActionObject } from 'src/widjets/share/model/types';
 
-// TODO: add handle messages from succes
 const Login: FC = () => {
   const [state, action] = useActionState(
     async (_: AuthActionObject, formData: FormData) =>

@@ -3,8 +3,6 @@ import { AuthError } from 'next-auth';
 
 import { signIn } from 'src/auth';
 import { AFTER_LOGIN_REDIRECT } from 'src/routes';
-import { sendEmail } from 'src/widjets/mail/api/send';
-import { generateVerificationToken } from 'src/widjets/share/api/tokens';
 import { NotVerifyEmailYetError } from 'src/widjets/share/model/errors';
 import { AuthActionObject } from 'src/widjets/share/model/types';
 
@@ -22,11 +20,11 @@ export async function loginAction(data: FormData): Promise<AuthActionObject> {
     return { succes: 'You entering!' };
   } catch (e) {
     if (e instanceof NotVerifyEmailYetError) {
-      const verificationToken = await generateVerificationToken(e.email);
-      const { error } = await sendEmail(e.email, verificationToken.token);
-
-      if (error) {
-        return { error: error.message };
+      if (e.data.error) {
+        return {
+          error:
+            e.data.error instanceof Error ? e.data.error.message : e.data.error,
+        };
       }
       return { succes: 'Confirmation email sent!' };
     }

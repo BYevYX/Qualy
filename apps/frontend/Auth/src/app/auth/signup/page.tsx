@@ -8,8 +8,6 @@ import { registerAction } from 'src/widjets/signup/api/signupActions';
 import SignupFields from 'src/widjets/signup/ui/SignupFileds';
 import SignupSubmitButton from 'src/widjets/signup/ui/SignupSubmitButton';
 
-// TODO: add handle messages from succes
-
 const Signup: FC = () => {
   const [state, action] = useActionState(
     async (_: AuthActionObject, formData: FormData) =>

@@ -8,6 +8,7 @@ import VK from 'next-auth/providers/vk';
 import Yandex from 'next-auth/providers/yandex';
 
 import { loginSchema } from './utils/validateAuth';
+import { sendEmail } from './widjets/mail/api/send';
 import { authGetUserByEmail } from './widjets/share/api/shareDB';
 import { generateVerificationToken } from './widjets/share/api/tokens';
 import { NotVerifyEmailYetError } from './widjets/share/model/errors';
@@ -51,7 +52,14 @@ export default {
         const isPasswordMatch = await bcrypt.compare(password, user.password);
 
         if (!user.emailVerified && isPasswordMatch) {
-          throw new NotVerifyEmailYetError(email);
+          const verificationToken = await generateVerificationToken(email);
+          const { error } = await sendEmail(
+            email,
+            user.name as string,
+            verificationToken.token,
+          );
+
+          throw new NotVerifyEmailYetError({ email, error });
         }
         if (isPasswordMatch) return user;
 
