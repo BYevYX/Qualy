@@ -7,7 +7,7 @@ import { db } from './db';
 import { refreshTokenRotation } from './utils/RefreshTokens';
 import {
   authGetUserById,
-  verifyUserEmailBD,
+  verifyUserEmailById,
 } from './widjets/share/api/shareDB';
 import { OAuthProvidersType } from '@qualy/front-server/types';
 
@@ -56,7 +56,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
       session.user.provider = token.provider;
 
-      await refreshTokenRotation(session);
+      // TODO: think about refreshToken (and account) for Credentials
+      if (session.user.provider) {
+        await refreshTokenRotation(session);
+      }
 
       return session;
     },
@@ -64,7 +67,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   events: {
     async linkAccount({ user }) {
       if (!user.id) throw new Error('User ID not found');
-      await verifyUserEmailBD(user.id);
+      await verifyUserEmailById(user.id);
     },
   },
 });

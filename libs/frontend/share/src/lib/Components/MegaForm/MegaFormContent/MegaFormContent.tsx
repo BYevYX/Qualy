@@ -4,7 +4,7 @@ import type { FC } from 'react';
 import type { MegaFormContentProps } from 'src/lib/Types/props';
 
 import styles from './MegaFormContent.module.css';
-import { StateComponent } from '../../StateComponent/StateComponent';
+import { StatusComponent } from '../../StatusComponent/StatusComponent';
 import { useMegaForm } from '../useMegaForm';
 
 const MegaFormContent: FC<MegaFormContentProps> = ({
@@ -55,13 +55,13 @@ const MegaFormContent: FC<MegaFormContentProps> = ({
     <div onChange={handleChange} className={styles.container}>
       {typeof inputRender === 'function' ? inputRender() : inputRender}
 
-      <StateComponent
+      <StatusComponent
         display={isFormErrorDisplay || !!state?.success}
-        className={styles.stateComponent}
-        stateType={isFormErrorDisplay ? 'error' : 'success'}
+        className={styles.statusComponent}
+        type={isFormErrorDisplay ? 'error' : 'success'}
       >
         {isFormErrorDisplay ? state?.error : state?.success}
-      </StateComponent>
+      </StatusComponent>
 
       {submitButtonRender({
         disabled,

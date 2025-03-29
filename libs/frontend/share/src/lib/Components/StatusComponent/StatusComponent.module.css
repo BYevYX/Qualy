@@ -13,6 +13,10 @@
   border: 1px solid #2ecc71;
 }
 
+.container.info {
+  border: 1px solid #155dfc;
+}
+
 .text {
   font-size: 14px;
   font-weight: 700;
@@ -24,6 +28,10 @@
 
 .text.success {
   color: #2ecc71;
+}
+
+.text.info {
+  color: #155dfc;
 }
 
 @starting-style {

@@ -5,6 +5,9 @@
 3. add from parameter (in verify email page) for redirect to enter after login and redirect to login after register (optionaly) 
 
 
+# important
+1. найти утечку данных из за которой светится пароль
+
 ----
 
 ## later

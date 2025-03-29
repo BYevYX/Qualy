@@ -6,7 +6,7 @@ export async function createUser(
   password: string,
   username: string,
 ) {
-  const user = await db.users.create({
+  const user = await db.user.create({
     data: {
       email,
       password,

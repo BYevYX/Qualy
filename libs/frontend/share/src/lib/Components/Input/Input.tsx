@@ -1,14 +1,15 @@
 'use client';
 import cn from 'classnames';
 import type { FC } from 'react';
+import type { InputProps } from 'src/lib/Types/props';
 
 import styles from './Input.module.css';
-import type { InputProps } from 'src/lib/Types/props';
 
 export const Input: FC<InputProps> = ({
   className,
   inputStyle = 'common',
   error,
+  name,
   ...atributes
 }) => {
   const styleVariant = styles[inputStyle];
@@ -18,7 +19,12 @@ export const Input: FC<InputProps> = ({
 
   return (
     <div className={styles.container}>
-      <input className={combinedClassName} {...atributes} />
+      <input
+        className={combinedClassName}
+        autoComplete={name}
+        name={name}
+        {...atributes}
+      />
       {error && (
         <div className={styles.errorMessageContainer}>
           <span className={styles.errorMessage}>{error}</span>

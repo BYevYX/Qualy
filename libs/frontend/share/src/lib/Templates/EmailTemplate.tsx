@@ -13,6 +13,7 @@ export const EmailTemplate: FC<
     };
   }>
 > = ({ imageSrc, text, children }) => {
+  const marginStyle = { marginBottom: '1rem' };
   return (
     <div>
       {imageSrc && <Image src={imageSrc} alt="Qualy image for email" />}
@@ -20,16 +21,13 @@ export const EmailTemplate: FC<
       <section
         style={{
           whiteSpace: 'pre-wrap',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1rem',
         }}
       >
-        <div>{text.greeting}</div>
-        <div>{text.content}</div>
-        {children}
-        <div>{text.additional}</div>
-        <div>
+        <div style={marginStyle}>{text.greeting}</div>
+        <div style={marginStyle}>{text.content}</div>
+        <div style={marginStyle}>{children}</div>
+        <div style={marginStyle}>{text.additional}</div>
+        <div style={marginStyle}>
           {text.linkExpire} If you didn&apos;t request this email, please ignore
           it
         </div>

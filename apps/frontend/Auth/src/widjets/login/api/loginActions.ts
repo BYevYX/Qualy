@@ -17,7 +17,7 @@ export async function loginAction(data: FormData): Promise<AuthActionObject> {
       redirectTo: AFTER_LOGIN_REDIRECT,
     });
 
-    return { succes: 'You entering!' };
+    return { success: 'You entering!' };
   } catch (e) {
     if (e instanceof NotVerifyEmailYetError) {
       if (e.data.error) {
@@ -26,7 +26,7 @@ export async function loginAction(data: FormData): Promise<AuthActionObject> {
             e.data.error instanceof Error ? e.data.error.message : e.data.error,
         };
       }
-      return { succes: 'Confirmation email sent!' };
+      return { success: 'Confirmation email sent!' };
     }
 
     if (e instanceof AuthError) {

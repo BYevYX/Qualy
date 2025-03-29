@@ -35,7 +35,7 @@ export async function registerAction(
       return { error: error.message };
     }
 
-    return { succes: 'Confirmation email sent!' };
+    return { success: 'Confirmation email sent!' };
   } catch (e) {
     if (e instanceof ValidationError) {
       return { error: e.message };
@@ -44,6 +44,7 @@ export async function registerAction(
     if (e instanceof SignupError) {
       return { error: e.message };
     }
+    console.log(e);
     return { error: 'Something went wrong!' };
   }
 }

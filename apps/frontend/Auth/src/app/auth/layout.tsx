@@ -17,6 +17,7 @@ export default function AuthLayout({
       <div className="flex">
         <Image
           src={shely}
+          priority
           alt="camera image"
           className="box-border h-auto max-h-screen w-full max-w-full"
         />
