@@ -22,7 +22,6 @@ export async function sendEmail(
   templateParameters: {
     username: string;
     token: string;
-    redirectUrl?: string;
   },
 ) {
   const { subject, template } = templates[variant];

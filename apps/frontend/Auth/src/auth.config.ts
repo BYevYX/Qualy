@@ -57,7 +57,6 @@ export default {
           const { error } = await sendEmail(email, 'verifyEmail', {
             username: user.name as string,
             token: verificationToken.token,
-            redirectUrl: AFTER_LOGIN_REDIRECT,
           });
 
           throw new NotVerifyEmailYetError({ email, error });

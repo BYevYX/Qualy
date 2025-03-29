@@ -7,11 +7,9 @@ import { getFullUrl } from 'src/utils/helpers';
 const VerificationEmailTemplate: FC<{
   token: string;
   username: string;
-  redirectUrl?: string;
-}> = ({ token, username, redirectUrl }) => {
+}> = ({ token, username }) => {
   const resetLink = getFullUrl(RESET_PASSWORD_URL, {
     token,
-    redirectUrl: redirectUrl ?? '',
   });
 
   const text = {
