@@ -1,6 +1,8 @@
 ## main
 
 1. add page in `/auth/reset-password`
+2. remove Oauth from reset and verify
+
 
 
 # important
@@ -9,6 +11,7 @@
 ----
 
 ## later
+3. make verify and reset not only for Auth (think how when start doing `/profile`)
 
 ## assets
 

@@ -1,16 +1,26 @@
 'use client';
 import { useEffect, useMemo, useState } from 'react';
-import type { FC } from 'react';
-import type { MegaFormContentProps } from 'src/lib/Types/props';
+import type { FC, ReactNode } from 'react';
+import type { StringSchema } from 'yup';
 
 import styles from './MegaFormContent.module.css';
 import { StatusComponent } from '../../StatusComponent/StatusComponent';
 import { useMegaForm } from '../useMegaForm';
 
+interface MegaFormContentProps {
+  state?: { error?: string; success?: string } | null;
+  validationSchemas: Record<string, StringSchema<string>>;
+  fieldsRender: ReactNode | (() => ReactNode);
+  submitButtonRender: (props: {
+    disabled: boolean;
+    isFormErrorDisplay: boolean;
+  }) => ReactNode;
+}
+
 const MegaFormContent: FC<MegaFormContentProps> = ({
   state,
   validationSchemas,
-  inputRender,
+  fieldsRender,
   submitButtonRender,
 }) => {
   const { pending, fieldsErrors, setFieldsErrors, fields, setFields } =
@@ -53,7 +63,7 @@ const MegaFormContent: FC<MegaFormContentProps> = ({
 
   return (
     <div onChange={handleChange} className={styles.container}>
-      {typeof inputRender === 'function' ? inputRender() : inputRender}
+      {typeof fieldsRender === 'function' ? fieldsRender() : fieldsRender}
 
       <StatusComponent
         display={isFormErrorDisplay || !!state?.success}

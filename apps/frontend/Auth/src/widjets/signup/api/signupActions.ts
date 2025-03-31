@@ -4,11 +4,11 @@ import { ValidationError } from 'yup';
 
 import { createUser } from './signupDB';
 import { SignupError } from '../model/SignupError';
+import { AuthActionObject } from 'src/features/common/model/types';
+import { sendEmail } from 'src/features/mail/api/send';
+import { generateVerificationToken } from 'src/features/tokens/api/generate';
+import { authGetUserByEmail } from 'src/utils/db/auth';
 import { signupSchema } from 'src/utils/validateAuth';
-import { sendEmail } from 'src/widjets/mail/api/send';
-import { authGetUserByEmail } from 'src/widjets/share/api/shareDB';
-import { generateVerificationToken } from 'src/widjets/share/api/tokens';
-import { AuthActionObject } from 'src/widjets/share/model/types';
 
 const saltRounds = 10;
 

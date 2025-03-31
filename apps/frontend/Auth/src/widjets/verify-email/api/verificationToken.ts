@@ -1,41 +1,15 @@
 'use server';
-import { v4 } from 'uuid';
 
 import {
-  authGetUserByEmail,
-  getVerificationTokenByEmail,
+  deleteVerificationToken,
   getVerificationTokenByToken,
   verifyUserEmailByEmail,
-} from './shareDB';
+} from '../../../utils/db/verify';
 import { VerificationCode } from '../model/types';
 import { StatusType } from '@qualy/front-share/types';
-import { db } from 'src/db';
-import { sendEmail } from 'src/widjets/mail/api/send';
-
-const HOUR = 1000 * 60 * 60;
-
-export const generateVerificationToken = async (email: string) => {
-  const token = v4();
-  const expires = new Date(new Date().getTime() + HOUR);
-
-  const existingToken = await getVerificationTokenByEmail(email);
-
-  if (existingToken) {
-    await db.verificationToken.delete({
-      where: {
-        token: existingToken.token,
-      },
-    });
-  }
-
-  return await db.verificationToken.create({
-    data: {
-      email,
-      token,
-      expires,
-    },
-  });
-};
+import { sendEmail } from 'src/features/mail/api/send';
+import { generateVerificationToken } from 'src/features/tokens/api/generate';
+import { authGetUserByEmail } from 'src/utils/db/auth';
 
 export const processVerificationToken = async (
   token: string,
@@ -73,11 +47,7 @@ export const processVerificationToken = async (
   }
 
   await verifyUserEmailByEmail(verificationToken.email);
-  await db.verificationToken.delete({
-    where: {
-      token,
-    },
-  });
+  await deleteVerificationToken(verificationToken.token);
 
   return { status: 'success', code: 'ok' };
 };

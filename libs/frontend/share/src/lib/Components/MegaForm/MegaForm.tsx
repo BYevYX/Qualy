@@ -13,7 +13,7 @@ import { Loading } from '../Loading/Loading';
 interface MegaFormProps extends Omit<FormProps, 'children'> {
   state?: { error?: string; success?: string } | null;
   validationSchemas: Record<string, StringSchema<string>>;
-  inputRender: ReactNode | (() => ReactNode);
+  fieldsRender: ReactNode | (() => ReactNode);
   submitButtonRender: (props: {
     disabled: boolean;
     isFormErrorDisplay: boolean;
@@ -21,7 +21,7 @@ interface MegaFormProps extends Omit<FormProps, 'children'> {
 }
 
 const MegaFormComponent: FC<MegaFormProps> = ({
-  inputRender,
+  fieldsRender,
   submitButtonRender,
   validationSchemas,
   state,
@@ -43,7 +43,7 @@ const MegaFormComponent: FC<MegaFormProps> = ({
         <Form {...formProps}>
           <MegaFormContent
             state={state}
-            inputRender={inputRender}
+            fieldsRender={fieldsRender}
             submitButtonRender={submitButtonRender}
             validationSchemas={validationSchemas}
           />

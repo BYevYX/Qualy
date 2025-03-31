@@ -10,5 +10,5 @@ export const NEED_LOGIN_REDIRECT = '/auth/login';
 export const SIGNIN_ERROR_URL = '/auth/error';
 
 export const EMAIL_VERIFICATION_URL = '/auth/verify-email';
-export const RESET_PASSWORD_URL = '/auth/reset-password';
+export const RESET_PASSWORD_URL = '/auth/new-password';
 export const DOMAIN = 'http://localhost:3000';

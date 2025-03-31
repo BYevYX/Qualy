@@ -7,12 +7,11 @@ import Google from 'next-auth/providers/google';
 import VK from 'next-auth/providers/vk';
 import Yandex from 'next-auth/providers/yandex';
 
-import { AFTER_LOGIN_REDIRECT } from './routes';
+import { NotVerifyEmailYetError } from './features/common/model/errors';
+import { sendEmail } from './features/mail/api/send';
+import { generateVerificationToken } from './features/tokens/api/generate';
+import { authGetUserByEmail } from './utils/db/auth';
 import { loginSchema } from './utils/validateAuth';
-import { sendEmail } from './widjets/mail/api/send';
-import { authGetUserByEmail } from './widjets/share/api/shareDB';
-import { generateVerificationToken } from './widjets/share/api/tokens';
-import { NotVerifyEmailYetError } from './widjets/share/model/errors';
 
 // TODO: configure VK (now it isnt working)
 export default {

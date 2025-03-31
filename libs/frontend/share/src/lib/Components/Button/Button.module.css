@@ -21,7 +21,10 @@
     transform: translateY(3px);
 }
 
-.button:disabled {
+.common:disabled {
     background-color: #FFE082;
+}
+
+.button:disabled {
     cursor: not-allowed;
 }

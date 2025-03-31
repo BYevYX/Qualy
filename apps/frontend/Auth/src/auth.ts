@@ -4,11 +4,9 @@ import type { Provider } from 'next-auth/providers';
 
 import authConfig from './auth.config';
 import { db } from './db';
+import { authGetUserById } from './utils/db/auth';
+import { verifyUserEmailById } from './utils/db/verify';
 import { refreshTokenRotation } from './utils/RefreshTokens';
-import {
-  authGetUserById,
-  verifyUserEmailById,
-} from './widjets/share/api/shareDB';
 import { OAuthProvidersType } from '@qualy/front-server/types';
 
 export const providerMap = (authConfig.providers as Provider[])

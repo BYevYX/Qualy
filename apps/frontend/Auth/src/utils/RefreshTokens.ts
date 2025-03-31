@@ -4,7 +4,7 @@ import { Session } from 'next-auth';
 
 import { OAuthProvidersType } from '@qualy/front-server/types';
 import { db } from 'src/db';
-import { authGetAccountByUserId } from 'src/widjets/share/api/shareDB';
+import { authGetAccountByUserId } from 'src/utils/db/auth';
 
 // TODO: test it and explore VKID SDK
 // TODO: handle RefreshTokenError (принудительно вызвать авторизовать)

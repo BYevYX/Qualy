@@ -1,9 +1,9 @@
 import Image from 'next/image';
 
 import shely from 'public/images/shely.jpeg';
+import { LayoutParams } from 'src/features/common/model/types';
 import AuthMultiChoose from 'src/features/common/ui/AuthMultiChoose';
-import { LayoutParams } from 'src/widjets/share/model/types';
-import OAuth from 'src/widjets/share/ui/OAuth';
+import OAuth from 'src/features/common/ui/OAuth';
 
 export default function AuthLayout({
   children,

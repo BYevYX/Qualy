@@ -4,5 +4,3 @@ export interface AuthActionObject {
 }
 
 export type LayoutParams = Promise<{ callbackUrl: string | null }>;
-
-export type VerificationCode = 'noToken' | 'noUser' | 'expired' | 'ok';

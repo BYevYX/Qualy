@@ -11,12 +11,13 @@ import {
   Loading,
   StatusComponent,
 } from '@qualy/front-share/server';
+import { StatusType } from '@qualy/front-share/types';
 import { NEED_LOGIN_REDIRECT } from 'src/routes';
-import { processVerificationToken } from 'src/widjets/share/api/tokens';
-import { VerificationCode } from 'src/widjets/share/model/types';
+import { processVerificationToken } from 'src/widjets/verify-email/api/verificationToken';
+import { VerificationCode } from 'src/widjets/verify-email/model/types';
 
 interface VerifyState {
-  status?: 'success' | 'error' | 'info';
+  status?: StatusType;
   message?: string;
 }
 

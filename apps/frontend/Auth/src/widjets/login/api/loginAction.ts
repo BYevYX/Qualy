@@ -2,9 +2,9 @@
 import { AuthError } from 'next-auth';
 
 import { signIn } from 'src/auth';
+import { NotVerifyEmailYetError } from 'src/features/common/model/errors';
+import { AuthActionObject } from 'src/features/common/model/types';
 import { AFTER_LOGIN_REDIRECT } from 'src/routes';
-import { NotVerifyEmailYetError } from 'src/widjets/share/model/errors';
-import { AuthActionObject } from 'src/widjets/share/model/types';
 
 export async function loginAction(data: FormData): Promise<AuthActionObject> {
   const email = data.get('email');

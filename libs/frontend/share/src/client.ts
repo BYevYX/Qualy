@@ -8,3 +8,4 @@ export { MegaForm, useMegaForm } from './lib/Components/MegaForm';
 export { Modal, ModalProvider, useModal } from './lib/Components/Modal';
 
 export { E404 } from './lib/Components/404/404';
+export { Tooltip } from './lib/Components/Tooltip/Tooltip';
