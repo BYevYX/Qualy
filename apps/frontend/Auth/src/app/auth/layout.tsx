@@ -5,7 +5,7 @@ import { LayoutParams } from 'src/features/common/model/types';
 import AuthMultiChoose from 'src/features/common/ui/AuthMultiChoose';
 import OAuth from 'src/features/common/ui/OAuth';
 
-export default function AuthLayout({
+export default async function AuthLayout({
   children,
   params,
 }: {

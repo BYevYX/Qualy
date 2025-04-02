@@ -1,12 +1,14 @@
 import { createContext, Dispatch, SetStateAction } from 'react';
+import { StringSchema } from 'yup';
 
-import { FieldsAndErrorsRecord } from '../../Types/contexts';
+import { ErrorsRecord } from '../../Types/contexts';
 
 interface MegaFormContextType {
-  fieldsErrors: FieldsAndErrorsRecord;
-  setFieldsErrors: Dispatch<SetStateAction<FieldsAndErrorsRecord>>;
-  fields: FieldsAndErrorsRecord;
-  setFields: Dispatch<SetStateAction<FieldsAndErrorsRecord>>;
+  fieldsErrors: ErrorsRecord;
+  setFieldsErrors: Dispatch<SetStateAction<ErrorsRecord>>;
+  fields: Record<string, string>;
+  setFields: Dispatch<SetStateAction<Record<string, string>>>;
+  validationSchemas: Record<string, StringSchema<string>>;
 }
 
 export const MegaFormContext = createContext<MegaFormContextType | null>(null);

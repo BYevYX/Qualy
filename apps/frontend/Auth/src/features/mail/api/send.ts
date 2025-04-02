@@ -1,11 +1,24 @@
+import type { FC } from 'react';
 import { Resend } from 'resend';
 
 import ResetPasswordTemplate from '../ui/ResetPasswordTemplate';
+import TwoFactorTemplate from '../ui/TwoFactorTemplate';
 import VerificationEmailTemplate from '../ui/VerificationEmailTemplate';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const templates = {
+type Templates = Record<
+  'verifyEmail' | 'resetPassword' | 'twoFactor',
+  {
+    subject: string;
+    template: FC<{
+      token: string;
+      username: string;
+    }>;
+  }
+>;
+
+const templates: Templates = {
   verifyEmail: {
     subject: 'Verify your email',
     template: VerificationEmailTemplate,
@@ -13,6 +26,10 @@ const templates = {
   resetPassword: {
     subject: 'Reset your password',
     template: ResetPasswordTemplate,
+  },
+  twoFactor: {
+    subject: 'Your One-Time Security Code for',
+    template: TwoFactorTemplate,
   },
 };
 

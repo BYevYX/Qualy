@@ -12,7 +12,7 @@ interface PasswordInputProps {
 
 const PasswordInput: FC<PasswordInputProps> = ({ name, placeholder }) => {
   const [showPassword, setShowPassword] = useState(false);
-  const { fieldsErrors } = useMegaForm();
+  const { controlRegister } = useMegaForm();
 
   const iconProps = {
     color: 'white',
@@ -26,8 +26,7 @@ const PasswordInput: FC<PasswordInputProps> = ({ name, placeholder }) => {
     <InputWithIcon
       type={showPassword ? 'text' : 'password'}
       placeholder={placeholder}
-      name={name}
-      error={fieldsErrors[name]}
+      {...controlRegister(name)}
       className="text-blue-600"
       inputStyle="underline"
     >

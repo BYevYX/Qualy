@@ -1,1 +1,1 @@
-export type FieldsAndErrorsRecord = Record<string, string | null | undefined>;
+export type ErrorsRecord = Record<string, string | undefined>;

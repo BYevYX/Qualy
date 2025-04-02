@@ -23,7 +23,7 @@ const VerificationEmailTemplate: FC<{
         your browser: <a href={confirmLink}>{confirmLink}</a>
       </span>
     ),
-    linkExpire: 'This link will expire in 1 day.',
+    linkExpire: 'This link will expire in 1 hour.',
   };
 
   return (

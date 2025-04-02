@@ -9,23 +9,21 @@ interface SignupFieldsProps {
 }
 
 const SignupFields: FC<SignupFieldsProps> = ({ formError }) => {
-  const { fieldsErrors } = useMegaForm();
+  const { controlRegister } = useMegaForm();
 
   return (
     <div className="flex flex-col gap-5">
       <Input
-        name="username"
+        {...controlRegister('username')}
         placeholder="Username"
         className="text-blue-600"
         inputStyle="underline"
-        error={fieldsErrors.username}
       />
       <Input
-        name="email"
+        {...controlRegister('email')}
         placeholder="Email"
         className="text-blue-600"
         inputStyle="underline"
-        error={fieldsErrors.email}
       />
       <PasswordInput name="password" placeholder="Password" />
       <PasswordInput name="verifyPassword" placeholder="Verify Password" />

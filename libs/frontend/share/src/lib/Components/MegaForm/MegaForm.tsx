@@ -1,11 +1,19 @@
 'use client';
 import Form, { FormProps } from 'next/form';
-import { FC, memo, ReactNode, Suspense, useState } from 'react';
+import {
+  FC,
+  memo,
+  ReactNode,
+  Suspense,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { StringSchema } from 'yup';
 
 import MegaFormContent from './MegaFormContent/MegaFormContent';
 import { MegaFormContext } from './MegaFormContext';
-import { FieldsAndErrorsRecord } from '../../Types/contexts';
+import { ErrorsRecord } from '../../Types/contexts';
 import { Loading } from '../Loading/Loading';
 
 // Always should be extension of MegaFormContentProps
@@ -27,12 +35,33 @@ const MegaFormComponent: FC<MegaFormProps> = ({
   state,
   ...formProps
 }) => {
-  const [fields, setFields] = useState<FieldsAndErrorsRecord>({});
-  const [fieldsErrors, setFieldsErrors] = useState<FieldsAndErrorsRecord>({});
+  const initialFields = useMemo(() => {
+    return Object.keys(validationSchemas).reduce(
+      (acc, key) => {
+        acc[key] = '';
+        return acc;
+      },
+      {} as Record<string, string>,
+    );
+  }, [validationSchemas]);
+
+  useEffect(() => {
+    setFields((prev) => {
+      const newFields = { ...prev };
+      Object.keys(validationSchemas).forEach((key) => {
+        if (!(key in prev)) newFields[key] = '';
+      });
+      return newFields;
+    });
+  }, [validationSchemas]);
+
+  const [fields, setFields] = useState<Record<string, string>>(initialFields);
+  const [fieldsErrors, setFieldsErrors] = useState<ErrorsRecord>({});
 
   return (
     <MegaFormContext
       value={{
+        validationSchemas,
         fields,
         setFields,
         fieldsErrors,
@@ -45,7 +74,6 @@ const MegaFormComponent: FC<MegaFormProps> = ({
             state={state}
             fieldsRender={fieldsRender}
             submitButtonRender={submitButtonRender}
-            validationSchemas={validationSchemas}
           />
         </Form>
       </Suspense>

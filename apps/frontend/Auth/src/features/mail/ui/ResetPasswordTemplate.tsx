@@ -17,7 +17,7 @@ const VerificationEmailTemplate: FC<{
     greeting: `Dear ${username},`,
     content:
       'We received a request to reset the password for your Qualy account. To set a new password, please click the link below:',
-    linkExpire: 'This link will expire in 1 day.',
+    linkExpire: 'This link will expire in 1 hour.',
   };
 
   return (

@@ -37,3 +37,5 @@ export default {
   verifyPassword: verifyPasswordSchema,
   username: usernameSchema,
 } as Record<SignupFieldsType, StringSchema<string>>;
+
+export { emailSchema, passwordSchema, verifyPasswordSchema, usernameSchema };

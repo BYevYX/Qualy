@@ -4,7 +4,7 @@ import { FC, useActionState } from 'react';
 
 import { MegaForm } from '@qualy/front-share/client';
 import { AuthActionObject } from 'src/features/common/model/types';
-import schemas from 'src/utils/validateInputs';
+import { passwordSchema } from 'src/utils/validateInputs';
 import { processNewPasswordAction } from 'src/widjets/new-password/api/newPasswordAction';
 import NewPasswordButton from 'src/widjets/new-password/ui/NewPasswordButton';
 import NewPasswordFields from 'src/widjets/new-password/ui/NewPasswordFields';
@@ -29,7 +29,7 @@ const NewPassword: FC = () => {
       action={action}
       fieldsRender={<NewPasswordFields />}
       submitButtonRender={(props) => <NewPasswordButton {...props} />}
-      validationSchemas={schemas}
+      validationSchemas={{ password: passwordSchema }}
       state={state}
     />
   );
