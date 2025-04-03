@@ -5,7 +5,7 @@ import { FC, useActionState, useCallback } from 'react';
 import { MegaForm } from '@qualy/front-share/client';
 import { AuthActionObject } from 'src/features/common/model/types';
 import { createQueryStringAndPath } from 'src/utils/helpers';
-import { passwordSchema, emailSchema } from 'src/utils/validateInputs';
+import { loginFieldsSchema } from 'src/utils/validateInputs';
 import { loginAction } from 'src/widjets/login/api/loginAction';
 import { resetPasswordAction } from 'src/widjets/login/api/resetPasswordAction';
 import { LoginSteps } from 'src/widjets/login/model/types';
@@ -59,7 +59,7 @@ const Login: FC = () => {
       action={authAction}
       fieldsRender={<LoginFields handleStep={handleStep} />}
       submitButtonRender={submitButtonRender}
-      validationSchemas={{ password: passwordSchema, email: emailSchema }}
+      validationSchemas={loginFieldsSchema}
       state={fullState}
       onSubmit={(e) => e.preventDefault}
     />

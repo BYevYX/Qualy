@@ -20,7 +20,7 @@ import { Loading } from '../Loading/Loading';
 // Need this because ts dont understand types outside lib if used MegaFormContentProps (need to understand why)
 interface MegaFormProps extends Omit<FormProps, 'children'> {
   state?: { error?: string; success?: string } | null;
-  validationSchemas: Record<string, StringSchema<string>>;
+  validationSchemas: Record<string, StringSchema<string | undefined>>;
   fieldsRender: ReactNode | (() => ReactNode);
   submitButtonRender: (props: {
     disabled: boolean;

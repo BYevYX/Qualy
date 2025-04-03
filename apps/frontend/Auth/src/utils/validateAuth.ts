@@ -1,20 +1,20 @@
 import { object } from 'yup';
 
-import schems from './validateInputs';
+import {
+  loginFieldsSchema,
+  signupFieldsSchema,
+  emailSchema,
+  passwordSchema,
+} from './validateInputs';
 
-export const loginSchema = object({
-  email: schems.email,
-  password: schems.password,
-});
+export const loginSchema = object(loginFieldsSchema);
 
-export const signupSchema = loginSchema.shape({
-  username: schems.username,
-});
+export const signupSchema = object(signupFieldsSchema);
 
 export const resetPasswordSchema = object({
-  email: schems.email,
+  email: emailSchema,
 });
 
 export const newPasswordSchema = object({
-  password: schems.password,
+  password: passwordSchema,
 });

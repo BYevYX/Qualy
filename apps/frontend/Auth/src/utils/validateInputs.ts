@@ -1,7 +1,5 @@
 import { string, StringSchema } from 'yup';
 
-import { SignupFieldsType } from 'src/widjets/signup/model/types';
-
 const maxLength = 100;
 const passwordMinLength = 8;
 const usernameMinLength = 3;
@@ -31,11 +29,31 @@ const usernameSchema = baseString('Username').min(
   `Username must be at least ${usernameMinLength} characters`,
 );
 
-export default {
+const twoFactorCodeSchema = string()
+  .optional()
+  .length(6, '2FA code should be 6 digits length')
+  .test('only-digits', '2FA code should consist only of digits', (value) => {
+    if (!value) return true;
+    return !!value.match(/^\d{2}$/)?.length;
+  });
+
+export const loginFieldsSchema = {
+  email: emailSchema,
+  password: passwordSchema,
+  twoFactorCode: twoFactorCodeSchema,
+};
+
+export const signupFieldsSchema = {
   email: emailSchema,
   password: passwordSchema,
   verifyPassword: verifyPasswordSchema,
   username: usernameSchema,
-} as Record<SignupFieldsType, StringSchema<string>>;
+};
 
-export { emailSchema, passwordSchema, verifyPasswordSchema, usernameSchema };
+export {
+  emailSchema,
+  passwordSchema,
+  verifyPasswordSchema,
+  usernameSchema,
+  twoFactorCodeSchema,
+};

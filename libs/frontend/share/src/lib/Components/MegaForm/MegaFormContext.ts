@@ -8,7 +8,7 @@ interface MegaFormContextType {
   setFieldsErrors: Dispatch<SetStateAction<ErrorsRecord>>;
   fields: Record<string, string>;
   setFields: Dispatch<SetStateAction<Record<string, string>>>;
-  validationSchemas: Record<string, StringSchema<string>>;
+  validationSchemas: Record<string, StringSchema<string | undefined>>;
 }
 
 export const MegaFormContext = createContext<MegaFormContextType | null>(null);
