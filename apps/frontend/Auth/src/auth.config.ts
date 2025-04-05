@@ -1,5 +1,4 @@
 // we cant use db adapter in middleware so we need to create separate config for middleware
-import bcrypt from 'bcryptjs';
 import type { NextAuthConfig } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import GitHub from 'next-auth/providers/github';
@@ -7,9 +6,6 @@ import Google from 'next-auth/providers/google';
 import VK from 'next-auth/providers/vk';
 import Yandex from 'next-auth/providers/yandex';
 
-import { NotVerifyEmailYetError } from './features/common/model/errors';
-import { sendEmail } from './features/mail/api/send';
-import { generateVerificationToken } from './features/tokens/api/generate';
 import { authGetUserByEmail } from './utils/db/auth';
 import { loginSchema } from './utils/validateAuth';
 
@@ -39,30 +35,14 @@ export default {
       credentials: {
         password: {},
         email: {},
+        twoFactorCode: {},
       },
       async authorize(credentials) {
         const validatedCredentials = await loginSchema.validate(credentials);
-        const { email, password } = validatedCredentials;
+        const { email } = validatedCredentials;
 
         const user = await authGetUserByEmail(email);
-        if (!user || !user.password) {
-          return null;
-        }
-
-        const isPasswordMatch = await bcrypt.compare(password, user.password);
-
-        if (!user.emailVerified && isPasswordMatch) {
-          const verificationToken = await generateVerificationToken(email);
-          const { error } = await sendEmail(email, 'verifyEmail', {
-            username: user.name as string,
-            token: verificationToken.token,
-          });
-
-          throw new NotVerifyEmailYetError({ email, error });
-        }
-        if (isPasswordMatch) return user;
-
-        return null;
+        return user;
       },
     }),
   ],

@@ -10,7 +10,7 @@ import {
   deleteTwoFactorConfirmation,
   deleteTwoFactorToken,
   getTwoFactorConfirmation,
-  getTwoFactorTokenByEmail,
+  getTwoFactorToken,
 } from 'src/utils/db/twoFactor';
 import {
   deleteVerificationToken,
@@ -62,10 +62,10 @@ export const generateTwoFactorToken = async (email: string) => {
   const token = crypto.randomInt(100_000, 1_000_000).toString();
   const expires = new Date(new Date().getTime() + minute * 10);
 
-  const existingToken = await getTwoFactorTokenByEmail(email);
+  const existingToken = await getTwoFactorToken(email);
 
   if (existingToken) {
-    await deleteTwoFactorToken(existingToken.token);
+    await deleteTwoFactorToken(existingToken.email);
   }
 
   return await db.twoFactorToken.create({

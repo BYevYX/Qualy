@@ -29,6 +29,7 @@ const Login: FC = () => {
 
       if (state.success === '2FA') {
         handleStep('two-factor');
+        state.success = 'Two factor code sent to your mail!';
       }
       return state;
     },
@@ -43,7 +44,10 @@ const Login: FC = () => {
 
   const submitButtonRender = useCallback(
     (props: { disabled: boolean; isFormErrorDisplay: boolean }) => (
-      <LoginSubmitButton formAction={resetAction} {...props} />
+      <LoginSubmitButton
+        actions={{ resetPassword: resetAction, login: authAction }}
+        {...props}
+      />
     ),
     [resetAction],
   );

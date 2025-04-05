@@ -39,7 +39,7 @@ interface PasswordSectionProps extends FieldSectionProps {
 }
 
 const PasswordSection: FC<PasswordSectionProps> = ({ step, handleStep }) => {
-  if (step !== 'reset-password' && step !== 'two-factor') {
+  if (step === 'reset-password' || step === 'two-factor') {
     return;
   }
 

@@ -16,8 +16,10 @@ export async function registerAction(
   formData: FormData,
 ): Promise<AuthActionObject> {
   try {
+    const formObject = Object.fromEntries(formData.entries());
     const { email, username, password } = await signupSchema.validate(
-      Object.fromEntries(formData.entries()),
+      formObject,
+      { context: formObject },
     );
 
     const existingUser = await authGetUserByEmail(email);

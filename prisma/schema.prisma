@@ -74,8 +74,8 @@ model resetPasswordToken {
 }
 
 model twoFactorToken {
-  email   String   @unique @db.VarChar(100)
-  token   String   @id
+  email   String   @id @db.VarChar(100)
+  token   String   
   expires DateTime
 }
 

@@ -14,7 +14,19 @@ const TwoFactorTemplate: FC<{
     linkExpire: 'This code will expire in 10 minutes.',
   };
 
-  return <EmailTemplate text={text}>{token}</EmailTemplate>;
+  return (
+    <EmailTemplate text={text}>
+      <span
+        style={{
+          fontSize: '24px',
+          lineHeight: '24px',
+          fontWeight: 600,
+        }}
+      >
+        {token}
+      </span>
+    </EmailTemplate>
+  );
 };
 
 export default TwoFactorTemplate;

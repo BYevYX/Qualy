@@ -1,4 +1,4 @@
-import { string, StringSchema } from 'yup';
+import { string } from 'yup';
 
 const maxLength = 100;
 const passwordMinLength = 8;
@@ -31,10 +31,9 @@ const usernameSchema = baseString('Username').min(
 
 const twoFactorCodeSchema = string()
   .optional()
-  .length(6, '2FA code should be 6 digits length')
-  .test('only-digits', '2FA code should consist only of digits', (value) => {
+  .test('only-digits', '2FA code should consist only of 6 digits', (value) => {
     if (!value) return true;
-    return !!value.match(/^\d{2}$/)?.length;
+    return !!value.match(/^\d{6}$/)?.length;
   });
 
 export const loginFieldsSchema = {

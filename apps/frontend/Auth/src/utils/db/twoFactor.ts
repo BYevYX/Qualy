@@ -1,6 +1,6 @@
 import { db } from 'src/db';
 
-export const getTwoFactorTokenByEmail = async (email: string) => {
+export const getTwoFactorToken = async (email: string) => {
   const twoFactorToken = await db.twoFactorToken.findUnique({
     where: {
       email,
@@ -9,19 +9,10 @@ export const getTwoFactorTokenByEmail = async (email: string) => {
   return twoFactorToken;
 };
 
-export const getTwoFactorTokenByToken = async (token: string) => {
-  const twoFactorToken = await db.twoFactorToken.findUnique({
-    where: {
-      token,
-    },
-  });
-  return twoFactorToken;
-};
-
-export const deleteTwoFactorToken = async (token: string) => {
+export const deleteTwoFactorToken = async (email: string) => {
   await db.twoFactorToken.delete({
     where: {
-      token,
+      email,
     },
   });
 };

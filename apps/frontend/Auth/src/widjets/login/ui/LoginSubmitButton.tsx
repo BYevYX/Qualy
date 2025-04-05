@@ -4,6 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import { FC } from 'react';
 
 import { LoginSteps } from '../model/types';
+import { useMegaForm } from '@qualy/front-share/client';
 import { Button } from '@qualy/front-share/server';
 
 function getTexts(step: LoginSteps) {
@@ -25,19 +26,39 @@ function getTexts(step: LoginSteps) {
 interface LoginSubmitProps {
   disabled: boolean;
   isFormErrorDisplay: boolean;
-  formAction: (formData: FormData) => void;
+  actions: {
+    resetPassword: (formData: FormData) => void;
+    login: (formData: FormData) => void;
+  };
 }
 
 const LoginSubmitButton: FC<LoginSubmitProps> = ({
   disabled,
   isFormErrorDisplay,
-  formAction,
+  actions,
 }) => {
+  const { fields } = useMegaForm();
   const search = useSearchParams();
   const step = search.get('step') as LoginSteps;
-  const isResetPasswordStep = step === 'reset-password';
+
+  const isLoginStep = step !== 'reset-password' && step !== 'two-factor';
 
   const texts = getTexts(step);
+
+  const formAction = (formData: FormData) => {
+    const newFormData = new FormData();
+    newFormData.set('email', fields.email);
+    newFormData.set('password', fields.password);
+    newFormData.set('twoFactorCode', formData.get('twoFactorCode') || '');
+
+    switch (step) {
+      case 'reset-password':
+        return actions.resetPassword(formData);
+
+      case 'two-factor':
+        return actions.login(newFormData);
+    }
+  };
 
   return (
     <div
@@ -48,7 +69,7 @@ const LoginSubmitButton: FC<LoginSubmitProps> = ({
       <Button
         type="submit"
         disabled={disabled}
-        formAction={isResetPasswordStep ? formAction : undefined}
+        formAction={!isLoginStep ? formAction : undefined}
       >
         {texts.button}
       </Button>
