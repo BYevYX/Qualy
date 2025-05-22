@@ -2,7 +2,7 @@
 import { FC } from 'react';
 
 import { Input, useMegaForm } from '@qualy/front-share/client';
-import PasswordInput from 'src/features/common/ui/PasswordInput';
+import PasswordInput from 'src/features/shared/ui/PasswordInput';
 
 interface SignupFieldsProps {
   formError?: string;

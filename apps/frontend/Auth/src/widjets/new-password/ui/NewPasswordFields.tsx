@@ -1,7 +1,7 @@
 'use client';
 import { FC } from 'react';
 
-import PasswordInput from 'src/features/common/ui/PasswordInput';
+import PasswordInput from 'src/features/shared/ui/PasswordInput';
 
 const ResetPasswordButtonsFields: FC = () => {
   return (

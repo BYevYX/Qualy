@@ -6,7 +6,7 @@ import { CiCircleInfo } from 'react-icons/ci';
 import { LoginSteps } from '../model/types';
 import { Input, Tooltip, useMegaForm } from '@qualy/front-share/client';
 import { Button } from '@qualy/front-share/server';
-import PasswordInput from 'src/features/common/ui/PasswordInput';
+import PasswordInput from 'src/features/shared/ui/PasswordInput';
 
 interface FieldSectionProps {
   step: LoginSteps;

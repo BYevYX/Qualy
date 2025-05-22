@@ -2,7 +2,7 @@
 import { ValidationError } from 'yup';
 
 import { ResetPasswordError } from '../model/errors';
-import { AuthActionObject } from 'src/features/common/model/types';
+import { AuthActionObject } from 'src/features/shared/model/types';
 import { sendEmail } from 'src/features/mail/api/send';
 import { generateResetPasswordToken } from 'src/features/tokens/api/generate';
 import { authGetUserByEmail } from 'src/utils/db/auth';

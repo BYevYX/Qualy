@@ -3,7 +3,7 @@ import { useSearchParams } from 'next/navigation';
 import { FC, useActionState } from 'react';
 
 import { MegaForm } from '@qualy/front-share/client';
-import { AuthActionObject } from 'src/features/common/model/types';
+import { AuthActionObject } from 'src/features/shared/model/types';
 import { passwordSchema } from 'src/utils/validateInputs';
 import { processNewPasswordAction } from 'src/widjets/new-password/api/newPasswordAction';
 import NewPasswordButton from 'src/widjets/new-password/ui/NewPasswordButton';

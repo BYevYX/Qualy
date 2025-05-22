@@ -1,9 +1,9 @@
 import Image from 'next/image';
 
 import shely from 'public/images/shely.jpeg';
-import { LayoutParams } from 'src/features/common/model/types';
-import AuthMultiChoose from 'src/features/common/ui/AuthMultiChoose';
-import OAuth from 'src/features/common/ui/OAuth';
+import { LayoutParams } from 'src/features/shared/model/types';
+import AuthMultiChoose from 'src/features/shared/ui/AuthMultiChoose';
+import OAuth from 'src/features/shared/ui/OAuth';
 
 export default async function AuthLayout({
   children,

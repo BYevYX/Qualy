@@ -2,7 +2,7 @@
 import { FC, useActionState } from 'react';
 
 import { MegaForm } from '@qualy/front-share/client';
-import { AuthActionObject } from 'src/features/common/model/types';
+import { AuthActionObject } from 'src/features/shared/model/types';
 import { signupFieldsSchema } from 'src/utils/validateInputs';
 import { registerAction } from 'src/widjets/signup/api/signupActions';
 import SignupFields from 'src/widjets/signup/ui/SignupFileds';

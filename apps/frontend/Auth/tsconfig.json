@@ -35,8 +35,14 @@
     "**/*.tsx",
     "next-env.d.ts",
     ".next/types/**/*.ts",
-    "../../../libs/**/*.ts"
+    "../../../libs/**/*.ts",
+    ".storybook/*.js",
+    ".storybook/*.ts"
+, "../../../libs/frontend/share/src/lib/Components/Card/Card.stories.tsx", "../../../libs/frontend/share/src/lib/Components/404/404.stories.tsx"  ],
+  "exclude": [
+    "node_modules",
+    "jest.config.ts",
+    "**/*.spec.ts",
+    "**/*.test.ts",
   ],
-  "exclude": ["node_modules", "jest.config.ts", "**/*.spec.ts", "**/*.test.ts"],
-  "references": []
 }

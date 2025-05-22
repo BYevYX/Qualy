@@ -9,7 +9,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { LayoutParams } from '../model/types';
 import { Button } from '@qualy/front-share/server';
 import { providerMap, signIn } from 'src/auth';
-import { AFTER_LOGIN_REDIRECT, SIGNIN_ERROR_URL } from 'src/routes';
+import { AFTER_LOGIN_REDIRECT, AUTH_ERROR_URL } from 'src/shared';
 
 const baseIconProps = { className: 'h-7 w-7' };
 const icons: Record<string, ReactNode> = {
@@ -48,7 +48,7 @@ const Oauth: FC<OauthProps> = async ({ params }) => {
                 // In some cases, you may want to redirect to a custom error
                 if (error instanceof AuthError) {
                   console.error(error);
-                  return redirect(`${SIGNIN_ERROR_URL}?error=${error.type}`);
+                  return redirect(`${AUTH_ERROR_URL}?error=${error.type}`);
                 }
 
                 // Otherwise if a redirects happens Next.js can handle it

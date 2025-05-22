@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import { EmailTemplate } from '@qualy/front-share/templates';
-import { EMAIL_VERIFICATION_URL } from 'src/routes';
+import { EMAIL_VERIFICATION_URL } from 'src/shared';
 import { getFullUrl } from 'src/utils/helpers';
 
 const VerificationEmailTemplate: FC<{

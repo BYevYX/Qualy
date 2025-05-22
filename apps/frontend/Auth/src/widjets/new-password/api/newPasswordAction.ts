@@ -8,7 +8,7 @@ import {
   deleteResetPasswordToken,
 } from '../../../utils/db/password';
 import { NewPasswordError } from '../model/errors';
-import { AuthActionObject } from 'src/features/common/model/types';
+import { AuthActionObject } from 'src/features/shared/model/types';
 import { authGetUserByEmail } from 'src/utils/db/auth';
 import { newPasswordSchema } from 'src/utils/validateAuth';
 

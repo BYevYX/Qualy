@@ -1,8 +1,17 @@
 ## main
 
-1. add page in `/auth/reset-password`
-2. remove Oauth from reset and verify
+1. draw FLOW
+2. testing
+3. check logic
+4. complete todo 
+5. remove Oauth from reset and ???
+6. написать readme и вставить туда флоу работы авторизации
 
+
+999. создать либу Functional programming с идеальной типизацией, readmi и комментами для каждой функции
+1000. написать в библиотеки утилиты для функционального программирования
+1001. переписать все функции из библы сервер на функ прогу
+1002. либо начать писать след микрофронтенд на функ проге либо переписать авторизацию на функ прогу
 
 
 # important

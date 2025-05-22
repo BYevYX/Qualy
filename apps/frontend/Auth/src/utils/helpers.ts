@@ -1,4 +1,4 @@
-import { DOMAIN } from 'src/routes';
+import { DOMAIN } from 'src/shared';
 
 export function getFullUrl(path: string, queryParams?: Record<string, string>) {
   const confirmPath = new URL(path, DOMAIN).toString();

@@ -3,7 +3,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { FC, useActionState, useCallback } from 'react';
 
 import { MegaForm } from '@qualy/front-share/client';
-import { AuthActionObject } from 'src/features/common/model/types';
+import { AuthActionObject } from 'src/features/shared/model/types';
 import { createQueryStringAndPath } from 'src/utils/helpers';
 import { loginFieldsSchema } from 'src/utils/validateInputs';
 import { loginAction } from 'src/widjets/login/api/loginAction';

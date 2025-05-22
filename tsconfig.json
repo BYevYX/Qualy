@@ -29,5 +29,10 @@
     {
       "path": "./libs/frontend/server"
     }
-  ]
+  ],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  }
 }

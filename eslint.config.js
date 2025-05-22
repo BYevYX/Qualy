@@ -6,88 +6,93 @@ const jsx = require('eslint-plugin-jsx-a11y');
 const playwright = require('eslint-plugin-playwright');
 const react = require('eslint-plugin-react');
 const prettierPlugin = require('eslint-plugin-prettier/recommended');
+const storybook = require('eslint-plugin-storybook');
+
 
 module.exports = [
-    ...tseslint.config(
-        js.configs.recommended,
-        tseslint.configs.recommended,
-        tseslint.configs.stylistic,
+  ...tseslint.config(
+    js.configs.recommended,
+    tseslint.configs.recommended,
+    tseslint.configs.stylistic,
+    {
+      files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
+      languageOptions: {
+        parser: tseslint.parser,
+        parserOptions: {
+          projectService: true,
+          tsconfigRootDir: __dirname,
+          project: ['./tsconfig.json'],
+        },
+      },
+    },
+  ),
+
+  ...nxEslintPlugin.configs['flat/typescript'],
+  ...nxEslintPlugin.configs['flat/react'],
+
+  {
+    ...importPlugin.flatConfigs.recommended,
+    plugins: {
+      import: importPlugin,
+    },
+    rules: {
+      ...importPlugin.flatConfigs.recommended.rules,
+      // Можно добавить дополнительные правила для усиления контроля
+      'import/order': [
+        'error',
         {
-            files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
-            languageOptions: {
-                parser: tseslint.parser,
-                parserOptions: {
-                    projectService: true,
-                    tsconfigRootDir: __dirname,
-                    project: ['./tsconfig.json'],
-                },
-            },
+          groups: [
+            ['builtin', 'external'],
+            ['internal', 'parent', 'sibling', 'index'],
+          ],
+          'newlines-between': 'always',
+          alphabetize: { order: 'asc', caseInsensitive: true },
         },
-    ),
-
-    ...nxEslintPlugin.configs['flat/typescript'],
-    ...nxEslintPlugin.configs['flat/react'],
-
-    {
-        ...importPlugin.flatConfigs.recommended,
-        plugins: {
-            import: importPlugin,
-        },
-        rules: {
-            ...importPlugin.flatConfigs.recommended.rules,
-            // Можно добавить дополнительные правила для усиления контроля
-            'import/order': [
-                'error',
-                {
-                    groups: [
-                        ['builtin', 'external'],
-                        ['internal', 'parent', 'sibling', 'index'],
-                    ],
-                    'newlines-between': 'always',
-                    alphabetize: { order: 'asc', caseInsensitive: true },
-                },
-            ],
-        },
-        settings: {
-            'import/resolver': {
-                node: {
-                    extensions: ['.js', '.jsx', '.ts', '.tsx'],
-                },
-                typescript: true,
-            },
-        },
+      ],
     },
-
-    {
-        ...jsx.flatConfigs.recommended,
-        plugins: {
-            jsx,
+    settings: {
+      'import/resolver': {
+        node: {
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
         },
+        typescript: true,
+      },
     },
+  },
 
-    {
-        ...playwright.configs['flat/recommended'],
-        files: ['**/*-e2e/**/*.spec*'],
-        rules: {
-            ...playwright.configs['flat/recommended'].rules,
-            // Customize Playwright rules
-            // ...
-        },
+  {
+    ...jsx.flatConfigs.recommended,
+    plugins: {
+      jsx,
     },
+  },
 
-    react.configs.flat.recommended, // This is not a plugin object, but a shareable config object
-    react.configs.flat['jsx-runtime'], // Add this if you are using React 17+
-
-    {
-        ignores: [
-            '**/*.config*',
-            '.nx/**',
-            'dist/**',
-            '.github/**',
-            '.vscode/**',
-            'node_modules/**'
-        ],
+  {
+    ...playwright.configs['flat/recommended'],
+    files: ['**/*-e2e/**/*.spec*'],
+    rules: {
+      ...playwright.configs['flat/recommended'].rules,
+      // Customize Playwright rules
+      // ...
     },
+  },
 
-    prettierPlugin,
+  ...storybook.configs['flat/recommended'],
+
+  react.configs.flat.recommended, // This is not a plugin object, but a shareable config object
+  react.configs.flat['jsx-runtime'], // Add this if you are using React 17+
+
+  {
+    ignores: [
+      '**/*.config*',
+      '.nx/**',
+      'dist/**',
+      '.github/**',
+      '.vscode/**',
+      'node_modules/**',
+      // '!.storybook',
+    ],
+  },
+
+  prettierPlugin,
 ];

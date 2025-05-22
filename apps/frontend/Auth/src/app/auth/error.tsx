@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useState, type FC } from 'react';
 
 import { Modal } from '@qualy/front-share/client';
-import ErrorMessage from 'src/features/common/ui/ErrorMessage';
+import ErrorMessage from 'src/features/shared/ui/ErrorMessage';
 
 interface ErrorFallbackProps {
   error: Error & { digest?: string };
