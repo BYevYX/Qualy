@@ -36,19 +36,6 @@ const twoFactorCodeSchema = string()
     return !!value.match(/^\d{6}$/)?.length;
   });
 
-export const loginFieldsSchema = {
-  email: emailSchema,
-  password: passwordSchema,
-  twoFactorCode: twoFactorCodeSchema,
-};
-
-export const signupFieldsSchema = {
-  email: emailSchema,
-  password: passwordSchema,
-  verifyPassword: verifyPasswordSchema,
-  username: usernameSchema,
-};
-
 export {
   emailSchema,
   passwordSchema,

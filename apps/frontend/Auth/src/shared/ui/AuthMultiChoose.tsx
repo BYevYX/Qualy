@@ -4,7 +4,7 @@ import { FC } from 'react';
 
 import { MultiButtons } from '@qualy/front-share/client';
 
-const AuthMultiChoose: FC = () => {
+export const AuthMultiChoose: FC = () => {
   const path = usePathname();
   return (
     <MultiButtons
@@ -25,5 +25,3 @@ const AuthMultiChoose: FC = () => {
     />
   );
 };
-
-export default AuthMultiChoose;

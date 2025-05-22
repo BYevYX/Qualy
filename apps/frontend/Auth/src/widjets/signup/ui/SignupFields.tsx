@@ -2,13 +2,13 @@
 import { FC } from 'react';
 
 import { Input, useMegaForm } from '@qualy/front-share/client';
-import PasswordInput from 'src/features/shared/ui/PasswordInput';
+import { PasswordInput } from 'src/shared';
 
 interface SignupFieldsProps {
   formError?: string;
 }
 
-const SignupFields: FC<SignupFieldsProps> = ({ formError }) => {
+export const SignupFields: FC<SignupFieldsProps> = ({ formError }) => {
   const { controlRegister } = useMegaForm();
 
   return (
@@ -30,5 +30,3 @@ const SignupFields: FC<SignupFieldsProps> = ({ formError }) => {
     </div>
   );
 };
-
-export default SignupFields;

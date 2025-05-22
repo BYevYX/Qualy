@@ -6,10 +6,9 @@ import { FC, ReactNode } from 'react';
 import { FaGithub, FaVk, FaYandex } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 
-import { LayoutParams } from '../model/types';
 import { Button } from '@qualy/front-share/server';
 import { providerMap, signIn } from 'src/auth';
-import { AFTER_LOGIN_REDIRECT, AUTH_ERROR_URL } from 'src/shared';
+import { LayoutParams, AFTER_LOGIN_REDIRECT, AUTH_ERROR_URL } from 'src/shared';
 
 const baseIconProps = { className: 'h-7 w-7' };
 const icons: Record<string, ReactNode> = {

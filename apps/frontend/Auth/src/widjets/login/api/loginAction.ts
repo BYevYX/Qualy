@@ -4,18 +4,17 @@ import { AuthError } from 'next-auth';
 
 import { signIn } from 'src/auth';
 import { sendEmail } from 'src/features/mail/api/send';
-import { AuthActionObject } from 'src/features/shared/model/types';
 import {
   generateTwoFactorToken,
   generateVerificationToken,
 } from 'src/features/tokens/api/generate';
-import { AFTER_LOGIN_REDIRECT } from 'src/shared';
+import { AuthActionObject, AFTER_LOGIN_REDIRECT } from 'src/shared';
 import { authGetUserByEmail } from 'src/utils/db/auth';
 import {
   deleteTwoFactorToken,
   getTwoFactorToken,
 } from 'src/utils/db/twoFactor';
-import { loginSchema } from 'src/utils/validateAuth';
+import { loginSchema } from 'src/widjets/login';
 
 export async function loginAction(data: FormData): Promise<AuthActionObject> {
   try {

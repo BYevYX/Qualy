@@ -2,11 +2,11 @@
 import { ValidationError } from 'yup';
 
 import { ResetPasswordError } from '../model/errors';
-import { AuthActionObject } from 'src/features/shared/model/types';
 import { sendEmail } from 'src/features/mail/api/send';
 import { generateResetPasswordToken } from 'src/features/tokens/api/generate';
+import { AuthActionObject } from 'src/shared';
 import { authGetUserByEmail } from 'src/utils/db/auth';
-import { resetPasswordSchema } from 'src/utils/validateAuth';
+import { resetPasswordSchema } from 'src/widjets/login';
 
 export async function resetPasswordAction(
   data: FormData,

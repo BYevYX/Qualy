@@ -15,7 +15,7 @@ interface ErrorMessageProps {
   message: string;
 }
 
-const ErrorMessage: FC<ErrorMessageProps> = ({ message }) => {
+export const ErrorMessage: FC<ErrorMessageProps> = ({ message }) => {
   return (
     <StatusComponent display className="m-1 whitespace-pre-wrap" type="error">
       <span>
@@ -25,5 +25,3 @@ const ErrorMessage: FC<ErrorMessageProps> = ({ message }) => {
     </StatusComponent>
   );
 };
-
-export default ErrorMessage;

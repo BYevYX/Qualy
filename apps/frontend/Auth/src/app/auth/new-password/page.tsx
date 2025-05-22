@@ -3,11 +3,12 @@ import { useSearchParams } from 'next/navigation';
 import { FC, useActionState } from 'react';
 
 import { MegaForm } from '@qualy/front-share/client';
-import { AuthActionObject } from 'src/features/shared/model/types';
-import { passwordSchema } from 'src/utils/validateInputs';
-import { processNewPasswordAction } from 'src/widjets/new-password/api/newPasswordAction';
-import NewPasswordButton from 'src/widjets/new-password/ui/NewPasswordButton';
-import NewPasswordFields from 'src/widjets/new-password/ui/NewPasswordFields';
+import { AuthActionObject, passwordSchema } from 'src/shared';
+import {
+  processNewPasswordAction,
+  NewPasswordFields,
+  NewPasswordButton,
+} from 'src/widjets/new-password';
 
 const NewPassword: FC = () => {
   const search = useSearchParams();

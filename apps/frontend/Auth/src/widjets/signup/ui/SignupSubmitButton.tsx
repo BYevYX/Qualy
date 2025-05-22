@@ -9,7 +9,7 @@ interface SignupSubmitButtonProps {
   disabled: boolean;
 }
 
-const SignupSubmitButton: FC<SignupSubmitButtonProps> = ({
+export const SignupSubmitButton: FC<SignupSubmitButtonProps> = ({
   isFormErrorDisplay,
   disabled,
 }) => {
@@ -37,5 +37,3 @@ const SignupSubmitButton: FC<SignupSubmitButtonProps> = ({
     </div>
   );
 };
-
-export default SignupSubmitButton;

@@ -8,7 +8,7 @@ interface LoginFormContentProps {
   isFormErrorDisplay: boolean;
 }
 
-const NewPasswordButton: FC<LoginFormContentProps> = ({
+export const NewPasswordButton: FC<LoginFormContentProps> = ({
   disabled,
   isFormErrorDisplay,
 }) => {
@@ -24,5 +24,3 @@ const NewPasswordButton: FC<LoginFormContentProps> = ({
     </div>
   );
 };
-
-export default NewPasswordButton;

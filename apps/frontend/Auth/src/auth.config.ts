@@ -7,7 +7,7 @@ import VK from 'next-auth/providers/vk';
 import Yandex from 'next-auth/providers/yandex';
 
 import { authGetUserByEmail } from './utils/db/auth';
-import { loginSchema } from './utils/validateAuth';
+import { loginSchema } from './widjets/login';
 
 // TODO: configure VK (now it isnt working)
 export default {

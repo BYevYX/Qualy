@@ -13,8 +13,10 @@ import {
 } from '@qualy/front-share/server';
 import { StatusType } from '@qualy/front-share/types';
 import { NEED_LOGIN_REDIRECT } from 'src/shared';
-import { processVerificationToken } from 'src/widjets/verify-email/api/verificationToken';
-import { VerificationCode } from 'src/widjets/verify-email/model/types';
+import {
+  processVerificationToken,
+  VerificationCode,
+} from 'src/widjets/verify-email';
 
 interface VerifyState {
   status?: StatusType;

@@ -8,9 +8,9 @@ import {
   deleteResetPasswordToken,
 } from '../../../utils/db/password';
 import { NewPasswordError } from '../model/errors';
-import { AuthActionObject } from 'src/features/shared/model/types';
+import { newPasswordSchema } from '../model/shemas';
+import { AuthActionObject } from 'src/shared';
 import { authGetUserByEmail } from 'src/utils/db/auth';
-import { newPasswordSchema } from 'src/utils/validateAuth';
 
 const saltRounds = 10;
 

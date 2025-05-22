@@ -1,3 +1,4 @@
+'use server';
 import type { FC } from 'react';
 import { Resend } from 'resend';
 

@@ -1,3 +1,3 @@
-import { ActionError } from 'src/features/shared/model/errors';
+import { ActionError } from 'src/shared';
 
 export class NewPasswordError extends ActionError {}

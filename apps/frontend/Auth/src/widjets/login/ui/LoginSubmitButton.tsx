@@ -32,7 +32,7 @@ interface LoginSubmitProps {
   };
 }
 
-const LoginSubmitButton: FC<LoginSubmitProps> = ({
+export const LoginSubmitButton: FC<LoginSubmitProps> = ({
   disabled,
   isFormErrorDisplay,
   actions,
@@ -83,5 +83,3 @@ const LoginSubmitButton: FC<LoginSubmitProps> = ({
     </div>
   );
 };
-
-export default LoginSubmitButton;

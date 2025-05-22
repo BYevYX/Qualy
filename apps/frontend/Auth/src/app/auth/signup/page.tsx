@@ -2,11 +2,13 @@
 import { FC, useActionState } from 'react';
 
 import { MegaForm } from '@qualy/front-share/client';
-import { AuthActionObject } from 'src/features/shared/model/types';
-import { signupFieldsSchema } from 'src/utils/validateInputs';
-import { registerAction } from 'src/widjets/signup/api/signupActions';
-import SignupFields from 'src/widjets/signup/ui/SignupFileds';
-import SignupSubmitButton from 'src/widjets/signup/ui/SignupSubmitButton';
+import { AuthActionObject } from 'src/shared';
+import {
+  registerAction,
+  SignupFields,
+  SignupSubmitButton,
+  signupFieldsSchema,
+} from 'src/widjets/signup';
 
 const Signup: FC = () => {
   const [state, action] = useActionState(

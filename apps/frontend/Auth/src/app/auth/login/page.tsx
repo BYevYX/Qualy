@@ -3,14 +3,15 @@ import { usePathname, useRouter } from 'next/navigation';
 import { FC, useActionState, useCallback } from 'react';
 
 import { MegaForm } from '@qualy/front-share/client';
-import { AuthActionObject } from 'src/features/shared/model/types';
-import { createQueryStringAndPath } from 'src/utils/helpers';
-import { loginFieldsSchema } from 'src/utils/validateInputs';
+import { AuthActionObject, createQueryStringAndPath } from 'src/shared';
+import {
+  loginFieldsSchema,
+  LoginFields,
+  LoginSubmitButton,
+} from 'src/widjets/login';
 import { loginAction } from 'src/widjets/login/api/loginAction';
 import { resetPasswordAction } from 'src/widjets/login/api/resetPasswordAction';
 import { LoginSteps } from 'src/widjets/login/model/types';
-import LoginFields from 'src/widjets/login/ui/LoginFields';
-import LoginSubmitButton from 'src/widjets/login/ui/LoginSubmitButton';
 
 const Login: FC = () => {
   const router = useRouter();

@@ -10,7 +10,10 @@ interface PasswordInputProps {
   placeholder: string;
 }
 
-const PasswordInput: FC<PasswordInputProps> = ({ name, placeholder }) => {
+export const PasswordInput: FC<PasswordInputProps> = ({
+  name,
+  placeholder,
+}) => {
   const [showPassword, setShowPassword] = useState(false);
   const { controlRegister } = useMegaForm();
 
@@ -38,5 +41,3 @@ const PasswordInput: FC<PasswordInputProps> = ({ name, placeholder }) => {
     </InputWithIcon>
   );
 };
-
-export default PasswordInput;
