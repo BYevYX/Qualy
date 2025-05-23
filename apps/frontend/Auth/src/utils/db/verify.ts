@@ -1,43 +1,33 @@
+import { EmailOrToken } from './dbUtils.types';
+import { Email, EmailOrId } from '@qualy/front-server/types';
 import { db } from 'src/db';
 
-export const getVerificationTokenByEmail = async (email: string) => {
+export const getVerificationToken = async (where: EmailOrToken) => {
   const verificationToken = await db.verificationToken.findUnique({
-    where: {
-      email,
-    },
+    where,
   });
   return verificationToken;
 };
 
-export const getVerificationTokenByToken = async (token: string) => {
-  const verificationToken = await db.verificationToken.findUnique({
-    where: {
-      token,
-    },
-  });
-  return verificationToken;
-};
+function isEmail(where: EmailOrId): where is Email {
+  return Object.hasOwn(where, 'email');
+}
 
-export const verifyUserEmailById = async (id: string) => {
-  await db.user.update({
-    where: {
-      id,
-    },
-    data: {
-      emailVerified: new Date(),
-    },
-  });
-};
+export const verifyUserEmail = async (where: EmailOrId) => {
+  const data: {
+    emailVerified: Date;
+    email?: string;
+  } = {
+    emailVerified: new Date(),
+  };
 
-export const verifyUserEmailByEmail = async (email: string) => {
+  if (isEmail(where)) {
+    data.email = where.email;
+  }
+
   await db.user.update({
-    where: {
-      email,
-    },
-    data: {
-      emailVerified: new Date(),
-      email,
-    },
+    where,
+    data,
   });
 };
 

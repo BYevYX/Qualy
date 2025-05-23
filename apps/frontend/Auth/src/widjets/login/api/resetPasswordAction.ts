@@ -5,7 +5,7 @@ import { ResetPasswordError } from '../model/errors';
 import { sendEmail } from 'src/features/mail/api/send';
 import { generateResetPasswordToken } from 'src/features/tokens/api/generate';
 import { AuthActionObject } from 'src/shared';
-import { authGetUserByEmail } from 'src/utils/db/auth';
+import { authGetUser } from 'src/utils/db/auth';
 import { resetPasswordSchema } from 'src/widjets/login';
 
 export async function resetPasswordAction(
@@ -16,7 +16,7 @@ export async function resetPasswordAction(
       Object.fromEntries(data.entries()),
     );
 
-    const user = await authGetUserByEmail(email);
+    const user = await authGetUser({ email });
 
     if (!user) {
       throw new ResetPasswordError('User does not exist!');

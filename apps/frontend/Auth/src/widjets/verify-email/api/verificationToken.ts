@@ -2,19 +2,19 @@
 
 import {
   deleteVerificationToken,
-  getVerificationTokenByToken,
-  verifyUserEmailByEmail,
+  getVerificationToken,
+  verifyUserEmail,
 } from '../../../utils/db/verify';
 import { VerificationCode } from '../model/types';
 import { StatusType } from '@qualy/front-share/types';
 import { sendEmail } from 'src/features/mail/api/send';
 import { generateVerificationToken } from 'src/features/tokens/api/generate';
-import { authGetUserByEmail } from 'src/utils/db/auth';
+import { authGetUser } from 'src/utils/db/auth';
 
 export const processVerificationToken = async (
   token: string,
 ): Promise<{ status: StatusType; code: VerificationCode }> => {
-  const verificationToken = await getVerificationTokenByToken(token);
+  const verificationToken = await getVerificationToken({ token });
 
   if (!verificationToken) {
     return {
@@ -24,7 +24,7 @@ export const processVerificationToken = async (
   }
 
   if (verificationToken.expires < new Date()) {
-    const user = await authGetUserByEmail(verificationToken.email);
+    const user = await authGetUser({ email: verificationToken.email });
     const newVerificationToken = await generateVerificationToken(
       verificationToken.email,
     );
@@ -46,7 +46,7 @@ export const processVerificationToken = async (
     };
   }
 
-  await verifyUserEmailByEmail(verificationToken.email);
+  await verifyUserEmail({ email: verificationToken.email });
   await deleteVerificationToken(verificationToken.token);
 
   return { status: 'success', code: 'ok' };

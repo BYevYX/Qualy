@@ -9,7 +9,7 @@ import {
   generateVerificationToken,
 } from 'src/features/tokens/api/generate';
 import { AuthActionObject, AFTER_LOGIN_REDIRECT } from 'src/shared';
-import { authGetUserByEmail } from 'src/utils/db/auth';
+import { authGetUser } from 'src/utils/db/auth';
 import {
   deleteTwoFactorToken,
   getTwoFactorToken,
@@ -23,7 +23,7 @@ export async function loginAction(data: FormData): Promise<AuthActionObject> {
     );
     const { email, password, twoFactorCode } = validatedCredentials;
 
-    const user = await authGetUserByEmail(email);
+    const user = await authGetUser({ email });
     if (!user || !user.password) {
       return { error: 'Invalid credentials!' };
     }

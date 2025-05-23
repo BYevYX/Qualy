@@ -1,18 +1,10 @@
 'use server';
 import type { PrismaClient } from '@prisma/client';
 
-export async function getUserByEmail(db: PrismaClient, email: string) {
-  return await db.user.findUnique({
-    where: {
-      email,
-    },
-  });
-}
+import { EmailOrId } from '../Types/db';
 
-export async function getUserById(db: PrismaClient, id: string) {
+export async function getUser(db: PrismaClient, where: EmailOrId) {
   return await db.user.findUnique({
-    where: {
-      id,
-    },
+    where,
   });
 }

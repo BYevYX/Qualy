@@ -1,11 +1,5 @@
-import {
-  getAccountByUserId,
-  getUserByEmail,
-  getUserById,
-} from '@qualy/front-server/index';
+import { getAccountByUserId, getUser } from '@qualy/front-server/index';
 import { db } from 'src/db';
 
-export const authGetUserByEmail = getUserByEmail.bind(null, db);
-export const authGetUserById = getUserById.bind(null, db);
-
+export const authGetUser = getUser.bind(null, db);
 export const authGetAccountByUserId = getAccountByUserId.bind(null, db);

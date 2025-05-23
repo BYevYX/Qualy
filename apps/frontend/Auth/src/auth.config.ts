@@ -6,7 +6,7 @@ import Google from 'next-auth/providers/google';
 import VK from 'next-auth/providers/vk';
 import Yandex from 'next-auth/providers/yandex';
 
-import { authGetUserByEmail } from './utils/db/auth';
+import { authGetUser } from './utils/db/auth';
 import { loginSchema } from './widjets/login';
 
 // TODO: configure VK (now it isnt working)
@@ -41,7 +41,7 @@ export default {
         const validatedCredentials = await loginSchema.validate(credentials);
         const { email } = validatedCredentials;
 
-        const user = await authGetUserByEmail(email);
+        const user = await authGetUser({ email });
         return user;
       },
     }),

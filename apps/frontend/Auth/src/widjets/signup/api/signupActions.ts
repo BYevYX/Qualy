@@ -8,7 +8,7 @@ import { SignupError } from '../model/SignupError';
 import { sendEmail } from 'src/features/mail/api/send';
 import { generateVerificationToken } from 'src/features/tokens/api/generate';
 import { AuthActionObject } from 'src/shared';
-import { authGetUserByEmail } from 'src/utils/db/auth';
+import { authGetUser } from 'src/utils/db/auth';
 
 const saltRounds = 10;
 
@@ -22,7 +22,7 @@ export async function registerAction(
       { context: formObject },
     );
 
-    const existingUser = await authGetUserByEmail(email);
+    const existingUser = await authGetUser({ email });
     if (existingUser) {
       throw new SignupError('User already exists');
     }

@@ -4,8 +4,8 @@ import type { Provider } from 'next-auth/providers';
 
 import authConfig from './auth.config';
 import { db } from './db';
-import { authGetUserById } from './utils/db/auth';
-import { verifyUserEmailById } from './utils/db/verify';
+import { authGetUser } from './utils/db/auth';
+import { verifyUserEmail } from './utils/db/verify';
 import { refreshTokenRotation } from './utils/RefreshTokens';
 import { OAuthProvidersType } from '@qualy/front-server/types';
 
@@ -33,7 +33,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async jwt({ token, account }) {
       if (!token.sub) return token;
 
-      const existingUser = await authGetUserById(token.sub);
+      const existingUser = await authGetUser({ id: token.sub });
       if (!existingUser) return token;
 
       return {
@@ -65,7 +65,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   events: {
     async linkAccount({ user }) {
       if (!user.id) throw new Error('User ID not found');
-      await verifyUserEmailById(user.id);
+      await verifyUserEmail({ id: user.id });
     },
   },
 });

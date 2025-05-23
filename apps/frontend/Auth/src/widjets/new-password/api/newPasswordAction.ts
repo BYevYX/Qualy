@@ -4,13 +4,13 @@ import { ValidationError } from 'yup';
 
 import {
   updatePassword,
-  getResetPasswordTokenByToken,
+  getResetPasswordToken,
   deleteResetPasswordToken,
 } from '../../../utils/db/password';
 import { NewPasswordError } from '../model/errors';
 import { newPasswordSchema } from '../model/shemas';
 import { AuthActionObject } from 'src/shared';
-import { authGetUserByEmail } from 'src/utils/db/auth';
+import { authGetUser } from 'src/utils/db/auth';
 
 const saltRounds = 10;
 
@@ -23,13 +23,13 @@ export async function processNewPasswordAction(
       Object.fromEntries(data.entries()),
     );
 
-    const existingToken = await getResetPasswordTokenByToken(token);
+    const existingToken = await getResetPasswordToken({ token });
 
     if (!existingToken) {
       throw new NewPasswordError('Invalid Token');
     }
 
-    const user = await authGetUserByEmail(existingToken.email);
+    const user = await authGetUser({ email: existingToken.email });
 
     if (!user) {
       throw new NewPasswordError('User does not exist!');

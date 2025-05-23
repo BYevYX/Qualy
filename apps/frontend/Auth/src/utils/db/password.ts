@@ -1,19 +1,9 @@
+import { EmailOrToken } from './dbUtils.types';
 import { db } from 'src/db';
 
-export const getResetPasswordTokenByEmail = async (email: string) => {
-  const resetPasswordTokenToken = await db.resetPasswordToken.findUnique({
-    where: {
-      email,
-    },
-  });
-  return resetPasswordTokenToken;
-};
-
-export const getResetPasswordTokenByToken = async (token: string) => {
+export const getResetPasswordToken = async (where: EmailOrToken) => {
   const resetPasswordToken = await db.resetPasswordToken.findUnique({
-    where: {
-      token,
-    },
+    where,
   });
   return resetPasswordToken;
 };

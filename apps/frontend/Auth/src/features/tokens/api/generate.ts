@@ -4,7 +4,7 @@ import { v4 } from 'uuid';
 import { db } from 'src/db';
 import {
   deleteResetPasswordToken,
-  getResetPasswordTokenByEmail,
+  getResetPasswordToken,
 } from 'src/utils/db/password';
 import {
   deleteTwoFactorConfirmation,
@@ -14,7 +14,7 @@ import {
 } from 'src/utils/db/twoFactor';
 import {
   deleteVerificationToken,
-  getVerificationTokenByEmail,
+  getVerificationToken,
 } from 'src/utils/db/verify';
 
 const minute = 1000 * 60;
@@ -24,7 +24,7 @@ export const generateVerificationToken = async (email: string) => {
   const token = v4();
   const expires = new Date(new Date().getTime() + HOUR);
 
-  const existingToken = await getVerificationTokenByEmail(email);
+  const existingToken = await getVerificationToken({ email });
 
   if (existingToken) {
     await deleteVerificationToken(existingToken.token);
@@ -43,7 +43,7 @@ export const generateResetPasswordToken = async (email: string) => {
   const token = v4();
   const expires = new Date(new Date().getTime() + HOUR);
 
-  const existingToken = await getResetPasswordTokenByEmail(email);
+  const existingToken = await getResetPasswordToken({ email });
 
   if (existingToken) {
     await deleteResetPasswordToken(existingToken.token);
