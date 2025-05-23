@@ -1,9 +1,9 @@
 'use client';
 import cn from 'classnames';
 import type { FC } from 'react';
-import type { InputProps } from 'src/lib/Types/props';
 
 import styles from './Input.module.css';
+import type { InputProps } from '../../Types/props';
 
 export const Input: FC<InputProps> = ({
   className,

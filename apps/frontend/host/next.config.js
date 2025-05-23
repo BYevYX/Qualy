@@ -1,33 +1,37 @@
-// @ts-check
+//@ts-check
 
-const { withNx } = require('@nx/next');
-const { NextFederationPlugin } = require('@module-federation/nextjs-mf');
+const { composePlugins, withNx } = require('@nx/next');
+
+const { AUTH_URL = 'http://localhost:3000' } = process.env;
 
 /**
  * @type {import('@nx/next/plugins/with-nx').WithNxOptions}
  **/
 const nextConfig = {
   nx: {
+    // Set this to true if you would like to use SVGR
+    // See: https://github.com/gregberge/svgr
     svgr: false,
   },
-  reactStrictMode: true,
-  webpack: (config, options) => {
-    // Добавляем NextFederationPlugin в конфигурацию Webpack
-    config.plugins.push(
-      new NextFederationPlugin({
-        name: 'host',
-        remotes: {
-          microfrontend1: 'microfrontend1@http://localhost:3001/_next/static/chunks/remoteEntry.js',
-        },
-        shared: {
-          react: { singleton: true, eager: true },
-          'react-dom': { singleton: true, eager: true },
-        },
-        extraOptions: {}, // Добавляем extraOptions (пустой объект или конфигурация по умолчанию)
-      })
-    );
-    return config;
-  },
+  rewrites: async () => [
+    {
+      source: '/auth',
+      destination: `${AUTH_URL}/auth`,
+    },
+    {
+      source: '/auth/:path+',
+      destination: `${AUTH_URL}/auth/:path+`,
+    },
+    {
+      source: '/auth-static/_next/:path+',
+      destination: `${AUTH_URL}/auth-static/_next/:path+`,
+    },
+  ],
 };
 
-module.exports = withNx(nextConfig);
+const plugins = [
+  // Add more Next.js plugins to this list if needed.
+  withNx,
+];
+
+module.exports = composePlugins(...plugins)(nextConfig);

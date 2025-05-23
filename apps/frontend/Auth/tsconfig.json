@@ -11,7 +11,11 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
@@ -21,10 +25,17 @@
         "name": "next"
       }
     ],
-    "types": ["jest", "node"],
+    "types": [
+      "jest",
+      "node"
+    ],
     "paths": {
-      "@qualy/front-share/*": ["../../../libs/frontend/share/src/*"],
-      "@qualy/front-server/*": ["../../../libs/frontend/server/src/*"]
+      "@qualy/front-share/*": [
+        "../../../libs/frontend/share/src/*"
+      ],
+      "@qualy/front-server/*": [
+        "../../../libs/frontend/server/src/*"
+      ]
     }
   },
   "files": [],
@@ -33,16 +44,19 @@
     "**/*.jsx",
     "**/*.ts",
     "**/*.tsx",
-    "next-env.d.ts",
-    ".next/types/**/*.ts",
     "../../../libs/**/*.ts",
+    "../../../libs/frontend/share/src/lib/Components/404/404.stories.tsx",
+    "../../../libs/frontend/share/src/lib/Components/Card/Card.stories.tsx",
+    ".next/types/**/*.ts",
     ".storybook/*.js",
-    ".storybook/*.ts"
-, "../../../libs/frontend/share/src/lib/Components/Card/Card.stories.tsx", "../../../libs/frontend/share/src/lib/Components/404/404.stories.tsx"  ],
+    ".storybook/*.ts",
+    "next-env.d.ts",
+    "../../../dist/apps/auth/.next/types/**/*.ts"
+  ],
   "exclude": [
     "node_modules",
     "jest.config.ts",
     "**/*.spec.ts",
-    "**/*.test.ts",
-  ],
+    "**/*.test.ts"
+  ]
 }

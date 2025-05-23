@@ -6,8 +6,8 @@ import Google from 'next-auth/providers/google';
 import VK from 'next-auth/providers/vk';
 import Yandex from 'next-auth/providers/yandex';
 
-import { authGetUser } from './utils/db/auth';
-import { loginSchema } from './widjets/login';
+// import { authGetUser } from './utils/db/auth';
+// import { loginSchema } from './widjets/login';
 
 // TODO: configure VK (now it isnt working)
 export default {
@@ -37,13 +37,15 @@ export default {
         email: {},
         twoFactorCode: {},
       },
-      async authorize(credentials) {
-        const validatedCredentials = await loginSchema.validate(credentials);
-        const { email } = validatedCredentials;
 
-        const user = await authGetUser({ email });
-        return user;
-      },
+      // TODO: исправить нельзя использовать в edge
+      // async authorize(credentials) {
+      //   const validatedCredentials = await loginSchema.validate(credentials);
+      //   const { email } = validatedCredentials;
+
+      //   const user = await authGetUser({ email });
+      //   return user;
+      // },
     }),
   ],
 } satisfies NextAuthConfig;
