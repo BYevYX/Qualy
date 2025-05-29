@@ -4,6 +4,7 @@ import { useState } from 'react';
 import type { FC } from 'react';
 
 import styles from './Toggle.module.css';
+import { Button } from '../Button/Button';
 
 interface BaseProps {
   firstButonText: string;
@@ -33,7 +34,7 @@ export const Toggle: FC<ToggleProps> = ({
 
   return (
     <div className={`${styles.root} ${isFirst && styles.root_active}`}>
-      <button
+      <Button
         className={`${styles.first} ${isFirst && styles.first_active}`}
         onClick={(e) => {
           if (isFirst) return;
@@ -44,8 +45,8 @@ export const Toggle: FC<ToggleProps> = ({
         }}
       >
         {firstButonText}
-      </button>
-      <button
+      </Button>
+      <Button
         className={`${styles.second} ${!isFirst && styles.second_active}`}
         onClick={(e) => {
           if (!isFirst) return;
@@ -56,7 +57,7 @@ export const Toggle: FC<ToggleProps> = ({
         }}
       >
         {secondButonText}
-      </button>
+      </Button>
     </div>
   );
 };

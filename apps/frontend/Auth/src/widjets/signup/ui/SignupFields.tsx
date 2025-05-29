@@ -22,6 +22,7 @@ export const SignupFields: FC<SignupFieldsProps> = ({ formError }) => {
       <Input
         {...controlRegister('email')}
         placeholder="Email"
+        type="email"
         className="text-blue-600"
         inputStyle="underline"
       />

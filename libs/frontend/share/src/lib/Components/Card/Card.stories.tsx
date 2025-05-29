@@ -40,6 +40,16 @@ export const FullCard: Story = {
       CardFooter: <CardFooter key="CardFooter">{footerText}</CardFooter>,
     };
 
-    return <Card>{children.map((key) => componentMap[key])}</Card>;
+    return (
+      <div
+        style={{
+          backgroundColor: 'white',
+          padding: '2rem',
+          borderRadius: '16px',
+        }}
+      >
+        <Card>{children.map((key) => componentMap[key])}</Card>
+      </div>
+    );
   },
 };

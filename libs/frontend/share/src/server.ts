@@ -3,6 +3,7 @@ export { Button } from './lib/Components/Button/Button';
 export { InputWithIcon } from './lib/Components/InputWithIcon/InputWithIcon';
 export { Loading } from './lib/Components/Loading/Loading';
 export { StatusComponent } from './lib/Components/StatusComponent/StatusComponent';
+export { SuperLink } from './lib/Components/SuperLink/SuperLink';
 
 export {
   Card,

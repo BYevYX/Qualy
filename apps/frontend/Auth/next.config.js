@@ -12,7 +12,7 @@ const nextConfig = {
     svgr: false,
   },
   // assetPrefix: 'auth',
-  basePath: 'auth'
+  basePath: '/auth'
 };
 
 const plugins = [

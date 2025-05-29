@@ -1,5 +1,4 @@
 import { Button } from '@qualy/front-share/server';
-import cn from 'classnames';
 import Form from 'next/form';
 import { redirect } from 'next/navigation';
 import { AuthError } from 'next-auth';
@@ -14,8 +13,8 @@ const baseIconProps = { className: 'h-7 w-7' };
 const icons: Record<string, ReactNode> = {
   GitHub: <FaGithub {...baseIconProps} />,
   Google: <FcGoogle {...baseIconProps} />,
-  Yandex: <FaYandex {...baseIconProps} color="white" />,
-  VK: <FaVk {...baseIconProps} color="white" />,
+  Yandex: <FaYandex {...baseIconProps} color="oklch(0.577 0.245 27.325)" />,
+  VK: <FaVk {...baseIconProps} color="#155dfc" />,
 };
 
 interface OauthProps {
@@ -59,16 +58,12 @@ const Oauth: FC<OauthProps> = async ({ params }) => {
             }}
           >
             <Button
+              variant="icon"
+              aria-label={`enter using ${provider.name}`}
               type="submit"
-              variant="noStyle"
-              className={cn(
-                'flex h-10 w-15 items-center justify-center hover:bg-gray-600',
-                {
-                  'bg-red-600': provider.id === 'yandex',
-                  'bg-blue-600': provider.id === 'vk',
-                  'bg-white': provider.id !== 'yandex' && provider.id !== 'vk',
-                },
-              )}
+              className={
+                'flex h-10 w-15 items-center justify-center hover:bg-gray-600'
+              }
             >
               {icons[provider.name] || provider.name}
             </Button>

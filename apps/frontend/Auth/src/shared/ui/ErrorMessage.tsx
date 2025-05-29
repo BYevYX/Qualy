@@ -17,9 +17,7 @@ interface ErrorMessageProps {
 export const ErrorMessage: FC<ErrorMessageProps> = ({ message }) => {
   return (
     <StatusComponent display className="m-1 whitespace-pre-wrap" type="error">
-      <p>
-        {errorsMap[message] || errorsMap.Default} {'\n'}Error message:{'\n'}
-      </p>
+      {errorsMap[message] || errorsMap.Default} {'\n'}Error message:{'\n'}
       <code className="rounded-sm bg-slate-100 p-1 text-xs">{message}</code>
     </StatusComponent>
   );

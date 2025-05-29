@@ -24,7 +24,7 @@ export const SignupSubmitButton: FC<SignupSubmitButtonProps> = ({
       <Button type="submit" disabled={disabled}>
         Create Account
       </Button>
-      <span className="text-cyan-700">
+      <p className="text-cyan-700">
         Already have an account?{' '}
         <Link
           className="text-amber-400 hover:text-amber-200"
@@ -32,7 +32,7 @@ export const SignupSubmitButton: FC<SignupSubmitButtonProps> = ({
         >
           Login
         </Link>
-      </span>
+      </p>
     </div>
   );
 };

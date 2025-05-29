@@ -1,11 +1,11 @@
 'use client';
 import cn from 'classnames';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FC } from 'react';
 
 import styles from './404.module.css';
 import { Button } from '../Button/Button';
+import { SuperLink } from '../SuperLink/SuperLink';
 
 interface E404Props {
   className?: string;
@@ -22,17 +22,17 @@ export const E404: FC<E404Props> = ({ className, size = 'md' }) => {
   const containerClassName = cn(styles.container, className, styles[size]);
 
   return (
-    <div className={containerClassName}>
+    <section className={containerClassName}>
       <div className={styles.e404}>404</div>
       <div>
-        <span>Page not found</span>
+        <h1>Page not found</h1>
       </div>
       <div className={styles.buttons}>
         <Button onClick={handleClick}>Go back</Button>
-        <Button>
-          <Link href={'/'}>Go home</Link>
-        </Button>
+        <SuperLink variant="button" href={'/'}>
+          Go home
+        </SuperLink>
       </div>
-    </div>
+    </section>
   );
 };

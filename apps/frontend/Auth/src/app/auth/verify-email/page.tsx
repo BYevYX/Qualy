@@ -72,9 +72,7 @@ const VerifyPage: FC = () => {
             <StatusComponent display={!isPending} type={state.status}>
               {state.message}
             </StatusComponent>
-            <Button variant="noStyle" className="mt-3 w-full bg-white">
-              <Link href={NEED_LOGIN_REDIRECT}>Login</Link>
-            </Button>
+            <Link href={NEED_LOGIN_REDIRECT}>Login</Link>
           </>
         )}
       </CardContent>

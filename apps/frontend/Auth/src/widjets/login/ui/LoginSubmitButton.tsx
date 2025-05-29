@@ -75,12 +75,12 @@ export const LoginSubmitButton: FC<LoginSubmitProps> = ({
         {texts.button}
       </Button>
 
-      <span className="text-cyan-700">
+      <p className="text-cyan-700">
         {texts.spanText}
         <Link className="text-amber-400 hover:text-amber-200" href={texts.href}>
           {texts.linkText}
         </Link>
-      </span>
+      </p>
     </div>
   );
 };

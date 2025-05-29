@@ -41,7 +41,7 @@ const MegaFormContent: FC<MegaFormContentProps> = ({
   );
 
   return (
-    <div onChange={handleChange} className={styles.container}>
+    <article onChange={handleChange} className={styles.container}>
       {typeof fieldsRender === 'function' ? fieldsRender() : fieldsRender}
 
       <StatusComponent
@@ -56,7 +56,7 @@ const MegaFormContent: FC<MegaFormContentProps> = ({
         disabled,
         isFormErrorDisplay: isFormErrorDisplay,
       })}
-    </div>
+    </article>
   );
 };
 

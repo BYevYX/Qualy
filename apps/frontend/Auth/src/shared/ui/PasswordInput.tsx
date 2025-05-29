@@ -33,9 +33,17 @@ export const PasswordInput: FC<PasswordInputProps> = ({
       inputStyle="underline"
     >
       {showPassword ? (
-        <FaRegEye {...iconProps} />
+        <FaRegEye
+          role="button"
+          aria-label="password now showing"
+          {...iconProps}
+        />
       ) : (
-        <FaRegEyeSlash {...iconProps} />
+        <FaRegEyeSlash
+          role="button"
+          aria-label="password now hide"
+          {...iconProps}
+        />
       )}
     </InputWithIcon>
   );

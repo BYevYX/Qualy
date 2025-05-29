@@ -1,8 +1,10 @@
 'use client';
 import { motion, AnimatePresence } from 'motion/react';
 import { FC, ReactNode } from 'react';
+import { IoClose } from 'react-icons/io5';
 
 import styles from './Modal.module.css';
+import { Button } from '../Button/Button';
 
 interface ModalProps {
   isOpen: boolean;
@@ -30,9 +32,14 @@ export const Modal: FC<ModalProps> = ({ isOpen, onClose, children }) => {
             exit={{ y: -50, opacity: 0 }}
             onClick={(e) => e.stopPropagation()} // Чтобы клик по контенту не закрывал модалку
           >
-            <button className={styles.close} onClick={onClose}>
-              ✖
-            </button>
+            <Button
+              variant="icon"
+              aria-label="close modal"
+              className={styles.close}
+              onClick={onClose}
+            >
+              <IoClose />
+            </Button>
             {children}
           </motion.article>
         </motion.div>

@@ -1,7 +1,7 @@
 'use client';
 import cn from 'classnames';
 import { motion, AnimatePresence } from 'motion/react';
-import { FC, PropsWithChildren, useState, useRef } from 'react';
+import { FC, PropsWithChildren, useState, useRef, useId } from 'react';
 
 import styles from './Tooltip.module.css';
 
@@ -21,6 +21,7 @@ export const Tooltip: FC<TooltipProps> = ({
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const timeoutRef = useRef<number | null>(null);
+  const id = useId();
 
   const showTooltip = () => {
     if (timeoutRef.current) {
@@ -46,13 +47,12 @@ export const Tooltip: FC<TooltipProps> = ({
       onBlur={hideTooltip}
       role="tooltip"
     >
-      <div aria-describedby="tooltip-content">{children}</div>
+      <div aria-describedby={id}>{children}</div>
 
       <AnimatePresence>
         {isVisible && (
           <motion.div
-            id="tooltip-content"
-            role="tooltip"
+            id={id}
             className={cn(styles.tooltip, positionClass, className)}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

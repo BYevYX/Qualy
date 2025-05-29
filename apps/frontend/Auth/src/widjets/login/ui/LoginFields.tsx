@@ -26,7 +26,7 @@ const MainFiledsSection: FC<FieldSectionProps> = ({ step }) => {
   return (
     <Input
       {...controlRegister(name)}
-      type="text"
+      type="email"
       placeholder={placeholder}
       className="text-blue-600"
       inputStyle="underline"
@@ -52,8 +52,8 @@ const PasswordSection: FC<PasswordSectionProps> = ({ step, handleStep }) => {
 
       <div className="flex gap-2">
         <Button
-          variant="noStyle"
-          className="text-s bg-gray-500 hover:bg-gray-600 disabled:bg-gray-400"
+          variant="additional"
+          className="text-s rounded bg-gray-500 pr-2 pl-2 hover:bg-gray-600 disabled:bg-gray-400"
           type="button"
           onClick={() => handleStep('reset-password')}
         >
