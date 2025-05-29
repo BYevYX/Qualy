@@ -1,4 +1,5 @@
 import { PrismaAdapter } from '@auth/prisma-adapter';
+import { OAuthProvidersType } from '@qualy/front-server/types';
 import NextAuth from 'next-auth';
 import type { Provider } from 'next-auth/providers';
 
@@ -7,7 +8,6 @@ import { db } from './db';
 import { authGetUser } from './utils/db/auth';
 import { verifyUserEmail } from './utils/db/verify';
 import { refreshTokenRotation } from './utils/RefreshTokens';
-import { OAuthProvidersType } from '@qualy/front-server/types';
 
 export const providerMap = (authConfig.providers as Provider[])
   .map((provider) => {

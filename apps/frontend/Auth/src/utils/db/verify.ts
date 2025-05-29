@@ -1,5 +1,6 @@
-import { EmailOrToken } from './dbUtils.types';
 import { Email, EmailOrId } from '@qualy/front-server/types';
+
+import { EmailOrToken } from './dbUtils.types';
 import { db } from 'src/db';
 
 export const getVerificationToken = async (where: EmailOrToken) => {

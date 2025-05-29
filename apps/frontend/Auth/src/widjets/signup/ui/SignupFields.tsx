@@ -1,7 +1,7 @@
 'use client';
+import { Input, useMegaForm } from '@qualy/front-share/client';
 import { FC } from 'react';
 
-import { Input, useMegaForm } from '@qualy/front-share/client';
 import { PasswordInput } from 'src/shared';
 
 interface SignupFieldsProps {

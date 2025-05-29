@@ -1,8 +1,7 @@
 'use client';
+import { MultiButtons } from '@qualy/front-share/client';
 import { usePathname } from 'next/navigation';
 import { FC } from 'react';
-
-import { MultiButtons } from '@qualy/front-share/client';
 
 export const AuthMultiChoose: FC = () => {
   const path = usePathname();

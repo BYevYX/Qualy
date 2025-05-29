@@ -22,7 +22,7 @@ export const Modal: FC<ModalProps> = ({ isOpen, onClose, children }) => {
           exit={{ opacity: 0 }}
           onClick={onClose} // Закрытие по клику вне окна
         >
-          <motion.div
+          <motion.article
             key="modal"
             className={styles.content}
             initial={{ y: -50, opacity: 0 }}
@@ -34,7 +34,7 @@ export const Modal: FC<ModalProps> = ({ isOpen, onClose, children }) => {
               ✖
             </button>
             {children}
-          </motion.div>
+          </motion.article>
         </motion.div>
       )}
     </AnimatePresence>

@@ -11,7 +11,8 @@ const nextConfig = {
     // See: https://github.com/gregberge/svgr
     svgr: false,
   },
-  assetPrefix: 'auth',
+  // assetPrefix: 'auth',
+  basePath: 'auth'
 };
 
 const plugins = [

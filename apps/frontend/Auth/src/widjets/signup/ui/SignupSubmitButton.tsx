@@ -1,8 +1,7 @@
+import { Button } from '@qualy/front-share/server';
 import cn from 'classnames';
 import Link from 'next/link';
 import { FC } from 'react';
-
-import { Button } from '@qualy/front-share/server';
 
 interface SignupSubmitButtonProps {
   isFormErrorDisplay: boolean;

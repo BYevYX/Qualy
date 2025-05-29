@@ -1,7 +1,6 @@
+import { Button } from '@qualy/front-share/server';
 import cn from 'classnames';
 import { FC } from 'react';
-
-import { Button } from '@qualy/front-share/server';
 
 interface LoginFormContentProps {
   disabled: boolean;

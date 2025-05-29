@@ -1,6 +1,5 @@
-import { FC } from 'react';
-
 import { EmailTemplate } from '@qualy/front-share/templates';
+import { FC } from 'react';
 
 const TwoFactorTemplate: FC<{
   token: string;

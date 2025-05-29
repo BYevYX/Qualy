@@ -1,7 +1,7 @@
 'use client';
+import { MegaForm } from '@qualy/front-share/client';
 import { FC, useActionState } from 'react';
 
-import { MegaForm } from '@qualy/front-share/client';
 import { AuthActionObject } from 'src/shared';
 import {
   registerAction,

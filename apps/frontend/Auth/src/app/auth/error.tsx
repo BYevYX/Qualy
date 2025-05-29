@@ -1,9 +1,9 @@
 'use client';
 
+import { Modal } from '@qualy/front-share/client';
 import { useRouter } from 'next/navigation';
 import { useState, type FC } from 'react';
 
-import { Modal } from '@qualy/front-share/client';
 import { ErrorMessage } from 'src/shared';
 
 interface ErrorFallbackProps {

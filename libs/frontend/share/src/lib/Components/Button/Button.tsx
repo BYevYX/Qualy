@@ -4,7 +4,7 @@ import { ButtonHTMLAttributes, FC } from 'react';
 import styles from './Button.module.css';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'common' | 'noStyle';
+  variant?: 'common' | 'icon' | 'noStyle';
 }
 
 export const Button: FC<ButtonProps> = ({

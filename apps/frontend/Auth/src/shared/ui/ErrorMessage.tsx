@@ -1,6 +1,5 @@
-import type { FC } from 'react';
-
 import { StatusComponent } from '@qualy/front-share/server';
+import type { FC } from 'react';
 
 const BaseString = 'There was a problem when trying to authenticate.';
 
@@ -18,9 +17,9 @@ interface ErrorMessageProps {
 export const ErrorMessage: FC<ErrorMessageProps> = ({ message }) => {
   return (
     <StatusComponent display className="m-1 whitespace-pre-wrap" type="error">
-      <span>
+      <p>
         {errorsMap[message] || errorsMap.Default} {'\n'}Error message:{'\n'}
-      </span>
+      </p>
       <code className="rounded-sm bg-slate-100 p-1 text-xs">{message}</code>
     </StatusComponent>
   );

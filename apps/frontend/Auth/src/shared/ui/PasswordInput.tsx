@@ -1,9 +1,8 @@
 'use client';
-import { FC, useState } from 'react';
-import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6';
-
 import { useMegaForm } from '@qualy/front-share/client';
 import { InputWithIcon } from '@qualy/front-share/server';
+import { FC, useState } from 'react';
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6';
 
 interface PasswordInputProps {
   name: 'password' | 'verifyPassword';

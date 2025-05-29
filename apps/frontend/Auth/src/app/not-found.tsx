@@ -1,7 +1,7 @@
+import { E404 } from '@qualy/front-share/client';
 import Image from 'next/image';
 import { FC } from 'react';
 
-import { E404 } from '@qualy/front-share/client';
 import reels from 'public/images/reels.webp';
 
 const NotFound: FC = () => {

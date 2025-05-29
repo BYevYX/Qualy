@@ -1,8 +1,8 @@
 'use client';
+import { MegaForm } from '@qualy/front-share/client';
 import { usePathname, useRouter } from 'next/navigation';
 import { FC, useActionState, useCallback } from 'react';
 
-import { MegaForm } from '@qualy/front-share/client';
 import { AuthActionObject, createQueryStringAndPath } from 'src/shared';
 import {
   loginFieldsSchema,

@@ -1,9 +1,9 @@
 'use client';
 
+import { Card, CardContent, CardHeader } from '@qualy/front-share/server';
 import { useSearchParams } from 'next/navigation';
 import type { FC } from 'react';
 
-import { Card, CardContent, CardHeader } from '@qualy/front-share/server';
 import { ErrorMessage } from 'src/shared';
 
 const ErrorPage: FC = () => {

@@ -31,7 +31,42 @@ interface CardContentProps extends CardHeaderProps {
 }
 type CardFooterProps = CardHeaderProps;
 
-export const Card = getComponent<CardProps>('Card');
-export const CardHeader = getComponent<CardHeaderProps>('CardHeader');
-export const CardContent = getComponent<CardContentProps>('CardContent');
-export const CardFooter = getComponent<CardFooterProps>('CardFooter');
+export const Card: FC<CardProps> = ({ className, children }) => {
+  return <section className={cn(styles.Card, className)}>{children}</section>;
+};
+
+export const CardHeader: FC<CardHeaderProps> = ({
+  className,
+  align = 'left',
+  children,
+}) => {
+  return (
+    <header className={cn(styles.CardHeader, styles[align], className)}>
+      {children}
+    </header>
+  );
+};
+
+export const CardContent: FC<CardContentProps> = ({
+  className,
+  align = 'left',
+  children,
+}) => {
+  return (
+    <article className={cn(styles.CardContent, styles[align], className)}>
+      {children}
+    </article>
+  );
+};
+
+export const CardFooter: FC<CardFooterProps> = ({
+  className,
+  align = 'left',
+  children,
+}) => {
+  return (
+    <footer className={cn(styles.CardFooter, styles[align], className)}>
+      {children}
+    </footer>
+  );
+};

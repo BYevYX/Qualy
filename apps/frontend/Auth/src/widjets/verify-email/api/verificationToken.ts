@@ -1,12 +1,13 @@
 'use server';
 
+import { StatusType } from '@qualy/front-share/types';
+
 import {
   deleteVerificationToken,
   getVerificationToken,
   verifyUserEmail,
 } from '../../../utils/db/verify';
 import { VerificationCode } from '../model/types';
-import { StatusType } from '@qualy/front-share/types';
 import { sendEmail } from 'src/features/mail/api/send';
 import { generateVerificationToken } from 'src/features/tokens/api/generate';
 import { authGetUser } from 'src/utils/db/auth';

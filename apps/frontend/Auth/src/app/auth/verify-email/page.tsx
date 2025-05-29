@@ -1,8 +1,4 @@
 'use client';
-import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
-import { FC, useEffect, useState, useTransition } from 'react';
-
 import {
   Button,
   Card,
@@ -12,6 +8,10 @@ import {
   StatusComponent,
 } from '@qualy/front-share/server';
 import { StatusType } from '@qualy/front-share/types';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { FC, useEffect, useState, useTransition } from 'react';
+
 import { NEED_LOGIN_REDIRECT } from 'src/shared';
 import {
   processVerificationToken,

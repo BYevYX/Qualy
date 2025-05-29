@@ -1,8 +1,8 @@
+import { OAuthProvidersType } from '@qualy/front-server/types';
 import { Auth } from '@vkid/sdk';
 // eslint-disable-next-line import/named
 import { Session } from 'next-auth';
 
-import { OAuthProvidersType } from '@qualy/front-server/types';
 import { db } from 'src/db';
 import { authGetAccountByUserId } from 'src/utils/db/auth';
 

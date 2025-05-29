@@ -1,3 +1,4 @@
+import { Button } from '@qualy/front-share/server';
 import cn from 'classnames';
 import Form from 'next/form';
 import { redirect } from 'next/navigation';
@@ -6,7 +7,6 @@ import { FC, ReactNode } from 'react';
 import { FaGithub, FaVk, FaYandex } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 
-import { Button } from '@qualy/front-share/server';
 import { providerMap, signIn } from 'src/auth';
 import { LayoutParams, AFTER_LOGIN_REDIRECT, AUTH_ERROR_URL } from 'src/shared';
 
@@ -26,7 +26,7 @@ const Oauth: FC<OauthProps> = async ({ params }) => {
   const { callbackUrl } = await params;
 
   return (
-    <div className="mt-4">
+    <article className="mt-4">
       <div className="flex items-center gap-4 text-white before:flex-1 before:border-b before:border-solid after:flex-1 after:border-b after:border-solid">
         <span className="whitespace-nowrap">Or continue with</span>
       </div>
@@ -75,7 +75,7 @@ const Oauth: FC<OauthProps> = async ({ params }) => {
           </Form>
         ))}
       </div>
-    </div>
+    </article>
   );
 };
 

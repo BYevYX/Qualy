@@ -26,8 +26,8 @@ export const Input: FC<InputProps> = ({
         {...atributes}
       />
       {error && (
-        <div className={styles.errorMessageContainer}>
-          <span className={styles.errorMessage}>{error}</span>
+        <div className={styles.errorMessageContainer} role="alert">
+          <p className={styles.errorMessage}>{error}</p>
         </div>
       )}
     </div>
