@@ -1,8 +1,7 @@
 import { userRole } from '@prisma/client';
+import { OAuthProvidersType } from '@qualy/front-server/types';
 import type { DefaultSession } from 'next-auth';
 import type { JWT } from 'next-auth/jwt';
-
-import { OAuthProvidersType } from '@qualy/front-server/types';
 
 export type ExtendedUser = DefaultSession['user'] & {
   role: userRole;

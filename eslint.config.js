@@ -94,5 +94,11 @@ module.exports = [
     ],
   },
 
+  {
+    rules: {
+      'storybook/no-uninstalled-addons': 'off',
+    },
+  },
+
   prettierPlugin,
 ];

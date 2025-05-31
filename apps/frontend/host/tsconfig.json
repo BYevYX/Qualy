@@ -2,8 +2,11 @@
   "extends": "../../../tsconfig.base.json",
   "compilerOptions": {
     "baseUrl": "./",
-    "jsx": "react",
-    "lib": ["dom", "esnext"],
+    "jsx": "preserve",
+    "lib": [
+      "dom",
+      "esnext"
+    ],
     "module": "esnext",
     "moduleResolution": "node",
     "skipLibCheck": true,
@@ -21,17 +24,26 @@
         "name": "next"
       }
     ],
-    "types": ["jest", "node"]
+    "types": [
+      "jest",
+      "node"
+    ]
   },
   "include": [
-    "**/*.ts",
-    "**/*.tsx",
     "**/*.js",
     "**/*.jsx",
+    "**/*.ts",
+    "**/*.tsx",
     "../../../apps/frontend/host/.next/types/**/*.ts",
     "../../../dist/apps/frontend/host/.next/types/**/*.ts",
     "../../../eslint.config.js",
-    "next-env.d.ts"
+    "next-env.d.ts",
+    "../../../dist/apps/host/.next/types/**/*.ts"
   ],
-  "exclude": ["node_modules", "jest.config.ts", "**/*.spec.ts", "**/*.test.ts"]
+  "exclude": [
+    "node_modules",
+    "jest.config.ts",
+    "**/*.spec.ts",
+    "**/*.test.ts"
+  ]
 }

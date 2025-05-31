@@ -2,7 +2,6 @@
   "name": "@qualy/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
   "private": true,
   "devDependencies": {
     "@babel/core": "^7.14.5",
