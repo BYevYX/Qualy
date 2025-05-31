@@ -35,6 +35,7 @@ export const Toggle: FC<ToggleProps> = ({
   return (
     <div className={`${styles.root} ${isFirst && styles.root_active}`}>
       <Button
+        variant="noStyle"
         className={`${styles.first} ${isFirst && styles.first_active}`}
         onClick={(e) => {
           if (isFirst) return;
@@ -47,6 +48,7 @@ export const Toggle: FC<ToggleProps> = ({
         {firstButonText}
       </Button>
       <Button
+        variant="noStyle"
         className={`${styles.second} ${!isFirst && styles.second_active}`}
         onClick={(e) => {
           if (!isFirst) return;

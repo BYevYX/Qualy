@@ -1,26 +1,28 @@
 'use client';
 import cn from 'classnames';
 import Link from 'next/link';
-import { FC, useRef } from 'react';
+import { FC, useState } from 'react';
 
 import styles from './MultiButtons.module.css';
 import { Button } from '../Button/Button';
+
+interface BaseButtonData {
+  id: string | number;
+  text: string;
+  active?: boolean;
+}
 
 interface MultiButtonsProps {
   className?: string;
   variant?: 'withLines' | 'common' | 'noStyle';
   buttonsClassname?: string;
   buttonsData: (
-    | {
-        text: string;
-        active?: boolean;
+    | (BaseButtonData & {
         onClick: React.MouseEventHandler<HTMLButtonElement>;
-      }
-    | {
-        text: string;
-        active?: boolean;
+      })
+    | (BaseButtonData & {
         href: string;
-      }
+      })
   )[];
 }
 
@@ -30,49 +32,47 @@ export const MultiButtons: FC<MultiButtonsProps> = ({
   buttonsClassname,
   variant = 'common',
 }) => {
-  const active = useRef<string | null>(null);
+  const [active, setActive] = useState(
+    () => buttonsData.find((button) => button.active)?.id,
+  );
 
   return (
     <div className={cn(styles.multiButtons, className)}>
-      {buttonsData.map((data, i) => {
-        if (data.active) {
-          active.current = data.text;
-        }
-
+      {buttonsData.map((button, i) => {
         const baseClassName = cn(
           styles.button,
           styles[variant],
           buttonsClassname,
           {
-            [styles.active]: active.current === data.text,
+            [styles.active]: active === button.id,
           },
         );
 
-        if ('href' in data) {
+        if ('href' in button) {
           return (
             <Link
-              key={i}
+              key={button.text + i}
               className={baseClassName}
-              href={data.href}
+              href={button.href}
               onClick={() => {
-                active.current = data.text;
+                setActive(button.id);
               }}
             >
-              {data.text}
+              {button.text}
             </Link>
           );
         }
 
         return (
           <Button
-            key={i}
+            key={button.text + i}
             className={baseClassName}
             onClick={(e) => {
-              data.onClick(e);
-              active.current = data.text;
+              button.onClick(e);
+              setActive(button.id);
             }}
           >
-            {data.text}
+            {button.text}
           </Button>
         );
       })}

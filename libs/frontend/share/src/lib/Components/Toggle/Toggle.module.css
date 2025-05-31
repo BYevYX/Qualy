@@ -20,6 +20,7 @@
 
 .first, .second {
     background-color: grey;
+    border: none;
     padding: 4px 16px;
     position: relative;
     text-align: center;

@@ -11,11 +11,13 @@ export const AuthMultiChoose: FC = () => {
       variant="withLines"
       buttonsData={[
         {
+          id: 'login-btn',
           text: 'Login',
           href: '/auth/login',
           active: path === '/auth/login',
         },
         {
+          id: 'signup-btn',
           text: 'Signup',
           href: '/auth/signup',
           active: path === '/auth/signup',
