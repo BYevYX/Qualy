@@ -1,0 +1,10 @@
+CREATE INDEX idx_pictures_release_date ON pictures(release_date);
+CREATE INDEX idx_participations_person_id   ON participations(person_id);
+CREATE INDEX idx_participations_picture_id  ON participations(picture_id);
+CREATE INDEX idx_ratings_picture_origin      ON ratings(picture_id, origin);
+CREATE INDEX idx_ratings_value               ON ratings(value);
+CREATE INDEX idx_watch_history_user         ON watch_history(user_id);
+CREATE INDEX idx_watch_history_picture      ON watch_history(picture_id);
+CREATE INDEX idx_countries_country          ON countries(country);
+CREATE INDEX idx_picture_types_type         ON picture_types(type);
+CREATE INDEX idx_reviews_review_date        ON reviews(review_date);

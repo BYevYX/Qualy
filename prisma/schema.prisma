@@ -7,31 +7,34 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum userRole {
-  USER
-  ADMIN
-}
-
 model User {
-  id                    String                 @id @default(cuid())
-  name                  String?                @db.VarChar(100)
+  id                    String                 @id @default(uuid()) @db.Uuid
+  name                  String                 @db.VarChar(100)
   email                 String                 @unique @db.VarChar(100)
   emailVerified         DateTime?
+  birthdate             DateTime?
   image                 String?
   createdAt             DateTime               @default(now())
   updatedAt             DateTime               @updatedAt
   password              String?                @db.VarChar(100)
-  role                  userRole               @default(USER)
   isTwoFactorEnabled    Boolean                @default(false)
   accounts              Account[]
+  favorite_genres       favoriteGenres[]
+  favorite_persons      favoritePersons[]
+  featured              featured[]
+  grades                grades[]
+  reviews               reviews[]
   sessions              Session[]
+  settings              settings?
   twoFactorConfirmation twoFactorConfirmation?
+  users_roles           usersRoles[]
+  watch_history         watchHistory[]
 
   @@map("users")
 }
 
 model Account {
-  userId            String
+  userId            String   @db.Uuid
   type              String
   provider          String
   providerAccountId String
@@ -52,7 +55,7 @@ model Account {
 
 model Session {
   sessionToken String   @unique
-  userId       String
+  userId       String   @db.Uuid
   expires      DateTime
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
@@ -75,12 +78,341 @@ model resetPasswordToken {
 
 model twoFactorToken {
   email   String   @id @db.VarChar(100)
-  token   String   
+  token   String
   expires DateTime
 }
 
 model twoFactorConfirmation {
   id     String @id @default(cuid())
-  userId String @unique
+  userId String @unique @db.Uuid
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model awardsCatalog {
+  award         String          @id @db.VarChar(30)
+  personsAwards personsAwards[]
+
+  @@map("awards_catalog")
+}
+
+model characters {
+  id              Int            @id @default(autoincrement())
+  character       String         @db.VarChar(100)
+  participationId Int            @map("participation_id")
+  participations  participations @relation(fields: [participationId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_participation_id")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model countries {
+  country          String           @db.Char(2)
+  pictureId        Int              @map("picture_id")
+  countriesCatalog countriesCatalog @relation(fields: [country], references: [country], onDelete: NoAction, onUpdate: NoAction, map: "fk_country")
+  pictures         pictures         @relation(fields: [pictureId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_picture_id")
+
+  @@id([country, pictureId])
+  @@index([country], map: "idx_countries_country")
+}
+
+model countriesCatalog {
+  country   String      @id @db.Char(2)
+  name      String      @db.VarChar(80)
+  countries countries[]
+  persons   persons[]
+
+  @@map("countries_catalog")
+}
+
+model favoriteGenres {
+  genre  String @db.Char(30)
+  userId String @map("user_id") @db.Uuid
+  genres genres @relation(fields: [genre], references: [genre], onDelete: NoAction, onUpdate: NoAction, map: "fk_genre")
+  users  User   @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_id")
+
+  @@id([genre, userId], map: "pk_favorite_genres")
+  @@map("favorite_genres")
+}
+
+model favoritePersons {
+  userId   String  @map("user_id") @db.Uuid
+  personId Int     @map("person_id")
+  persons  persons @relation(fields: [personId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_person_id")
+  users    User    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_id")
+
+  @@id([userId, personId], map: "pk_favorite_persons")
+  @@map("favorite_persons")
+}
+
+model featured {
+  userId    String   @map("user_id") @db.Uuid
+  pictureId Int      @map("picture_id")
+  pictures  pictures @relation(fields: [pictureId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_picture_id")
+  users     User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_id")
+
+  @@id([userId, pictureId], map: "pk_featured")
+}
+
+model genres {
+  genre          String           @id @db.VarChar(30)
+  favoriteGenres favoriteGenres[]
+  genresList     genresList[]
+}
+
+model genresList {
+  genre     String   @db.Char(30)
+  pictureId Int      @map("picture_id")
+  genres    genres   @relation(fields: [genre], references: [genre], onDelete: NoAction, onUpdate: NoAction, map: "fk_genre")
+  pictures  pictures @relation(fields: [pictureId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_picture_id")
+
+  @@id([genre, pictureId], map: "pk_genres_list")
+  @@map("genres_list")
+}
+
+model grades {
+  userId      String   @map("user_id") @db.Uuid
+  pictureId   Int      @map("picture_id")
+  value       Decimal  @db.Decimal(3, 1)
+  rating_date DateTime @default(now()) @db.Timestamp(6)
+  pictures    pictures @relation(fields: [pictureId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_picture_id")
+  users       User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_id")
+
+  @@id([userId, pictureId], map: "pk_grades")
+}
+
+model participations {
+  id                   Int                @id @default(autoincrement())
+  pictureId            Int                @map("picture_id")
+  personId             Int                @map("person_id")
+  role                 String             @db.VarChar(30)
+  characters           characters[]
+  persons              persons            @relation(fields: [personId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_person_id")
+  pictures             pictures           @relation(fields: [pictureId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_picture_id")
+  person_roles_catalog personRolesCatalog @relation(fields: [role], references: [role], onDelete: NoAction, onUpdate: NoAction, map: "fk_role")
+
+  @@index([personId], map: "idx_participations_person_id")
+  @@index([pictureId], map: "idx_participations_picture_id")
+}
+
+model personRolesCatalog {
+  role           String           @id @db.VarChar(30)
+  participations participations[]
+
+  @@map("person_roles_catalog")
+}
+
+model persons {
+  id               Int               @id @default(autoincrement())
+  name             String            @db.VarChar(100)
+  secondName       String            @map("second_name") @db.VarChar(100)
+  description      String?           @db.VarChar(500)
+  photoUrl         String?           @map("photo_url") @db.VarChar(300)
+  birthdate        DateTime          @db.Date
+  deathDate        DateTime?         @map("death_date") @db.Date
+  country          String            @db.Char(2)
+  town             String            @db.VarChar(100)
+  height           Int
+  favoritePersons  favoritePersons[]
+  participations   participations[]
+  countriesCatalog countriesCatalog  @relation(fields: [country], references: [country], onDelete: NoAction, onUpdate: NoAction, map: "fk_country")
+  personsAwards    personsAwards[]
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model personsAwards {
+  personId              Int           @map("person_id")
+  pictureId             Int           @map("picture_id")
+  award                 String        @db.VarChar(30)
+  awardPresentationDate DateTime      @map("award_presentation_date") @db.Date
+  description           String        @db.VarChar(200)
+  id                    Int           @id @default(autoincrement())
+  awardsCatalog         awardsCatalog @relation(fields: [award], references: [award], onDelete: NoAction, onUpdate: NoAction, map: "fk_award")
+  persons               persons       @relation(fields: [personId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_person_id")
+  pictures              pictures      @relation(fields: [pictureId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_picture_id")
+
+  @@map("persons_awards")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model pictureTypes {
+  type                  String              @db.VarChar(30)
+  pictureId             Int                 @map("picture_id")
+  pictures              pictures            @relation(fields: [pictureId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_picture_id")
+  picture_types_catalog pictureTypesCatalog @relation(fields: [type], references: [type], onDelete: NoAction, onUpdate: NoAction, map: "fk_type")
+
+  @@id([type, pictureId])
+  @@index([type], map: "idx_picture_types_type")
+  @@map("picture_types")
+}
+
+model pictureRangCatalog {
+  rang     String     @id @db.VarChar(30)
+  pictures pictures[]
+}
+
+model pictureTypesCatalog {
+  type         String         @id @db.VarChar(30)
+  pictureTypes pictureTypes[]
+
+  @@map("picture_types_catalog")
+}
+
+model pictures {
+  id                        Int                @id @default(autoincrement())
+  name                      String             @db.VarChar(100)
+  originalName              String             @map("original_name") @db.VarChar(100)
+  releaseDate               DateTime           @map("release_date") @db.Date
+  description               String             @db.VarChar(500)
+  duration                  Int?
+  startTimestamp            Int?               @map("start_timestamp")
+  endTimestamp              Int?               @map("end_timestamp")
+  postCreditsSceneTimestamp Int?               @map("post_credits_scene_timestamp")
+  rang                      String             @db.VarChar(30)
+  countries                 countries[]
+  featured                  featured[]
+  genresList                genresList[]
+  grades                    grades[]
+  participations            participations[]
+  personsAwards             personsAwards[]
+  pictureTypes              pictureTypes[]
+  pictureRangCatalog        pictureRangCatalog @relation(fields: [rang], references: [rang])
+  posters                   posters[]
+  ratings                   ratings[]
+  reviews                   reviews[]
+  watchHistory              watchHistory[]
+
+  @@index([releaseDate], map: "idx_pictures_release_date")
+}
+
+model picturesArchive {
+  id                        Int
+  name                      String   @db.VarChar(100)
+  originalName              String   @map("original_name") @db.VarChar(100)
+  releaseDate               DateTime @map("release_date") @db.Date
+  description               String   @db.VarChar(500)
+  duration                  Int?
+  startTimestamp            Int?     @map("start_timestamp")
+  endTimestamp              Int?     @map("end_timestamp")
+  postCreditsSceneTimestamp Int?     @map("post_credits_scene_timestamp")
+  operationType             String   @map("operation_type")
+  deletedAt                 DateTime @default(now()) @map("deleted_at") @db.Timestamptz(6)
+  deletedBy                 String?  @default(dbgenerated("CURRENT_USER")) @map("deleted_by")
+
+  @@id([id, deletedAt], map: "pk_pictures_archive")
+  @@map("pictures_archive")
+}
+
+model posters {
+  poster    String   @db.VarChar(300)
+  pictureId Int      @map("picture_id")
+  pictures  pictures @relation(fields: [pictureId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_picture_id")
+
+  @@id([pictureId, poster])
+}
+
+model ratingOriginsCatalog {
+  origin String @id @db.VarChar(30)
+
+  @@map("rating_origins_catalog")
+}
+
+model ratings {
+  origin    String   @db.VarChar(30)
+  pictureId Int      @map("picture_id")
+  value     Decimal  @db.Decimal(3, 1)
+  pictures  pictures @relation(fields: [pictureId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_picture_id")
+
+  @@id([pictureId, origin], map: "pk_ratings")
+  @@index([pictureId, origin], map: "idx_ratings_picture_origin")
+  @@index([value], map: "idx_ratings_value")
+}
+
+model reviews {
+  id         Int      @id @default(autoincrement())
+  userId     String   @map("user_id") @db.Uuid
+  pictureId  Int      @map("picture_id")
+  reviewDate DateTime @default(dbgenerated("CURRENT_DATE")) @map("review_date") @db.Date
+  grade      Decimal  @db.Decimal(3, 1)
+  text       String
+  pictures   pictures @relation(fields: [pictureId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_picture_id")
+  users      User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_id")
+
+  @@index([reviewDate], map: "idx_reviews_review_date")
+}
+
+model settings {
+  userId              String              @id @map("user_id") @db.Uuid
+  theme               String              @default("S") @db.Char(1)
+  videoQuality        String              @default("1080p") @map("video_quality") @db.VarChar(10)
+  dataSaving          Boolean             @default(true) @map("data_saving")
+  autoSkipCredits     Boolean             @default(false) @map("auto_skip_credits")
+  autoRotateScreen    Boolean             @default(true) @map("auto_rotate_screen")
+  vibration           Boolean             @default(true)
+  users               User                @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_id")
+  videoQualityCatalog videoQualityCatalog @relation(fields: [videoQuality], references: [quality], onDelete: NoAction, onUpdate: NoAction, map: "fk_video_quality")
+}
+
+model usersArchive {
+  id            String   @db.Char(36)
+  name          String   @db.VarChar(100)
+  email         String   @db.VarChar(100)
+  password      String   @db.VarChar(256)
+  birthdate     DateTime @db.Date
+  operationType String   @map("operation_type")
+  deletedAt     DateTime @default(now()) @map("deleted_at") @db.Timestamptz(6)
+  deletedBy     String?  @default(dbgenerated("CURRENT_USER")) @map("deleted_by")
+
+  @@id([id, deletedAt], map: "pk_users_archive")
+  @@map("users_archive")
+}
+
+model usersRoles {
+  userId            String            @map("user_id") @db.Uuid
+  role              String            @default("USER") @db.VarChar(30)
+  usersRolesCatalog usersRolesCatalog @relation(fields: [role], references: [role], onDelete: NoAction, onUpdate: NoAction, map: "fk_role")
+  users             User              @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_id")
+
+  @@id([role, userId])
+  @@map("users_roles")
+}
+
+model usersRolesCatalog {
+  role       String       @id @db.VarChar(30)
+  usersRoles usersRoles[]
+
+  @@map("users_roles_catalog")
+}
+
+model videoQualityCatalog {
+  quality  String     @id @db.VarChar(10)
+  settings settings[]
+
+  @@map("video_quality_catalog")
+}
+
+model watchHistory {
+  userId     String   @map("user_id") @db.Uuid
+  pictureId  Int      @map("picture_id")
+  watchDate  DateTime @default(now()) @map("watch_date") @db.Timestamp(6)
+  timestamp  Int
+  watchCount Int      @default(1) @map("watch_count")
+  pictures   pictures @relation(fields: [pictureId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_picture_id")
+  users      User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_id")
+
+  @@id([userId, pictureId], map: "pk_watch_history")
+  @@index([pictureId], map: "idx_watch_history_picture")
+  @@index([userId], map: "idx_watch_history_user")
+  @@map("watch_history")
+}
+
+model watchHistoryArchive {
+  archiveId      Int       @id @default(autoincrement()) @map("archive_id")
+  userId         String    @map("user_id") @db.Char(36)
+  pictureId      Int       @map("picture_id")
+  watchDate      DateTime  @map("watch_date") @db.Timestamp(6)
+  timestamp      Int
+  watchCount     Int       @map("watch_count")
+  operation_type String    @db.VarChar(10)
+  changedAt      DateTime? @default(now()) @map("changed_at") @db.Timestamptz(6)
+  changedBy      String?   @default(dbgenerated("CURRENT_USER")) @map("changed_by")
+
+  @@map("watch_history_archive")
 }
